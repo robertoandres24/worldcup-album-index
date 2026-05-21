@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import esTranslations from '../i18n/es.json'
 import enTranslations from '../i18n/en.json'
 
