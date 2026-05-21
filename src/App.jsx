@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useI18n } from './hooks/useI18n.js'
 
 const stickersData = [
@@ -61,6 +61,25 @@ const stickersData = [
 function App() {
   const { locale, t, toggleLocale } = useI18n()
   const [search, setSearch] = useState('')
+  const [showScrollTop, setShowScrollTop] = useState(false)
+  const [isAtBottom, setIsAtBottom] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 300
+      setShowScrollTop(scrolled)
+      
+      // Detect if near bottom (within 100px)
+      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100
+      setIsAtBottom(scrolled && nearBottom)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   const filteredStickers = useMemo(() => {
     if (!search.trim()) return stickersData
@@ -167,6 +186,18 @@ function App() {
           </p>
         </div>
       </footer>
+
+      {showScrollTop && (
+        <button
+          className={`scroll-top-btn ${isAtBottom ? 'scroll-top-raised' : ''}`}
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 15l-6-6-6 6" />
+          </svg>
+        </button>
+      )}
     </div>
   )
 }
