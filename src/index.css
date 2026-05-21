@@ -133,6 +133,107 @@ header p {
   color: white;
 }
 
+.share-container {
+  position: relative;
+}
+
+.share-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 0.5rem;
+  min-width: 180px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1001;
+  animation: fadeInUp 0.2s ease;
+}
+
+.share-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 14px;
+  width: 12px;
+  height: 12px;
+  background: rgba(30, 30, 30, 0.95);
+  transform: rotate(45deg);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.share-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: none;
+  background: transparent;
+  color: var(--light);
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.share-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.share-option svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.share-option.whatsapp {
+  color: #25d366;
+}
+
+.share-option.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.15);
+}
+
+.share-option.facebook {
+  color: #1877f2;
+}
+
+.share-option.facebook:hover {
+  background: rgba(24, 119, 242, 0.15);
+}
+
+.share-option.twitter {
+  color: #1da1f2;
+}
+
+.share-option.twitter:hover {
+  background: rgba(29, 161, 242, 0.15);
+}
+
+.share-option.linkedin {
+  color: #0a66c2;
+}
+
+.share-option.linkedin:hover {
+  background: rgba(10, 102, 194, 0.15);
+}
+
+.share-option.copy {
+  color: var(--gray);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
+}
+
+.share-option.copy:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--light);
+}
+
 @media (max-width: 600px) {
   .top-bar {
     max-width: 100%;
