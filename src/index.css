@@ -233,6 +233,48 @@ footer span {
   font-weight: 600;
 }
 
+.github-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--light);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.github-link:hover {
+  color: var(--primary);
+}
+
+.github-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.github-message {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.issues-link {
+  color: var(--secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.issues-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 @media (max-width: 600px) {
   header h1 {
     font-size: 1.8rem;

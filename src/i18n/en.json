@@ -10,5 +10,7 @@
   "sureNotPasted": "Are you sure you haven't pasted it already?",
   "footer": "Developed by",
   "switchToEnglish": "EN",
-  "switchToSpanish": "ES"
+  "switchToSpanish": "ES",
+  "starMessage": "Star the repo if this helped you out",
+  "suggestImprovement": "Suggestions? Open an issue"
 }

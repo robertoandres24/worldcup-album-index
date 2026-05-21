@@ -2,7 +2,7 @@
   "title": "Indice del álbum de la Copa Mundial 2026",
   "description": "Introduce el código del país (ej: URU, MEX, BRA) y descubre en qué página del álbum va pegado.",
   "goodbyeIndex": "¡Adiós a revisar la página de índex como en los 90s!",
-  "lessBrowsing": "Menos hojeadas 📖 = Más años de vida para tu álbum 😉",
+  "lessBrowsing": "Menos hojeadas = Más años de vida para tu álbum ",
   "searchPlaceholder": "Busca por código (MEX), país o página...",
   "resultsCount": "resultado",
   "resultsCountPlural": "resultados",
@@ -10,5 +10,7 @@
   "sureNotPasted": "¿Seguro que no la pegaste ya?",
   "footer": "Desarrollado por",
   "switchToEnglish": "EN",
-  "switchToSpanish": "ES"
+  "switchToSpanish": "ES",
+  "starMessage": "Dale una estrella al repo si te sirvió",
+  "suggestImprovement": "¿Sugerencias? Abre un issue"
 }
