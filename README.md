@@ -1,16 +1,17 @@
 # World Cup 2026 Album Index
 
-Buscador minimalista de láminas para el álbum del Mundial 2026.
+Minimal page finder based on country code for the World Cup 2026 album.
 
-## Características
+## Features
 
-- Busca por código de país, nombre o número de página
-- Filtrado en tiempo real
-- Diseño responsive y minimalista
-- Colores vibrantes y modernos
-- Sin dependencias pesadas (solo React + Vite)
+- Search by country code, name or page number
+- Real-time filtering
+- Responsive and minimalist design
+- Vibrant and modern colors
+- No heavy dependencies (just React + Vite)
+- Multi-language support (EN/ES)
 
-## Desarrollo
+## Development
 
 ```bash
 npm install
@@ -23,8 +24,8 @@ npm run dev
 npm run build
 ```
 
-Sube la carpeta `dist` a Vercel o cualquier hosting estático.
+Upload the `dist` folder to Vercel or any static hosting.
 
 ---
 
-Desarrollado por Studio84
+Developed by Studio84
