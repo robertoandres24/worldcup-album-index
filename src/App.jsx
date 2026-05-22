@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useI18n } from './hooks/useI18n.js'
+import curiosities from './curiosities.json'
 
 const stickersData = [
   // Grupo A
@@ -57,6 +58,81 @@ const stickersData = [
   { page: 102, code: 'GHA', name: 'Ghana', group: 'K' },
   { page: 104, code: 'PAN', name: 'Panama', group: 'K' },
 ]
+
+// Create a map for O(1) lookup of curiosities by country code
+const curiositiesMap = new Map(curiosities.map(c => [c.code, c.datos_curiosos]))
+
+function CuriosityCarousel({ countryCode }) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [direction, setDirection] = useState(0)
+  
+  const countryCuriosities = curiositiesMap.get(countryCode) || []
+  
+  if (countryCuriosities.length === 0) return null
+  
+  const goToPrev = () => {
+    setDirection(-1)
+    setCurrentIndex((prev) => (prev === 0 ? countryCuriosities.length - 1 : prev - 1))
+  }
+  
+  const goToNext = () => {
+    setDirection(1)
+    setCurrentIndex((prev) => (prev === countryCuriosities.length - 1 ? 0 : prev + 1))
+  }
+  
+  const goToSlide = (index) => {
+    setDirection(index > currentIndex ? 1 : -1)
+    setCurrentIndex(index)
+  }
+
+  return (
+    <div className="curiosity-carousel">
+      <div className="curiosity-header">
+        <span className="curiosity-icon">💡</span>
+        <span className="curiosity-title">Sabías que...</span>
+        <span className="curiosity-counter">{currentIndex + 1} / {countryCuriosities.length}</span>
+      </div>
+      
+      <div className="curiosity-content-wrapper">
+        <button 
+          className="curiosity-nav curiosity-nav-prev" 
+          onClick={goToPrev}
+          aria-label="Anterior curiosidad"
+        >
+          ‹
+        </button>
+        
+        <div className="curiosity-slider">
+          <div 
+            className="curiosity-slide"
+            key={currentIndex}
+          >
+            {countryCuriosities[currentIndex]}
+          </div>
+        </div>
+        
+        <button 
+          className="curiosity-nav curiosity-nav-next" 
+          onClick={goToNext}
+          aria-label="Siguiente curiosidad"
+        >
+          ›
+        </button>
+      </div>
+      
+      <div className="curiosity-dots">
+        {countryCuriosities.map((_, index) => (
+          <button
+            key={index}
+            className={`curiosity-dot ${index === currentIndex ? 'active' : ''}`}
+            onClick={() => goToSlide(index)}
+            aria-label={`Ir a curiosidad ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 function App() {
   const { locale, t, toggleLocale } = useI18n()
@@ -224,23 +300,11 @@ function App() {
         )}
       </div>
 
+      {filteredStickers.length === 1 && (
+        <CuriosityCarousel countryCode={filteredStickers[0].code} />
+      )}
+
       <footer>
-        <div className="footer-top">
-          <div className="lang-toggle footer-lang">
-            <button
-              className={`lang-btn ${locale === 'es' ? 'active' : ''}`}
-              onClick={() => locale !== 'es' && toggleLocale()}
-            >
-              ES
-            </button>
-            <button
-              className={`lang-btn ${locale === 'en' ? 'active' : ''}`}
-              onClick={() => locale !== 'en' && toggleLocale()}
-            >
-              EN
-            </button>
-          </div>
-        </div>
         <div className="github-section">
           <p className="github-message">
             <a
@@ -274,6 +338,20 @@ function App() {
               </svg>
             </a>
           </p>
+        </div>
+        <div className="lang-toggle footer-lang">
+          <button
+            className={`lang-btn ${locale === 'es' ? 'active' : ''}`}
+            onClick={() => locale !== 'es' && toggleLocale()}
+          >
+            ES
+          </button>
+          <button
+            className={`lang-btn ${locale === 'en' ? 'active' : ''}`}
+            onClick={() => locale !== 'en' && toggleLocale()}
+          >
+            EN
+          </button>
         </div>
       </footer>
 

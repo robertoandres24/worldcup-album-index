@@ -73,8 +73,8 @@ header p {
 }
 
 .lang-btn {
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   border: 2px solid rgba(255,255,255,0.2);
   background: rgba(255,255,255,0.05);
@@ -314,6 +314,28 @@ header p {
   border-color: var(--primary);
 }
 
+/* Center single card when only one result */
+.stickers-list:has(.sticker-card:only-child) {
+  grid-template-columns: 1fr;
+  place-items: center;
+}
+
+.sticker-card:only-child {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Center no-results message */
+.stickers-list:has(.no-results:only-child) {
+  grid-template-columns: 1fr;
+  place-items: center;
+}
+
+.no-results:only-child {
+  max-width: 400px;
+  width: 100%;
+}
+
 .page-number {
   font-size: 2rem;
   font-weight: 800;
@@ -376,14 +398,12 @@ header p {
 footer {
   margin-top: auto;
   padding-top: 3rem;
+  padding-bottom: 3rem;
   text-align: center;
   color: var(--gray);
   font-size: 0.9rem;
 }
 
-footer span {
-  
-}
 
 .footer-top {
   display: flex;
@@ -399,11 +419,12 @@ footer span {
 .lang-toggle.footer-lang {
   margin-bottom: 0;
   width: auto;
-  justify-content: flex-start;
+  justify-content: center;
+  margin: 1rem 0;
 }
 
 .github-section {
-  margin: 2.5rem 0;
+  margin-top: 2.5rem;
   padding-top: 2.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -576,5 +597,155 @@ footer span {
   
   .country-name {
     font-size: 1.1rem;
+  }
+}
+
+/* Curiosity Carousel Styles */
+.curiosity-carousel {
+  width: 100%;
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.curiosity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.curiosity-icon {
+  font-size: 1.5rem;
+}
+
+.curiosity-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--secondary);
+  flex: 1;
+  margin-left: 0.5rem;
+}
+
+.curiosity-counter {
+  font-size: 0.875rem;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.curiosity-content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 120px;
+}
+
+.curiosity-nav {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--light);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  padding-bottom: 4px;
+}
+
+.curiosity-nav:hover {
+  background: var(--primary);
+  transform: scale(1.1);
+}
+
+.curiosity-nav:active {
+  transform: scale(0.95);
+}
+
+.curiosity-slider {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.curiosity-slide {
+  animation: slideIn 0.3s ease-out;
+  line-height: 1.6;
+  color: var(--light);
+  font-size: 1rem;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.curiosity-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.curiosity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.curiosity-dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.curiosity-dot.active {
+  background: var(--secondary);
+  transform: scale(1.2);
+}
+
+/* Mobile styles for curiosity carousel */
+@media (max-width: 640px) {
+  .curiosity-carousel {
+    margin: 1rem auto 0;
+    padding: 1rem;
+  }
+  
+  .curiosity-content-wrapper {
+    min-height: 140px;
+  }
+  
+  .curiosity-nav {
+    width: 32px;
+    height: 32px;
+    font-size: 1.25rem;
+  }
+  
+  .curiosity-slide {
+    font-size: 0.95rem;
+  }
+  
+  .curiosity-title {
+    font-size: 1rem;
   }
 }
