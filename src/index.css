@@ -574,12 +574,18 @@ header h1 span {
   font-size: 1.2rem;
 }
 
-.group-a { background: linear-gradient(135deg, #00a651, #00d66e); }
-.group-c { background: linear-gradient(135deg, #ffd700, #ffaa00); }
-.group-e { background: linear-gradient(135deg, #ff6b35, #f7931e); }
-.group-g { background: linear-gradient(135deg, #662d91, #9b59b6); }
-.group-i { background: linear-gradient(135deg, #0072ce, #00a8e8); }
-.group-k { background: linear-gradient(135deg, #c90076, #ff1493); }
+.group-a { background: linear-gradient(135deg, #2e7d32, #43a047); }
+.group-b { background: linear-gradient(135deg, #c62828, #e53935); }
+.group-c { background: linear-gradient(135deg, #f9a800, #ffd700); }
+.group-d { background: linear-gradient(135deg, #1565c0, #1e88e5); }
+.group-e { background: linear-gradient(135deg, #bf360c, #e64a19); }
+.group-f { background: linear-gradient(135deg, #00695c, #00897b); }
+.group-g { background: linear-gradient(135deg, #7e57c2, #b39ddb); }
+.group-h { background: linear-gradient(135deg, #00838f, #00acc1); }
+.group-i { background: linear-gradient(135deg, #4a148c, #7b1fa2); }
+.group-j { background: linear-gradient(135deg, #f398b8, #f4bcd2); }
+.group-k { background: linear-gradient(135deg, #558b2f, #7cb342); }
+.group-l { background: linear-gradient(135deg, #f0158d, #ed679c); }
 
 .no-results {
   text-align: center;
