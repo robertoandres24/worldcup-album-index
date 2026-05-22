@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://albumfifaindex.com/sitemap.xml
+Sitemap: https://mialbumfifa.com/sitemap.xml
