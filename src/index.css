@@ -534,6 +534,60 @@ footer {
   text-decoration: underline;
 }
 
+/* Ko-fi Section */
+.kofi-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 94, 91, 0.1) 0%, rgba(255, 94, 91, 0.05) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 94, 91, 0.2);
+  text-align: center;
+}
+
+.kofi-message {
+  color: var(--gray);
+  font-size: 0.95rem;
+  margin-bottom: 0.7rem;
+  line-height: 1.5;
+}
+
+.kofi-sub-message {
+  color: var(--gray);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.kofi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #FF5E5B 0%, #FF7A77 100%);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 94, 91, 0.3);
+}
+
+.kofi-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 94, 91, 0.4);
+}
+
+.kofi-btn:active {
+  transform: translateY(0);
+}
+
+.kofi-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
 .scroll-top-btn {
   position: fixed;
   bottom: 2rem;
@@ -672,6 +726,27 @@ footer {
   
   .country-name {
     font-size: 1.1rem;
+  }
+
+  /* Ko-fi mobile styles */
+  .kofi-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+
+  .kofi-message {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .kofi-btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .kofi-icon {
+    width: 22px;
+    height: 22px;
   }
 }
 

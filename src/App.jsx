@@ -318,25 +318,25 @@ function App() {
       )}
 
       <footer>
-        <div className="github-section">
-          <p className="github-message">
-            <a
-              href="https://github.com/robertoandres24/worldcup-album-index"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="github-link"
-            >
-              ⭐ {t('starMessage')} · {' '}
-            </a>
-            <a
-              href="https://github.com/robertoandres24/worldcup-album-index/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="github-link"
-            >
-              {' '} 🤓 {t('suggestImprovement')}
-            </a>
+        <div className="kofi-section">
+          <p className="kofi-message">
+            ☕ {t('kofiMessage')}
           </p>
+          <p className="kofi-sub-message">
+            {t('kofiSubMessage')}
+          </p>
+          <a
+            href="https://ko-fi.com/studio84"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="kofi-btn"
+          >
+            <img src="/kofi-icon.png" alt="Ko-fi" className="kofi-icon" />
+            {t('kofiButton')}
+          </a>
+        </div>
+
+                <div className="github-section">
           <p className="github-developed-by">
             <span className="footer-text">{t('footer')}</span>
             <a
@@ -352,6 +352,7 @@ function App() {
             </a>
           </p>
         </div>
+
         <div className="lang-toggle footer-lang">
           <button
             className={`lang-btn ${locale === 'es' ? 'active' : ''}`}
