@@ -84,7 +84,7 @@ header h1 span {
 }
 
 .about-modal {
-  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(30, 41, 59, 0.95) 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   max-width: 600px;
@@ -816,7 +816,7 @@ footer {
 
   /* About modal mobile styles */
   .about-modal {
-    padding: 1.5rem;
+    padding: 3rem 1.5rem 1.5rem;
     max-height: 85vh;
     margin: 1rem;
   }
@@ -829,6 +829,7 @@ footer {
   .about-content p {
     font-size: 0.9rem;
     line-height: 1.5;
+    text-align: justify;
   }
 
   .about-close-btn {
