@@ -20,5 +20,13 @@
   "copyLink": "Copy link",
   "kofiMessage": "If you liked the site, buy me a coffee to keep adding awesome features 😉",
   "kofiSubMessage": "The minimum is just 1 dollar. Yep, cheaper than a pack of stickers 😂.",
-  "kofiButton": "Support on Ko-fi"
+  "kofiButton": "Support on Ko-fi",
+  "aboutButton": "About this project",
+  "aboutTitle": "About Album FIFA Index 2026",
+  "aboutParagraph1": "Hi! I'm the developer behind Album FIFA Index 2026 ☕⚽",
+  "aboutParagraph2": "This app was born out of pure frustration 😂: I was pasting stickers and got tired of having to go back to the album's physical index every time to see which page each country was on. I wanted to paste, not browse! So I built this search tool as quickly as possible.",
+  "aboutParagraph3": "Plus, to keep the kids (and the not-so-kids!) entertained, I added fun facts about each national team while they look for their pages.",
+  "aboutParagraph4a": "If the app saved you time trading duplicates or pasting as a family, you can",
+  "aboutParagraph4b": "buy me a coffee",
+  "aboutParagraph4c": "and it's more than welcome! With your support, Studio84 will keep the search tool fast, ad-free, and with new features I'm already planning. Thanks for the support! 🙌"
 }

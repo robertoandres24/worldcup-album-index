@@ -141,6 +141,7 @@ function App() {
   const [isAtBottom, setIsAtBottom] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
   const [searchFocused, setSearchFocused] = useState(false)
+  const [showAbout, setShowAbout] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -216,6 +217,9 @@ function App() {
   return (
     <div className="container">
       <div className="top-bar">
+        <button className="about-link" onClick={() => setShowAbout(true)}>
+          {t('aboutButton')}
+        </button>
         <div className="share-container">
           <button className="share-btn" onClick={toggleShareMenu} aria-label={t('share')}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -258,6 +262,29 @@ function App() {
         <p><em>{t('goodbyeIndex')}</em></p>
         <p><em>{t('lessBrowsing')}</em></p>
       </header>
+
+      {showAbout && (
+        <div className="about-modal-overlay" onClick={() => setShowAbout(false)}>
+          <div className="about-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="about-close-btn" onClick={() => setShowAbout(false)} aria-label="Close">
+              ×
+            </button>
+            <div className="about-content">
+              <h2>{t('aboutTitle')}</h2>
+              <p>{t('aboutParagraph1')}</p>
+              <p>{t('aboutParagraph2')}</p>
+              <p>{t('aboutParagraph3')}</p>
+              <p>
+                {t('aboutParagraph4a')}{' '}
+                <a href="https://ko-fi.com/studio84" target="_blank" rel="noopener noreferrer" className="about-kofi-link">
+                  {t('aboutParagraph4b')}
+                </a>{' '}
+                {t('aboutParagraph4c')}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="search-container">
         <div className="search-input-wrapper">
