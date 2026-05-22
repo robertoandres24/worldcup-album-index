@@ -1,3 +1,11 @@
 {
-  "framework": "vite"
+  "framework": "vite",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "albumfifaindex.com" }],
+      "destination": "https://mialbumfifa.com/$1?ref=old",
+      "permanent": true
+    }
+  ]
 }

@@ -142,6 +142,16 @@ function App() {
   const [showShareMenu, setShowShareMenu] = useState(false)
   const [searchFocused, setSearchFocused] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
+  const [showRedirectBanner, setShowRedirectBanner] = useState(() => {
+    const dismissed = sessionStorage.getItem('redirect-banner-dismissed')
+    if (dismissed) return false
+    return new URLSearchParams(window.location.search).get('ref') === 'old'
+  })
+
+  const dismissRedirectBanner = () => {
+    sessionStorage.setItem('redirect-banner-dismissed', '1')
+    setShowRedirectBanner(false)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -256,6 +266,19 @@ function App() {
           )}
         </div>
       </div>
+      {showRedirectBanner && (
+        <div className="redirect-banner">
+          <span>
+            {t('redirectBanner')}{' '}
+            <strong>
+              <a href="https://mialbumfifa.com" className="redirect-banner-link">mialbumfifa.com</a>
+            </strong>
+          </span>
+          <button className="redirect-banner-dismiss" onClick={dismissRedirectBanner}>
+            {t('redirectBannerDismiss')} ×
+          </button>
+        </div>
+      )}
       <header className={searchFocused ? 'search-focus-mode' : ''}>
         <h1><span>⚽</span> {t('title')}</h1>
         <p>{t('description')}</p>
