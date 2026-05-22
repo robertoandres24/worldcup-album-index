@@ -327,7 +327,7 @@ function App() {
             <div
               key={sticker.code}
               className="sticker-card"
-              onClick={() => setSearch(sticker.code)}
+              onClick={() => { setSearch(sticker.code); scrollToTop() }}
               style={{ cursor: 'pointer' }}
             >
               <div className="page-number">{sticker.page}</div>
