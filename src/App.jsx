@@ -259,8 +259,6 @@ function App() {
       <header className={searchFocused ? 'search-focus-mode' : ''}>
         <h1><span>⚽</span> {t('title')}</h1>
         <p>{t('description')}</p>
-        <p><em>{t('goodbyeIndex')}</em></p>
-        <p><em>{t('lessBrowsing')}</em></p>
       </header>
 
       {showAbout && (
