@@ -206,12 +206,12 @@ header p {
   background: rgba(24, 119, 242, 0.15);
 }
 
-.share-option.twitter {
-  color: #1da1f2;
+.share-option.x {
+  color: #d3bcbc;
 }
 
-.share-option.twitter:hover {
-  background: rgba(29, 161, 242, 0.15);
+.share-option.x:hover {
+  background: rgba(211, 188, 188, 0.1);
 }
 
 .share-option.linkedin {
