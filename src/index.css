@@ -34,11 +34,14 @@ body {
 header {
   text-align: center;
   margin-bottom: 2rem;
+  transition: margin 0.3s ease;
 }
 
 header h1 {
   font-size: 2.5rem;
   font-weight: 800;
+  transition: all 0.3s ease;
+  overflow: hidden;
   background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -46,14 +49,9 @@ header h1 {
   margin-bottom: 0.5rem;
 }
 
-header h1 span {
-  -webkit-text-fill-color: initial;
-  background: none;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-}
-
 header p {
+  transition: all 0.3s ease;
+  overflow: hidden;
   color: var(--gray);
   font-size: 1.1rem;
   max-width: 500px;
@@ -61,6 +59,13 @@ header p {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+header h1 span {
+  -webkit-text-fill-color: initial;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
 }
 
 .lang-toggle {
@@ -614,6 +619,26 @@ footer {
 
   header p {
     font-size: 1rem;
+  }
+
+  /* Hide title and description when search is focused - mobile only */
+  header.search-focus-mode h1,
+  header.search-focus-mode p {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  /* Keep header icon visible */
+  header.search-focus-mode h1 span {
+    max-height: none;
+    opacity: 1;
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
   }
 
   .search-input {

@@ -140,6 +140,7 @@ function App() {
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [isAtBottom, setIsAtBottom] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
+  const [searchFocused, setSearchFocused] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -251,7 +252,7 @@ function App() {
           )}
         </div>
       </div>
-      <header>
+      <header className={searchFocused ? 'search-focus-mode' : ''}>
         <h1><span>⚽</span> {t('title')}</h1>
         <p>{t('description')}</p>
         <p><em>{t('goodbyeIndex')}</em></p>
@@ -266,7 +267,8 @@ function App() {
             placeholder={t('searchPlaceholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            autoFocus
+            onFocus={() => setSearchFocused(true)}
+            onBlur={() => setTimeout(() => setSearchFocused(false), 150)}
           />
           {search && (
             <button
