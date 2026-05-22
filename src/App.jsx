@@ -324,7 +324,12 @@ function App() {
           </div>
         ) : (
           filteredStickers.map((sticker) => (
-            <div key={sticker.code} className="sticker-card">
+            <div
+              key={sticker.code}
+              className="sticker-card"
+              onClick={() => setSearch(sticker.code)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="page-number">{sticker.page}</div>
               <div className="country-info">
                 <div className="country-code">{sticker.code}</div>

@@ -790,6 +790,11 @@ footer {
     font-size: 1rem;
   }
 
+  /* Remove header spacing when search is focused - mobile only */
+  header.search-focus-mode {
+    margin-bottom: 0;
+  }
+
   /* Hide title and description when search is focused - mobile only */
   header.search-focus-mode h1,
   header.search-focus-mode p {
