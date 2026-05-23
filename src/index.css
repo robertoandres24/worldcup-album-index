@@ -1548,6 +1548,61 @@ footer {
   flex-shrink: 0;
 }
 
+@media (max-width: 600px) {
+  .promo-banner--country {
+    margin-top: 1.25rem;
+  }
+}
+
+/* ── Inline Promo Banner (country selected, not logged in) ──── */
+.inline-promo-banner {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin: 0.5rem 0 1.5rem;
+  animation: fadeInUp 0.3s ease;
+}
+
+.inline-promo-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.inline-promo-content {
+  flex: 1;
+}
+
+.inline-promo-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--light);
+  margin: 0 0 0.4rem;
+}
+
+.inline-promo-body {
+  font-size: 0.82rem;
+  color: #b0b8c8;
+  line-height: 1.55;
+  margin: 0 0 0.9rem;
+}
+
+.inline-promo-body strong {
+  color: var(--light);
+}
+
+@media (max-width: 480px) {
+  .inline-promo-banner {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
 /* ── Sticker Panel ─────────────────────────────────────────── */
 .sticker-panel {
   width: 100%;

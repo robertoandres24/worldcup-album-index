@@ -5,6 +5,7 @@ import curiosities from './curiosities.json'
 import flags from './flags.js'
 import SuggestionModal from './components/SuggestionModal.jsx'
 import StickerPanel from './components/StickerPanel.jsx'
+import { PromoBanner } from './components/PromoBanner.jsx'
 
 const stickersData = [
   // Grupo A
@@ -156,7 +157,7 @@ function App() {
   const [showSuggestionModal, setShowSuggestionModal] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const [showPromoBanner, setShowPromoBanner] = useState(() => {
-    return !localStorage.getItem('promo-album-dismissed')
+    return !localStorage.getItem('promo-banner-home')
   })
   const [showRedirectBanner, setShowRedirectBanner] = useState(() => {
     const dismissed = sessionStorage.getItem('redirect-banner-dismissed')
@@ -165,7 +166,7 @@ function App() {
   })
 
   const dismissPromoBanner = () => {
-    localStorage.setItem('promo-album-dismissed', '1')
+    localStorage.setItem('promo-banner-home', '1')
     setShowPromoBanner(false)
   }
 
@@ -176,7 +177,8 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      localStorage.setItem('promo-album-dismissed', '1')
+      localStorage.setItem('promo-banner-home', '1')
+      localStorage.setItem('promo-banner-country', '1')
       setShowPromoBanner(false)
     }
   }, [user])
@@ -311,22 +313,14 @@ function App() {
         </div>
       )}
       {showPromoBanner && !user && (
-        <div className="promo-banner">
-          <div className="promo-banner-glow" />
-          <button className="promo-dismiss" onClick={dismissPromoBanner} aria-label="Cerrar">×</button>
-          <div className="promo-icon">✨</div>
-          <h3 className="promo-title">Nueva funcionalidad: Mi Álbum Digital</h3>
-          <p className="promo-body">
-            Inicia sesión con Google y accede a tu colección personal desde cualquier dispositivo.
-            Marca las laminitas que ya tengas con un click y descubre cuáles te faltan al instante.
-            Despues de registrarte, selecciona un pais y podras comenzar a registrar tus figuritas.
-          </p>
-          <button className="promo-cta" onClick={handlePromoLogin}>
-            <svg className="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-            Iniciar sesión con Google
-          </button>
-          <button className="promo-dismiss-text" onClick={dismissPromoBanner}>Ya lo sé, no mostrar más</button>
-        </div>
+        <PromoBanner
+          icon="✨"
+          title="Nueva funcionalidad: Mi Álbum Digital"
+          body="Inicia sesión con Google y accede a tu colección personal desde cualquier dispositivo. Marca las laminitas que ya tengas con un click y descubre cuáles te faltan al instante. Después de registrarte, selecciona un país y podrás comenzar a registrar tus figuritas."
+          onLogin={signInWithGoogle}
+          onDismiss={dismissPromoBanner}
+          storageKey="promo-banner-home"
+        />
       )}
 
       <header className={searchFocused ? 'search-focus-mode' : ''}>
@@ -424,6 +418,18 @@ function App() {
 
       {filteredStickers.length === 1 && user && (
         <StickerPanel countryCode={filteredStickers[0].code} user={user} />
+      )}
+
+      {filteredStickers.length === 1 && !user && !authLoading && (
+        <PromoBanner
+          icon="🏆"
+          title={`¡Registrate y marca las laminas que ya tengas!`}
+          body={`Aquí aparecerán las 20 figuritas de ${filteredStickers[0].name}. Inicia sesión con Google, selecciónalas con un click y lleva el registro de todos los paises desde cualquier dispositivo.`}
+          onLogin={signInWithGoogle}
+          onDismiss={() => localStorage.setItem('promo-banner-country', '1')}
+          storageKey="promo-banner-country"
+          className="promo-banner--country"
+        />
       )}
 
       {filteredStickers.length === 1 && (
