@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { useI18n } from './hooks/useI18n.js'
 import curiosities from './curiosities.json'
 import flags from './flags.js'
+import SuggestionModal from './components/SuggestionModal.jsx'
 
 const stickersData = [
   // Grupo A
@@ -149,6 +150,7 @@ function App() {
   const [showShareMenu, setShowShareMenu] = useState(false)
   const [searchFocused, setSearchFocused] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
+  const [showSuggestionModal, setShowSuggestionModal] = useState(false)
   const [showRedirectBanner, setShowRedirectBanner] = useState(() => {
     const dismissed = sessionStorage.getItem('redirect-banner-dismissed')
     if (dismissed) return false
@@ -234,9 +236,14 @@ function App() {
   return (
     <div className="container">
       <div className="top-bar">
-        <button className="about-link" onClick={() => setShowAbout(true)}>
-          {t('aboutButton')}
-        </button>
+        <div className="top-bar-left">
+          <button className="about-link" onClick={() => setShowAbout(true)}>
+            {t('aboutButton')}
+          </button>
+          <button className="suggestion-link" onClick={() => setShowSuggestionModal(true)}>
+            {t('suggestionButton')}
+          </button>
+        </div>
         <div className="share-container">
           <button className="share-btn" onClick={toggleShareMenu} aria-label={t('share')}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -312,6 +319,10 @@ function App() {
             </div>
           </div>
         </div>
+      )}
+
+      {showSuggestionModal && (
+        <SuggestionModal onClose={() => setShowSuggestionModal(false)} />
       )}
 
       <div className="search-container">
