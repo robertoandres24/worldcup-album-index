@@ -1,8 +1,10 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useI18n } from './hooks/useI18n.js'
+import { useAuth } from './hooks/useAuth.js'
 import curiosities from './curiosities.json'
 import flags from './flags.js'
 import SuggestionModal from './components/SuggestionModal.jsx'
+import StickerPanel from './components/StickerPanel.jsx'
 
 const stickersData = [
   // Grupo A
@@ -144,6 +146,7 @@ function CuriosityCarousel({ countryCode }) {
 
 function App() {
   const { locale, t, toggleLocale } = useI18n()
+  const { user, loading: authLoading, signInWithGoogle, signOut } = useAuth()
   const [search, setSearch] = useState('')
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [isAtBottom, setIsAtBottom] = useState(false)
@@ -151,11 +154,32 @@ function App() {
   const [searchFocused, setSearchFocused] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const [showSuggestionModal, setShowSuggestionModal] = useState(false)
+  const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showPromoBanner, setShowPromoBanner] = useState(() => {
+    return !localStorage.getItem('promo-album-dismissed')
+  })
   const [showRedirectBanner, setShowRedirectBanner] = useState(() => {
     const dismissed = sessionStorage.getItem('redirect-banner-dismissed')
     if (dismissed) return false
     return new URLSearchParams(window.location.search).get('ref') === 'old'
   })
+
+  const dismissPromoBanner = () => {
+    localStorage.setItem('promo-album-dismissed', '1')
+    setShowPromoBanner(false)
+  }
+
+  const handlePromoLogin = () => {
+    dismissPromoBanner()
+    signInWithGoogle()
+  }
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('promo-album-dismissed', '1')
+      setShowPromoBanner(false)
+    }
+  }, [user])
 
   const dismissRedirectBanner = () => {
     sessionStorage.setItem('redirect-banner-dismissed', '1')
@@ -181,10 +205,13 @@ function App() {
       if (showShareMenu && !e.target.closest('.share-container')) {
         setShowShareMenu(false)
       }
+      if (showUserMenu && !e.target.closest('.user-avatar-container')) {
+        setShowUserMenu(false)
+      }
     }
     document.addEventListener('click', handleClickOutside)
     return () => document.removeEventListener('click', handleClickOutside)
-  }, [showShareMenu])
+  }, [showShareMenu, showUserMenu])
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -240,43 +267,33 @@ function App() {
           <button className="about-link" onClick={() => setShowAbout(true)}>
             {t('aboutButton')}
           </button>
-          <button className="suggestion-link" onClick={() => setShowSuggestionModal(true)}>
-            {t('suggestionButton')}
-          </button>
         </div>
-        <div className="share-container">
-          <button className="share-btn" onClick={toggleShareMenu} aria-label={t('share')}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="18" cy="5" r="3" />
-              <circle cx="6" cy="12" r="3" />
-              <circle cx="18" cy="19" r="3" />
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-            </svg>
-          </button>
-          {showShareMenu && (
-            <div className="share-menu">
-              <button className="share-option whatsapp" onClick={shareLinks.whatsapp} aria-label="WhatsApp">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                <span>WhatsApp</span>
+        <div className="user-auth-area">
+          {!authLoading && (
+            user ? (
+              <div className="user-avatar-container">
+                <button
+                  className="user-avatar-btn"
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  aria-label="Menú de usuario"
+                >
+                  {(user.user_metadata?.full_name || user.email).charAt(0).toUpperCase()}
+                </button>
+                {showUserMenu && (
+                  <div className="user-dropdown">
+                    <div className="user-dropdown-email">{user.email}</div>
+                    <button className="user-dropdown-logout" onClick={() => { signOut(); setShowUserMenu(false) }}>
+                      Cerrar sesión
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button className="auth-btn auth-btn-login" onClick={signInWithGoogle}>
+                <svg className="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                Iniciar sesión
               </button>
-              <button className="share-option facebook" onClick={shareLinks.facebook} aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                <span>Facebook</span>
-              </button>
-              <button className="share-option x" onClick={shareLinks.x} aria-label="X">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                <span>X</span>
-              </button>
-              <button className="share-option linkedin" onClick={shareLinks.linkedin} aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                <span>LinkedIn</span>
-              </button>
-              <button className="share-option copy" onClick={shareLinks.copyLink} aria-label={t('linkCopied')}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-                <span>{t('copyLink')}</span>
-              </button>
-            </div>
+            )
           )}
         </div>
       </div>
@@ -293,6 +310,25 @@ function App() {
           </button>
         </div>
       )}
+      {showPromoBanner && !user && (
+        <div className="promo-banner">
+          <div className="promo-banner-glow" />
+          <button className="promo-dismiss" onClick={dismissPromoBanner} aria-label="Cerrar">×</button>
+          <div className="promo-icon">✨</div>
+          <h3 className="promo-title">Nueva funcionalidad: Mi Álbum Digital</h3>
+          <p className="promo-body">
+            Inicia sesión con Google y accede a tu colección personal desde cualquier dispositivo.
+            Marca las laminitas que ya tengas con un click y descubre cuáles te faltan al instante.
+            Despues de registrarte, selecciona un pais y podras comenzar a registrar tus figuritas.
+          </p>
+          <button className="promo-cta" onClick={handlePromoLogin}>
+            <svg className="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Iniciar sesión con Google
+          </button>
+          <button className="promo-dismiss-text" onClick={dismissPromoBanner}>Ya lo sé, no mostrar más</button>
+        </div>
+      )}
+
       <header className={searchFocused ? 'search-focus-mode' : ''}>
         <h1><span>⚽</span> {t('title')}</h1>
         <p>{t('description')}</p>
@@ -385,6 +421,11 @@ function App() {
         )}
       </div>
 
+
+      {filteredStickers.length === 1 && user && (
+        <StickerPanel countryCode={filteredStickers[0].code} user={user} />
+      )}
+
       {filteredStickers.length === 1 && (
         <CuriosityCarousel countryCode={filteredStickers[0].code} />
       )}
@@ -408,7 +449,7 @@ function App() {
           </a>
         </div>
 
-                <div className="github-section">
+        <div className="github-section">
           <p className="github-developed-by">
             <span className="footer-text">{t('footer')}</span>
             <a
@@ -425,19 +466,46 @@ function App() {
           </p>
         </div>
 
-        <div className="lang-toggle footer-lang">
-          <button
-            className={`lang-btn ${locale === 'es' ? 'active' : ''}`}
-            onClick={() => locale !== 'es' && toggleLocale()}
-          >
-            ES
+        <div>
+          <button className="suggestion-link" onClick={() => setShowSuggestionModal(true)}>
+            {t('suggestionButton')}
           </button>
-          <button
-            className={`lang-btn ${locale === 'en' ? 'active' : ''}`}
-            onClick={() => locale !== 'en' && toggleLocale()}
-          >
-            EN
+        </div>
+
+        <div className="share-container footer-share">
+          <button className="share-btn" onClick={toggleShareMenu} aria-label={t('share')}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
           </button>
+          {showShareMenu && (
+            <div className="share-menu">
+              <button className="share-option whatsapp" onClick={shareLinks.whatsapp} aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span>WhatsApp</span>
+              </button>
+              <button className="share-option facebook" onClick={shareLinks.facebook} aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span>Facebook</span>
+              </button>
+              <button className="share-option x" onClick={shareLinks.x} aria-label="X">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span>X</span>
+              </button>
+              <button className="share-option linkedin" onClick={shareLinks.linkedin} aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                <span>LinkedIn</span>
+              </button>
+              <button className="share-option copy" onClick={shareLinks.copyLink} aria-label={t('linkCopied')}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                <span>{t('copyLink')}</span>
+              </button>
+            </div>
+          )}
         </div>
       </footer>
 

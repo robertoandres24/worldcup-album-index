@@ -1,14 +1,18 @@
+import { createClient } from '@supabase/supabase-js'
+
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-export const invokeFunction = async (functionName, body) => {
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+export const invokeFunction = async (functionName, body, accessToken) => {
   const response = await fetch(
     `${supabaseUrl}/functions/v1/${functionName}`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${supabaseAnonKey}`
+        'Authorization': `Bearer ${accessToken || supabaseAnonKey}`
       },
       body: JSON.stringify(body)
     }
