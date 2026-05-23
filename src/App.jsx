@@ -170,11 +170,6 @@ function App() {
     setShowPromoBanner(false)
   }
 
-  const handlePromoLogin = () => {
-    dismissPromoBanner()
-    signInWithGoogle()
-  }
-
   useEffect(() => {
     if (user) {
       localStorage.setItem('promo-banner-home', '1')
