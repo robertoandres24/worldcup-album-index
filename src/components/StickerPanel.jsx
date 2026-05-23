@@ -13,7 +13,7 @@ function StickerPanel({ countryCode, user }) {
     setLoading(true)
     supabase
       .from('sticker_collection')
-      .select('sticker_number, collected')
+      .select('sticker_number')
       .eq('user_id', user.id)
       .eq('country_code', countryCode)
       .then(({ data, error }) => {
@@ -25,7 +25,7 @@ function StickerPanel({ countryCode, user }) {
         const map = {}
         if (data) {
           data.forEach((row) => {
-            map[row.sticker_number] = row.collected
+            map[row.sticker_number] = true
           })
         }
         setCollected(map)
@@ -39,16 +39,22 @@ function StickerPanel({ countryCode, user }) {
 
     setCollected((prev) => ({ ...prev, [number]: next }))
 
-    const { error } = await supabase.from('sticker_collection').upsert(
-      {
+    let error
+    if (next) {
+      ;({ error } = await supabase.from('sticker_collection').insert({
         user_id: user.id,
         country_code: countryCode,
         sticker_number: number,
-        collected: next,
         updated_at: new Date().toISOString(),
-      },
-      { onConflict: 'user_id,country_code,sticker_number' }
-    )
+      }))
+    } else {
+      ;({ error } = await supabase
+        .from('sticker_collection')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('country_code', countryCode)
+        .eq('sticker_number', number))
+    }
 
     if (error) {
       console.error('Error saving sticker:', error)
