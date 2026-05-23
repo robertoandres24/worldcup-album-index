@@ -159,6 +159,7 @@ function App() {
   const [showPromoBanner, setShowPromoBanner] = useState(() => {
     return !localStorage.getItem('promo-banner-home')
   })
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false)
   const [showRedirectBanner, setShowRedirectBanner] = useState(() => {
     const dismissed = sessionStorage.getItem('redirect-banner-dismissed')
     if (dismissed) return false
@@ -175,8 +176,16 @@ function App() {
       localStorage.setItem('promo-banner-home', '1')
       localStorage.setItem('promo-banner-country', '1')
       setShowPromoBanner(false)
+      if (!localStorage.getItem('welcome-modal-dismissed')) {
+        setShowWelcomeModal(true)
+      }
     }
   }, [user])
+
+  const dismissWelcomeModal = () => {
+    localStorage.setItem('welcome-modal-dismissed', '1')
+    setShowWelcomeModal(false)
+  }
 
   const dismissRedirectBanner = () => {
     sessionStorage.setItem('redirect-banner-dismissed', '1')
@@ -307,6 +316,27 @@ function App() {
           </button>
         </div>
       )}
+      {showWelcomeModal && (
+        <div className="welcome-modal-overlay" onClick={dismissWelcomeModal}>
+          <div className="welcome-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="welcome-modal-close" onClick={dismissWelcomeModal} aria-label="Cerrar">×</button>
+            <div className="welcome-modal-icon">🎉</div>
+            <h2 className="welcome-modal-title">¡Ya estás dentro!</h2>
+            <p className="welcome-modal-body">
+              Para comenzar a usar <strong>Mi Álbum Digital</strong>, escribe el código de un país
+              en el buscador o clickea cualquier carta de la lista.
+            </p>
+            <p className="welcome-modal-body">
+              Aparecerán los 20 recuadros de figuritas de esa selección y podrás marcar
+              las que ya tienes con un click. ¡A divertirse! 😄
+            </p>
+            <button className="welcome-modal-cta" onClick={dismissWelcomeModal}>
+              ¡Entendido, a jugar!
+            </button>
+          </div>
+        </div>
+      )}
+
       {showPromoBanner && !user && (
         <PromoBanner
           icon="✨"

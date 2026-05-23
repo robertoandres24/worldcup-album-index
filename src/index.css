@@ -68,6 +68,100 @@ header h1 span {
   background-clip: initial;
 }
 
+/* ── Welcome Modal (post-login onboarding) ─────────────────── */
+.welcome-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.welcome-modal {
+  position: relative;
+  background: rgba(20, 20, 40, 0.98);
+  border-radius: 20px;
+  padding: 2rem 1.75rem 1.75rem;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  animation: modalFadeIn 0.25s ease;
+}
+
+.welcome-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 1.3rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.2rem 0.4rem;
+  border-radius: 50%;
+  transition: color 0.15s, background 0.15s;
+}
+
+.welcome-modal-close:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+.welcome-modal-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.welcome-modal-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 1rem;
+}
+
+.welcome-modal-body {
+  font-size: 0.875rem;
+  color: #b0b8c8;
+  line-height: 1.6;
+  margin: 0 0 0.75rem;
+}
+
+.welcome-modal-body strong {
+  color: var(--light);
+}
+
+.welcome-modal-cta {
+  display: inline-block;
+  margin-top: 0.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.welcome-modal-cta:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
 .about-modal-overlay {
   position: fixed;
   top: 0;
