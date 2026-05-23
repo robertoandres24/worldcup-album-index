@@ -149,6 +149,7 @@ function App() {
   const { locale, t, toggleLocale } = useI18n()
   const { user, loading: authLoading, signInWithGoogle, signOut } = useAuth()
   const [search, setSearch] = useState('')
+  const [selectedCode, setSelectedCode] = useState(null)
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [isAtBottom, setIsAtBottom] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
@@ -265,6 +266,14 @@ function App() {
         s.page.toString().includes(query)
     )
   }, [search])
+
+  const activeCountry = useMemo(() => {
+    if (selectedCode) return stickersData.find((s) => s.code === selectedCode) ?? null
+    if (!search.trim()) return null
+    const query = search.trim().toUpperCase()
+    const exact = stickersData.find((s) => s.code === query)
+    return exact ?? (filteredStickers.length === 1 ? filteredStickers[0] : null)
+  }, [selectedCode, search, filteredStickers])
 
   return (
     <div className="container">
@@ -387,14 +396,14 @@ function App() {
             className="search-input"
             placeholder={t('searchPlaceholder')}
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => { setSelectedCode(null); setSearch(e.target.value) }}
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setTimeout(() => setSearchFocused(false), 150)}
           />
           {search && (
             <button
               className="search-clear-btn"
-              onClick={() => setSearch('')}
+              onClick={() => { setSelectedCode(null); setSearch('') }}
               aria-label="Limpiar búsqueda"
             >
               ×
@@ -423,7 +432,7 @@ function App() {
             <div
               key={sticker.code}
               className="sticker-card"
-              onClick={() => { setSearch(sticker.code); scrollToTop() }}
+              onClick={() => { setSelectedCode(sticker.code); setSearch(sticker.code); scrollToTop() }}
               style={{ cursor: 'pointer' }}
             >
               <div className="page-number">{sticker.page}</div>
@@ -441,15 +450,15 @@ function App() {
       </div>
 
 
-      {filteredStickers.length === 1 && user && (
-        <StickerPanel countryCode={filteredStickers[0].code} user={user} />
+      {activeCountry && user && (
+        <StickerPanel countryCode={activeCountry.code} user={user} />
       )}
 
-      {filteredStickers.length === 1 && !user && !authLoading && (
+      {activeCountry && !user && !authLoading && (
         <PromoBanner
           icon="🏆"
           title={`¡Registrate y marca las laminas que ya tengas!`}
-          body={`Aquí aparecerán las 20 figuritas de ${filteredStickers[0].name}. Inicia sesión con Google, selecciónalas con un click y lleva el registro de todos los paises desde cualquier dispositivo.`}
+          body={`Aquí aparecerán las 20 figuritas de ${activeCountry.name}. Inicia sesión con Google, selecciónalas con un click y lleva el registro de todos los paises desde cualquier dispositivo.`}
           onLogin={signInWithGoogle}
           onDismiss={() => localStorage.setItem('promo-banner-country', '1')}
           storageKey="promo-banner-country"
@@ -457,8 +466,8 @@ function App() {
         />
       )}
 
-      {filteredStickers.length === 1 && (
-        <CuriosityCarousel countryCode={filteredStickers[0].code} />
+      {activeCountry && (
+        <CuriosityCarousel countryCode={activeCountry.code} />
       )}
 
       <footer>
