@@ -1,6 +1,6 @@
 {
   "title": "Mi Album FIFA de la Copa Mundial 2026",
-  "description": "Introduce el código del país (ej: URU, MEX, BRA) y descubre en qué página del álbum va pegado.",
+  "description": "Encuentra en qué página va cada lámina, marca las que ya tienes y registra tus repetidas.",
   "goodbyeIndex": "¡Adiós a revisar la página de índex como en los 90s!",
   "lessBrowsing": "Menos hojeadas = Más años de vida para tu álbum ",
   "searchPlaceholder": "Busca por código (MEX), país o página...",
@@ -36,8 +36,8 @@
   "hoursRemaining": "Podrás enviar otra en {hours} horas",
   "aboutTitle": "Sobre Mi Album FIFA 2026",
   "aboutParagraph1": "¡Hola! Soy el desarrollador detrás de Mi Album FIFA 2026 ☕⚽",
-  "aboutParagraph2": "Esta app nació por pura frustración 😂: estaba pegando laminitas y me cansé de tener que volver al índice físico del álbum a cada rato para ver en qué página iba cada país. ¡Quería pegar, no hojear! Así que armé este buscador lo antes posible.",
-  "aboutParagraph3": "Además, para que los niños (¡y los no tan niños!) se diviertan más, le sumé datos curiosos de cada selección mientras buscan sus páginas.",
+  "aboutParagraph2": "Esta app nació por pura frustración 😂: estaba pegando laminitas y me cansé de volver al índice físico a cada rato. Así que armé un buscador... y de ahí no pude parar. Hoy es un álbum digital completo: busca tu país, marca las láminas que ya tienes, registra las repetidas y lleva el control de tu colección desde cualquier dispositivo.",
+  "aboutParagraph3": "Y para que los niños (¡y los no tan niños!) se diviertan más, le sumé datos curiosos de cada selección. Todo gratis, sin anuncios, y siempre en tu bolsillo.",
   "aboutParagraph4a": "Si la app te ahorró tiempo intercambiando repetidas o pegando en familia, ¡puedes",
   "aboutParagraph4b": "donarnos un cafecito",
   "aboutParagraph4c": "y es más que bienvenido! Con tu apoyo, Studio84 mantendrá el buscador rápido, libre de anuncios y con nuevas funciones que ya estoy planeando. ¡Gracias por el aguante! 🙌",

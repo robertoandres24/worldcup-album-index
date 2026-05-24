@@ -1,6 +1,6 @@
 {
   "title": "World Cup 2026 Album Index",
-  "description": "Enter the country code (e.g., URU, MEX, BRA) and find out which page to stick it on.",
+  "description": "Find which page each sticker goes on, mark the ones you have and log your duplicates.",
   "goodbyeIndex": "Goodbye to flipping through the index like in the 90s!",
   "lessBrowsing": "Less browsing 📖 = More years of life for your album 😉",
   "searchPlaceholder": "Search by code (MEX), country or page...",
@@ -36,8 +36,8 @@
   "hoursRemaining": "You can send another in {hours} hours",
   "aboutTitle": "About My Album FIFA 2026",
   "aboutParagraph1": "Hi! I'm the developer behind My Album FIFA 2026 ☕⚽",
-  "aboutParagraph2": "This app was born out of pure frustration 😂: I was pasting stickers and got tired of having to go back to the album's physical index every time to see which page each country was on. I wanted to paste, not browse! So I built this search tool as quickly as possible.",
-  "aboutParagraph3": "Plus, to keep the kids (and the not-so-kids!) entertained, I added fun facts about each national team while they look for their pages.",
+  "aboutParagraph2": "This app was born out of pure frustration 😂: I was pasting stickers and got tired of flipping back to the physical index every five minutes. So I built a search tool... and couldn't stop there. Today it's a full digital album: search your country, mark the stickers you have, log your duplicates, and track your whole collection from any device.",
+  "aboutParagraph3": "And to keep the kids (and the not-so-kids!) entertained, I added fun facts about each national team. All free, no ads, and always in your pocket.",
   "aboutParagraph4a": "If the app saved you time trading duplicates or pasting as a family, you can",
   "aboutParagraph4b": "buy me a coffee",
   "aboutParagraph4c": "and it's more than welcome! With your support, Studio84 will keep the search tool fast, ad-free, and with new features I'm already planning. Thanks for the support! 🙌",
