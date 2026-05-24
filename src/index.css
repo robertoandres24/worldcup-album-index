@@ -1853,6 +1853,16 @@ footer {
   padding: 1rem;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sticker-modal-overlay * {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .sticker-modal {
