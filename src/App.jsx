@@ -1,11 +1,11 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useI18n } from './hooks/useI18n.js'
 import { useAuth } from './hooks/useAuth.js'
-import curiosities from './curiosities.json'
 import flags from './flags.js'
 import SuggestionModal from './components/SuggestionModal.jsx'
 import StickerPanel from './components/StickerPanel.jsx'
 import { PromoBanner } from './components/PromoBanner.jsx'
+import CuriosityCarousel from './components/CuriosityCarousel.jsx'
 
 const stickersData = [
   // Grupo A
@@ -69,81 +69,6 @@ const stickersData = [
   { page: 102, code: 'GHA', name: 'Ghana', group: 'L', iso: 'gh' },
   { page: 104, code: 'PAN', name: 'Panama', group: 'L', iso: 'pa' },
 ]
-
-// Create a map for O(1) lookup of curiosities by country code
-const curiositiesMap = new Map(curiosities.map(c => [c.code, c.datos_curiosos]))
-
-function CuriosityCarousel({ countryCode }) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
-  
-  const countryCuriosities = curiositiesMap.get(countryCode) || []
-  
-  if (countryCuriosities.length === 0) return null
-  
-  const goToPrev = () => {
-    setDirection(-1)
-    setCurrentIndex((prev) => (prev === 0 ? countryCuriosities.length - 1 : prev - 1))
-  }
-  
-  const goToNext = () => {
-    setDirection(1)
-    setCurrentIndex((prev) => (prev === countryCuriosities.length - 1 ? 0 : prev + 1))
-  }
-  
-  const goToSlide = (index) => {
-    setDirection(index > currentIndex ? 1 : -1)
-    setCurrentIndex(index)
-  }
-
-  return (
-    <div className="curiosity-carousel">
-      <div className="curiosity-header">
-        <span className="curiosity-icon">💡</span>
-        <span className="curiosity-title">Sabías que...</span>
-        <span className="curiosity-counter">{currentIndex + 1} / {countryCuriosities.length}</span>
-      </div>
-      
-      <div className="curiosity-content-wrapper">
-        <button 
-          className="curiosity-nav curiosity-nav-prev" 
-          onClick={goToPrev}
-          aria-label="Anterior curiosidad"
-        >
-          ‹
-        </button>
-        
-        <div className="curiosity-slider">
-          <div 
-            className="curiosity-slide"
-            key={currentIndex}
-          >
-            {countryCuriosities[currentIndex]}
-          </div>
-        </div>
-        
-        <button 
-          className="curiosity-nav curiosity-nav-next" 
-          onClick={goToNext}
-          aria-label="Siguiente curiosidad"
-        >
-          ›
-        </button>
-      </div>
-      
-      <div className="curiosity-dots">
-        {countryCuriosities.map((_, index) => (
-          <button
-            key={index}
-            className={`curiosity-dot ${index === currentIndex ? 'active' : ''}`}
-            onClick={() => goToSlide(index)}
-            aria-label={`Ir a curiosidad ${index + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
 
 function App() {
   const { locale, t, toggleLocale } = useI18n()
