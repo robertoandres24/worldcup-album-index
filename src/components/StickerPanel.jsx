@@ -198,7 +198,11 @@ function StickerPanel({ countryCode, user }) {
           </button>
         ))}
       </div>
-      <p className="sticker-grid-hint">Toca una figurita para marcarla · Mantén presionado para registrar repetidas</p>
+      <p className="sticker-grid-hint">
+        {window.matchMedia('(pointer: fine)').matches
+          ? 'Haz clic en una figurita para marcarla · Click derecho para registrar repetidas'
+          : 'Toca una figurita para marcarla · Mantén presionado para registrar repetidas'}
+      </p>
 
       {modal !== null && (
         <div className="sticker-modal-overlay" onClick={closeModal}>
