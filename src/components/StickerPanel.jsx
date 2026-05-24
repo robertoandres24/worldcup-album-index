@@ -141,10 +141,15 @@ function StickerPanel({ countryCode, user }) {
     }
   }
 
-  const handleLongPressStart = (number) => {
+  const handleLongPressStart = (e, number) => {
     longPressTimer.current = setTimeout(() => {
       openModal(number)
     }, LONG_PRESS_MS)
+  }
+
+  const handleTouchStart = (e, number) => {
+    e.preventDefault()
+    handleLongPressStart(e, number)
   }
 
   const handleLongPressEnd = () => {
@@ -179,7 +184,7 @@ function StickerPanel({ countryCode, user }) {
             className={`figurita-card ${collected[num] ? 'collected' : ''} ${repeated[num] > 0 ? 'repeated' : ''}`}
             onClick={() => toggleSticker(num)}
             onContextMenu={(e) => handleContextMenu(e, num)}
-            onTouchStart={() => handleLongPressStart(num)}
+            onTouchStart={(e) => handleTouchStart(e, num)}
             onTouchEnd={handleLongPressEnd}
             onTouchMove={handleLongPressEnd}
             disabled={loading}
