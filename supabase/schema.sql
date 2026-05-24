@@ -30,9 +30,10 @@ create table if not exists public.sticker_collection (
   user_id        uuid not null references auth.users(id) on delete cascade,
   country_code   text not null,
   sticker_number int  not null check (sticker_number between 1 and 20),
+  repeated       int  not null default 0,
   updated_at     timestamptz default now(),
   unique (user_id, country_code, sticker_number)
-  -- Note: presence of a row = sticker is collected. No boolean column needed.
+  -- Note: presence of a row = sticker is collected. repeated > 0 means extra copies.
 );
 
 alter table public.sticker_collection enable row level security;
