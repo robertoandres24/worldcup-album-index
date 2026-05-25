@@ -1,9 +1,11 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useI18n } from './hooks/useI18n.js'
 import { useAuth } from './hooks/useAuth.js'
+import { useGlobalCollection } from './hooks/useGlobalCollection.js'
 import flags from './flags.js'
 import SuggestionModal from './components/SuggestionModal.jsx'
 import StickerPanel from './components/StickerPanel.jsx'
+import GlobalStatsBar from './components/GlobalStatsBar.jsx'
 import { PromoBanner } from './components/PromoBanner.jsx'
 import CuriosityCarousel from './components/CuriosityCarousel.jsx'
 
@@ -77,6 +79,7 @@ const stickersData = [
 function App() {
   const { locale, t, toggleLocale } = useI18n()
   const { user, loading: authLoading, signInWithGoogle, signOut } = useAuth()
+  const { totals, loading: collectionLoading, updateEntry } = useGlobalCollection(user)
   const [search, setSearch] = useState('')
   const [selectedCode, setSelectedCode] = useState(null)
   const [showScrollTop, setShowScrollTop] = useState(false)
@@ -292,6 +295,10 @@ function App() {
         <p>{t('description')}</p>
       </header>
 
+      {user && (
+        <GlobalStatsBar totals={totals} loading={collectionLoading} />
+      )}
+
       {showAbout && (
         <div className="about-modal-overlay" onClick={() => setShowAbout(false)}>
           <div className="about-modal" onClick={(e) => e.stopPropagation()}>
@@ -398,7 +405,12 @@ function App() {
 
 
       {activeCountry && user && (
-        <StickerPanel countryCode={activeCountry.code} user={user} stickerCount={activeCountry.count ?? 20} />
+        <StickerPanel
+          countryCode={activeCountry.code}
+          user={user}
+          stickerCount={activeCountry.count ?? 20}
+          onCollectionChange={updateEntry}
+        />
       )}
 
       {activeCountry && !user && !authLoading && (

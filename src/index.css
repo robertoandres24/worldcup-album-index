@@ -823,7 +823,7 @@ header h1 span {
 }
 
 .sticker-card--fwc .special-card-label {
-  background: linear-gradient(to right, #ffffff, #003f9e);
+  background: linear-gradient(to right, #ffffff, #4d9fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1722,6 +1722,109 @@ footer {
   .inline-promo-banner {
     flex-direction: column;
     gap: 0.5rem;
+  }
+}
+
+/* ── Global Stats Bar ──────────────────────────────────────── */
+.global-stats-bar {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.global-stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.global-stats-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--light);
+  letter-spacing: 0.5px;
+}
+
+.global-stats-pct {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.global-stats-progress {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.global-stats-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 99px;
+  transition: width 0.5s ease;
+}
+
+.global-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.global-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.global-stat-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.global-stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.global-stat-desc {
+  font-size: 0.72rem;
+  color: var(--gray);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.global-stat-item--fwc .global-stat-value {
+  background: linear-gradient(to right, #ffffff, #4d9fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.global-stat-item--cc .global-stat-value {
+  color: #F40000;
+}
+
+.global-stat-item--rep .global-stat-value {
+  color: var(--secondary);
+}
+
+@media (max-width: 400px) {
+  .global-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
 }
 

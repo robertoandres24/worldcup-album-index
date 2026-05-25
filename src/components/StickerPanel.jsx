@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabaseClient.js'
 
 const LONG_PRESS_MS = 500
 
-function StickerPanel({ countryCode, user, stickerCount = 20 }) {
+function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange }) {
   const [collected, setCollected] = useState({})
   const [repeated, setRepeated] = useState({})
   const [loading, setLoading] = useState(true)
@@ -55,6 +55,7 @@ function StickerPanel({ countryCode, user, stickerCount = 20 }) {
 
     setCollected((prev) => ({ ...prev, [number]: next }))
     if (!next) setRepeated((prev) => ({ ...prev, [number]: 0 }))
+    onCollectionChange?.(countryCode, number, { collected: next, repeated: next ? 0 : 0 })
 
     let error
     if (next) {
@@ -77,6 +78,7 @@ function StickerPanel({ countryCode, user, stickerCount = 20 }) {
     if (error) {
       console.error('Error saving sticker:', error)
       setCollected((prev) => ({ ...prev, [number]: current }))
+      onCollectionChange?.(countryCode, number, { collected: current, repeated: repeated[number] ?? 0 })
     }
   }
 
@@ -109,6 +111,7 @@ function StickerPanel({ countryCode, user, stickerCount = 20 }) {
     if (action === 'none') {
       setCollected((prev) => ({ ...prev, [number]: false }))
       setRepeated((prev) => ({ ...prev, [number]: 0 }))
+      onCollectionChange?.(countryCode, number, { collected: false, repeated: 0 })
       await supabase
         .from('sticker_collection')
         .delete()
@@ -120,6 +123,7 @@ function StickerPanel({ countryCode, user, stickerCount = 20 }) {
 
     setCollected((prev) => ({ ...prev, [number]: true }))
     setRepeated((prev) => ({ ...prev, [number]: rep }))
+    onCollectionChange?.(countryCode, number, { collected: true, repeated: rep })
 
     const existing = collected[number]
     if (existing) {
