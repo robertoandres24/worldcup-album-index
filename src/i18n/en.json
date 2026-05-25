@@ -81,7 +81,7 @@
   "importWarningTitle": "Irreversible action",
   "importWarningLine1": "This will replace your entire current collection with the one from the specified account:",
   "importWarningBullet1": "Your collection will match the source account exactly",
-  "importWarningBullet2": "This action cannot be undone manually",
+  "importWarningBullet2": "Your data will be backed up: if anything goes wrong, you can restore it with one click",
   "importWarningSource": "Source account:",
   "importConfirmInstruction": "To confirm, type",
   "importPhaseBackup": "Saving backup...",

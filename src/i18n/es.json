@@ -81,7 +81,7 @@
   "importWarningTitle": "Acción irreversible",
   "importWarningLine1": "Esto reemplazará toda tu colección actual con la de la cuenta indicada:",
   "importWarningBullet1": "Tu colección quedará igual a la de la cuenta origen",
-  "importWarningBullet2": "Esta acción no se puede deshacer manualmente",
+  "importWarningBullet2": "Tus datos serán respaldados: si hay algún fallo, podrás restaurarlos con un clic",
   "importWarningSource": "Cuenta origen:",
   "importConfirmInstruction": "Para confirmar, escribe",
   "importPhaseBackup": "Guardando copia de seguridad...",
