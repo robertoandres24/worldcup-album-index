@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import curiositiesEs from '../curiosities.es.json'
-import curiositiesEn from '../curiosities.en.json'
+import curiositiesEs from '../data/curiosities.es.json'
+import curiositiesEn from '../data/curiosities.en.json'
 
 const mapsCache = {
   es: new Map(curiositiesEs.map(c => [c.code, c.datos_curiosos])),
