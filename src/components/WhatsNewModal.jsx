@@ -1,7 +1,10 @@
 const FEATURES = [
-  { id: 'global-stats',  date: '2026-05-24', icon: '📊' },
-  { id: 'fwc-cc-cards',  date: '2026-05-24', icon: '🃏' },
-  { id: 'nav-redesign',  date: '2026-05-24', icon: '🎨' },
+  { id: 'i18n-support',    date: '2026-05-25', icon: '🌐' },
+  { id: 'ux-improvements', date: '2026-05-25', icon: '✨' },
+  { id: 'last-touched',   date: '2026-05-25', icon: '🟡' },
+  { id: 'global-stats',   date: '2026-05-24', icon: '📊' },
+  { id: 'fwc-cc-cards',   date: '2026-05-24', icon: '🃏' },
+  { id: 'nav-redesign',   date: '2026-05-24', icon: '🎨' },
 ]
 
 function formatDate(isoDate, locale) {
