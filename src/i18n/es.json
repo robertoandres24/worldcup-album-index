@@ -104,6 +104,8 @@
   "metaDescription": "Tu álbum digital FIFA World Cup 2026. Registra las láminas que ya tienes, busca páginas por código de país y lleva el control de tu colección Panini desde cualquier dispositivo. Gratis.",
   "whatsNewTitle": "Novedades",
   "whatsNewCloseAriaLabel": "Cerrar",
+  "feature.import-collection.title": "Importar colección desde otra cuenta",
+  "feature.import-collection.description": "Ahora puedes copiar la colección completa de otra cuenta a la tuya con un solo clic. Disponible en el menú de tu usuario. Tus datos se respaldan automáticamente antes de importar, por si algo sale mal.",
   "feature.i18n-support.title": "Soporte completo en inglés y español",
   "feature.i18n-support.description": "La app ahora está disponible en inglés y español. Puedes cambiar el idioma desde el pie de página. Las curiosidades de cada selección, las fechas y todos los textos de la interfaz se adaptan al idioma seleccionado.",
   "feature.ux-improvements.title": "Mejoras de usabilidad en la búsqueda",

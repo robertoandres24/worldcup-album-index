@@ -104,6 +104,8 @@
   "metaDescription": "Your digital FIFA World Cup 2026 sticker album. Track the stickers you have, search pages by country code, and manage your Panini collection from any device. Free.",
   "whatsNewTitle": "What's new",
   "whatsNewCloseAriaLabel": "Close",
+  "feature.import-collection.title": "Import collection from another account",
+  "feature.import-collection.description": "You can now copy the full collection from another account into yours with a single click. Available in your user menu. Your data is automatically backed up before importing, in case anything goes wrong.",
   "feature.i18n-support.title": "Full English and Spanish support",
   "feature.i18n-support.description": "The app is now available in English and Spanish. Switch languages from the footer. Country curiosities, dates, and all interface text adapt to the selected language.",
   "feature.ux-improvements.title": "Search usability improvements",
