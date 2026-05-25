@@ -4,6 +4,7 @@
   "goodbyeIndex": "Goodbye to flipping through the index like in the 90s!",
   "lessBrowsing": "Less browsing 📖 = More years of life for your album 😉",
   "searchBackAriaLabel": "Back to list",
+  "searchClearAriaLabel": "Clear search",
   "searchPlaceholder": "Search by code (MEX), country or page...",
   "resultsCount": "result",
   "resultsCountPlural": "results",
@@ -104,6 +105,8 @@
   "metaDescription": "Your digital FIFA World Cup 2026 sticker album. Track the stickers you have, search pages by country code, and manage your Panini collection from any device. Free.",
   "whatsNewTitle": "What's new",
   "whatsNewCloseAriaLabel": "Close",
+  "closeAriaLabel": "Close",
+  "scrollToTopAriaLabel": "Scroll to top",
   "feature.import-collection.title": "Import collection from another account",
   "feature.import-collection.description": "You can now copy the full collection from another account into yours with a single click. Available in your user menu. Your data is automatically backed up before importing, in case anything goes wrong.",
   "feature.i18n-support.title": "Full English and Spanish support",
@@ -117,5 +120,13 @@
   "feature.fwc-cc-cards.title": "FWC and CC cards",
   "feature.fwc-cc-cards.description": "The album's special sections have been added: FWC (19 cards, pages 1–3 and 106–109) and CC (14 cards, pages 112–113). You can search them by name and track your stickers just like with national teams.",
   "feature.nav-redesign.title": "Navigation redesign",
-  "feature.nav-redesign.description": "Cleaner top-bar: just What's New and your profile. The user button now shows your name with a dropdown menu. Footer items have been reorganized."
+  "feature.nav-redesign.description": "Cleaner top-bar: just What's New and your profile. The user button now shows your name with a dropdown menu. Footer items have been reorganized.",
+  "welcomeTitle": "You're all set!",
+  "welcomeBody1": "To start using",
+  "welcomeBody1b": "My Digital Album",
+  "welcomeBody2": "type a country code in the search box or click any card from the list.",
+  "welcomeBody3": "The 20 sticker slots for that team will appear, and you can mark the ones you already have with a click. Have fun!",
+  "welcomeCta": "Got it, let's play!",
+  "newFeatureTitle": "New feature: My Digital Album",
+  "newFeatureBody": "Sign in with Google and access your personal collection from any device. Mark the stickers you already have with a click and instantly see which ones you're missing. After signing in, select a country and you can start tracking your stickers."
 }

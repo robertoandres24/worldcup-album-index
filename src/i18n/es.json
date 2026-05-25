@@ -5,6 +5,7 @@
   "lessBrowsing": "Menos hojeadas = Más años de vida para tu álbum ",
   "searchPlaceholder": "Busca por código (MEX), país o página...",
   "searchBackAriaLabel": "Volver al listado",
+  "searchClearAriaLabel": "Limpiar búsqueda",
   "resultsCount": "resultado",
   "resultsCountPlural": "resultados",
   "noResults": "No se encontraron países con ese código",
@@ -104,6 +105,8 @@
   "metaDescription": "Tu álbum digital FIFA World Cup 2026. Registra las láminas que ya tienes, busca páginas por código de país y lleva el control de tu colección Panini desde cualquier dispositivo. Gratis.",
   "whatsNewTitle": "Novedades",
   "whatsNewCloseAriaLabel": "Cerrar",
+  "closeAriaLabel": "Cerrar",
+  "scrollToTopAriaLabel": "Volver arriba",
   "feature.import-collection.title": "Importar colección desde otra cuenta",
   "feature.import-collection.description": "Ahora puedes copiar la colección completa de otra cuenta a la tuya con un solo clic. Disponible en el menú de tu usuario. Tus datos se respaldan automáticamente antes de importar, por si algo sale mal.",
   "feature.i18n-support.title": "Soporte completo en inglés y español",
@@ -117,5 +120,13 @@
   "feature.fwc-cc-cards.title": "Cartas FWC y CC",
   "feature.fwc-cc-cards.description": "Se agregaron las secciones especiales del álbum: FWC (19 cartas, páginas 1–3 y 106–109) y CC (14 cartas, páginas 112–113). Puedes buscarlas por nombre y registrar tus figuritas igual que con las selecciones.",
   "feature.nav-redesign.title": "Rediseño de navegación",
-  "feature.nav-redesign.description": "Top-bar más limpio: solo Novedades y tu perfil. El botón de usuario ahora muestra tu nombre con un menú desplegable. Reorganización de items en el footer."
+  "feature.nav-redesign.description": "Top-bar más limpio: solo Novedades y tu perfil. El botón de usuario ahora muestra tu nombre con un menú desplegable. Reorganización de items en el footer.",
+  "welcomeTitle": "¡Ya estás dentro!",
+  "welcomeBody1": "Para comenzar a usar",
+  "welcomeBody1b": "Mi Álbum Digital",
+  "welcomeBody2": "escribe el código de un país en el buscador o clickea cualquier carta de la lista.",
+  "welcomeBody3": "Aparecerán los 20 recuadros de figuritas de esa selección y podrás marcar las que ya tienes con un click. ¡A divertirse!",
+  "welcomeCta": "¡Entendido, a jugar!",
+  "newFeatureTitle": "Nueva funcionalidad: Mi Álbum Digital",
+  "newFeatureBody": "Inicia sesión con Google y accede a tu colección personal desde cualquier dispositivo. Marca las laminitas que ya tengas con un click y descubre cuáles te faltan al instante. Después de registrarte, selecciona un país y podrás comenzar a registrar tus figuritas."
 }

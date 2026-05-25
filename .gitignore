@@ -6,3 +6,4 @@ supabase/.temp
 .env.development
 dist
 .DS_Store
+.windsurf
