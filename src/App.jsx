@@ -111,6 +111,23 @@ function App() {
   }
 
   useEffect(() => {
+    document.documentElement.lang = locale
+    document.title = t('metaTitle')
+    const metaDesc = document.querySelector('meta[name="description"]')
+    if (metaDesc) metaDesc.setAttribute('content', t('metaDescription'))
+    const ogTitle = document.querySelector('meta[property="og:title"]')
+    if (ogTitle) ogTitle.setAttribute('content', t('metaTitle'))
+    const ogDesc = document.querySelector('meta[property="og:description"]')
+    if (ogDesc) ogDesc.setAttribute('content', t('metaDescription'))
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]')
+    if (twitterTitle) twitterTitle.setAttribute('content', t('metaTitle'))
+    const twitterDesc = document.querySelector('meta[name="twitter:description"]')
+    if (twitterDesc) twitterDesc.setAttribute('content', t('metaDescription'))
+    const ogLocale = document.querySelector('meta[property="og:locale"]')
+    if (ogLocale) ogLocale.setAttribute('content', locale === 'en' ? 'en_US' : 'es_ES')
+  }, [locale, t])
+
+  useEffect(() => {
     if (user) {
       localStorage.setItem('promo-banner-home', '1')
       localStorage.setItem('promo-banner-country', '1')
