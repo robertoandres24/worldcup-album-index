@@ -6,15 +6,12 @@ const mapsCache = {
   es: new Map(curiositiesEs.map(c => [c.code, c.datos_curiosos])),
   en: new Map(curiositiesEn.map(c => [c.code, c.datos_curiosos])),
 }
-const AUTO_PLAY_INTERVAL = 6000
 const SWIPE_THRESHOLD = 50
 
 function CuriosityCarousel({ countryCode, locale = 'es' }) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
   const [dragOffset, setDragOffset] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
-  const intervalRef = useRef(null)
   const touchStartX = useRef(null)
   const touchCurrentX = useRef(null)
 
@@ -25,45 +22,18 @@ function CuriosityCarousel({ countryCode, locale = 'es' }) {
     setCurrentIndex(0)
   }, [countryCode])
 
-  useEffect(() => {
-    if (countryCuriosities.length <= 1) return
-
-    intervalRef.current = setInterval(() => {
-      setDirection(1)
-      setCurrentIndex((prev) => (prev === countryCuriosities.length - 1 ? 0 : prev + 1))
-    }, AUTO_PLAY_INTERVAL)
-
-    return () => clearInterval(intervalRef.current)
-  }, [countryCode, countryCuriosities.length])
-
-  const resetInterval = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = setInterval(() => {
-        setDirection(1)
-        setCurrentIndex((prev) => (prev === countryCuriosities.length - 1 ? 0 : prev + 1))
-      }, AUTO_PLAY_INTERVAL)
-    }
-  }
-
   if (countryCuriosities.length === 0) return null
 
   const goToPrev = () => {
-    setDirection(-1)
     setCurrentIndex((prev) => (prev === 0 ? countryCuriosities.length - 1 : prev - 1))
-    resetInterval()
   }
 
   const goToNext = () => {
-    setDirection(1)
     setCurrentIndex((prev) => (prev === countryCuriosities.length - 1 ? 0 : prev + 1))
-    resetInterval()
   }
 
   const goToSlide = (index) => {
-    setDirection(index > currentIndex ? 1 : -1)
     setCurrentIndex(index)
-    resetInterval()
   }
 
   const handleTouchStart = (e) => {
