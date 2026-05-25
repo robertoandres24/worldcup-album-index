@@ -2259,6 +2259,12 @@ footer {
   box-shadow: 0 4px 12px rgba(99, 179, 237, 0.45);
 }
 
+.figurita-card.last-touched {
+  border-color: #f6c90e !important;
+  box-shadow: 0 0 0 2px rgba(246, 201, 14, 0.35), 0 4px 14px rgba(246, 201, 14, 0.2) !important;
+  transform: scale(1.06);
+}
+
 .figurita-repeated-badge {
   position: absolute;
   top: 2px;

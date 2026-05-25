@@ -9,6 +9,7 @@ function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange
   const [loading, setLoading] = useState(true)
   const [modal, setModal] = useState(null)
   const [modalRepeated, setModalRepeated] = useState(0)
+  const [lastTouched, setLastTouched] = useState(null)
   const longPressTimer = useRef(null)
 
   useEffect(() => {
@@ -41,6 +42,7 @@ function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange
   }, [user, countryCode])
 
   const toggleSticker = (number) => {
+    setLastTouched(number)
     if (repeated[number] > 0) {
       openModal(number)
       return
@@ -89,8 +91,20 @@ function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange
     }
   }, [])
 
+  useEffect(() => {
+    if (lastTouched === null) return
+    const handler = (e) => {
+      if (!e.target.closest('.figurita-card')) {
+        setLastTouched(null)
+      }
+    }
+    document.addEventListener('pointerdown', handler)
+    return () => document.removeEventListener('pointerdown', handler)
+  }, [lastTouched])
+
   const openModal = (number) => {
     if (loading) return
+    setLastTouched(number)
     const current = repeated[number] ?? 0
     setModalRepeated(current > 0 ? current : 1)
     setModal(number)
@@ -184,7 +198,7 @@ function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange
         {Array.from({ length: stickerCount }, (_, i) => i + 1).map((num) => (
           <button
             key={num}
-            className={`figurita-card ${collected[num] ? 'collected' : ''} ${repeated[num] > 0 ? 'repeated' : ''}`}
+            className={`figurita-card ${collected[num] ? 'collected' : ''} ${repeated[num] > 0 ? 'repeated' : ''} ${lastTouched === num ? 'last-touched' : ''}`}
             onClick={() => toggleSticker(num)}
             onContextMenu={(e) => handleContextMenu(e, num)}
             onTouchStart={(e) => handleTouchStart(e, num)}
