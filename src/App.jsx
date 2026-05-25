@@ -9,6 +9,7 @@ import GlobalStatsBar from './components/GlobalStatsBar.jsx'
 import WhatsNewModal, { FEATURES, STORAGE_KEY as WHATS_NEW_KEY } from './components/WhatsNewModal.jsx'
 import { PromoBanner } from './components/PromoBanner.jsx'
 import CuriosityCarousel from './components/CuriosityCarousel.jsx'
+import ImportCollectionModal from './components/ImportCollectionModal.jsx'
 
 const stickersData = [
   // Grupo A
@@ -96,6 +97,7 @@ function App() {
     return FEATURES.some((f) => !read.includes(f.id))
   })
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showImportModal, setShowImportModal] = useState(false)
   const [showPromoBanner, setShowPromoBanner] = useState(() => {
     return !localStorage.getItem('promo-banner-home')
   })
@@ -269,6 +271,10 @@ function App() {
               {showUserMenu && (
                 <div className="user-dropdown">
                   <div className="user-dropdown-email">{user.email}</div>
+                  <button className="user-dropdown-import" onClick={() => { setShowImportModal(true); setShowUserMenu(false) }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    {t('importMenuItem')}
+                  </button>
                   <button className="user-dropdown-logout" onClick={() => { signOut(); setShowUserMenu(false) }}>
                     {t('signOut')}
                   </button>
@@ -367,6 +373,14 @@ function App() {
 
       {showWhatsNew && (
         <WhatsNewModal onClose={() => setShowWhatsNew(false)} t={t} locale={locale} />
+      )}
+
+      {showImportModal && (
+        <ImportCollectionModal
+          onClose={() => setShowImportModal(false)}
+          onSuccess={() => window.location.reload()}
+          t={t}
+        />
       )}
 
       <div className="search-container">
