@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabaseClient.js'
 
 const LONG_PRESS_MS = 500
 
-function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange }) {
+function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange, t }) {
   const [collected, setCollected] = useState({})
   const [repeated, setRepeated] = useState({})
   const [loading, setLoading] = useState(true)
@@ -174,7 +174,7 @@ function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange
     <div className="sticker-panel">
       <div className="sticker-panel-header">
         <span className="sticker-panel-title">
-          🗂️ Figuritas <strong>{countryCode}</strong>
+          {t('stickerPanelTitle')} <strong>{countryCode}</strong>
         </span>
         <span className="sticker-panel-count">
           {loading ? '...' : `${collectedCount} / ${stickerCount}${repeatedCount > 0 ? ` · 🔄 ${repeatedCount}` : ''}`}
@@ -202,45 +202,43 @@ function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange
         ))}
       </div>
       <p className="sticker-grid-hint">
-        {window.matchMedia('(pointer: fine)').matches
-          ? 'Haz clic en una figurita para marcarla · Click derecho para registrar repetidas'
-          : 'Toca una figurita para marcarla · Mantén presionado para registrar repetidas'}
+        {window.matchMedia('(pointer: fine)').matches ? t('hintMouse') : t('hintTouch')}
       </p>
 
       {modal !== null && (
         <div className="sticker-modal-overlay" onClick={closeModal}>
           <div className="sticker-modal" onClick={(e) => e.stopPropagation()}>
             <p className="sticker-modal-title">
-              Figurita <strong>{countryCode} #{modal}</strong>
+              {t('modalTitle')} <strong>{countryCode} #{modal}</strong>
             </p>
             <div className="sticker-modal-repeated-row">
-              <span className="sticker-modal-repeated-label">🔄 Repetidas</span>
+              <span className="sticker-modal-repeated-label">{t('modalRepeatedLabel')}</span>
               <div className="sticker-modal-counter">
                 <button
                   className="sticker-counter-btn"
                   onClick={() => setModalRepeated((v) => Math.max(0, v - 1))}
-                  aria-label="Menos"
+                  aria-label={t('ariaLess')}
                 >−</button>
                 <span className="sticker-counter-value">{modalRepeated}</span>
                 <button
                   className="sticker-counter-btn"
                   onClick={() => setModalRepeated((v) => v + 1)}
-                  aria-label="Más"
+                  aria-label={t('ariaMore')}
                 >+</button>
               </div>
             </div>
             {modalRepeated === 0 && (
-              <p className="sticker-modal-hint">Se quitará de repetidas y quedará solo como tengo</p>
+              <p className="sticker-modal-hint">{t('modalHintRemove')}</p>
             )}
             <div className="sticker-modal-actions">
               <button className="sticker-modal-btn btn-collected" onClick={() => applyModalAction('collected')}>
-                {modalRepeated === 0 ? '✅ Solo tengo' : `✅ Guardar (${modalRepeated} rep.)`}
+                {modalRepeated === 0 ? t('modalBtnCollectedZero') : t('modalBtnCollectedRep').replace('{count}', modalRepeated)}
               </button>
               <button className="sticker-modal-btn btn-none" onClick={() => applyModalAction('none')}>
-                ✕ No tengo
+                {t('modalBtnNone')}
               </button>
             </div>
-            <button className="sticker-modal-cancel" onClick={closeModal}>Cancelar</button>
+            <button className="sticker-modal-cancel" onClick={closeModal}>{t('modalCancel')}</button>
           </div>
         </div>
       )}

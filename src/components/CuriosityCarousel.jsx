@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
-import curiosities from '../curiosities.json'
+import curiositiesEs from '../curiosities.es.json'
+import curiositiesEn from '../curiosities.en.json'
 
-const curiositiesMap = new Map(curiosities.map(c => [c.code, c.datos_curiosos]))
+const mapsCache = {
+  es: new Map(curiositiesEs.map(c => [c.code, c.datos_curiosos])),
+  en: new Map(curiositiesEn.map(c => [c.code, c.datos_curiosos])),
+}
 const AUTO_PLAY_INTERVAL = 6000
 const SWIPE_THRESHOLD = 50
 
-function CuriosityCarousel({ countryCode }) {
+function CuriosityCarousel({ countryCode, locale = 'es' }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
   const [dragOffset, setDragOffset] = useState(0)
@@ -14,6 +18,7 @@ function CuriosityCarousel({ countryCode }) {
   const touchStartX = useRef(null)
   const touchCurrentX = useRef(null)
 
+  const curiositiesMap = mapsCache[locale] ?? mapsCache.es
   const countryCuriosities = curiositiesMap.get(countryCode) || []
 
   useEffect(() => {
@@ -102,7 +107,7 @@ function CuriosityCarousel({ countryCode }) {
     <div className="curiosity-carousel">
       <div className="curiosity-header">
         <span className="curiosity-icon">💡</span>
-        <span className="curiosity-title">Sabías que...</span>
+        <span className="curiosity-title">{locale === 'en' ? 'Did you know?' : '¿Sabías que...'}</span>
         <span className="curiosity-counter">{currentIndex + 1} / {countryCuriosities.length}</span>
       </div>
 
@@ -110,7 +115,7 @@ function CuriosityCarousel({ countryCode }) {
         <button
           className="curiosity-nav curiosity-nav-prev"
           onClick={goToPrev}
-          aria-label="Anterior curiosidad"
+          aria-label={locale === 'en' ? 'Previous' : 'Anterior'}
         >
           ‹
         </button>
@@ -136,7 +141,7 @@ function CuriosityCarousel({ countryCode }) {
         <button
           className="curiosity-nav curiosity-nav-next"
           onClick={goToNext}
-          aria-label="Siguiente curiosidad"
+          aria-label={locale === 'en' ? 'Next' : 'Siguiente'}
         >
           ›
         </button>
@@ -148,7 +153,7 @@ function CuriosityCarousel({ countryCode }) {
             key={index}
             className={`curiosity-dot ${index === currentIndex ? 'active' : ''}`}
             onClick={() => goToSlide(index)}
-            aria-label={`Ir a curiosidad ${index + 1}`}
+            aria-label={`${locale === 'en' ? 'Go to fact' : 'Ir a curiosidad'} ${index + 1}`}
           />
         ))}
       </div>
