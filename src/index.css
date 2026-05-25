@@ -810,6 +810,29 @@ header h1 span {
   color: var(--light);
 }
 
+.sticker-card--special {
+  justify-content: flex-start;
+}
+
+.special-card-label {
+  flex: 1;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.sticker-card--fwc .special-card-label {
+  background: linear-gradient(to right, #ffffff, #003f9e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sticker-card--cc .special-card-label {
+  color: #F40000;
+}
+
 .group-badge {
   background: linear-gradient(135deg, var(--accent), var(--purple));
   color: white;

@@ -68,6 +68,10 @@ const stickersData = [
   { page: 100, code: 'CRO', name: 'Croatia', group: 'L', iso: 'hr' },
   { page: 102, code: 'GHA', name: 'Ghana', group: 'L', iso: 'gh' },
   { page: 104, code: 'PAN', name: 'Panama', group: 'L', iso: 'pa' },
+  // FWC
+  { page: 1, code: 'FWC', label: 'FWC 1–19', type: 'fwc', count: 19 },
+  // CC
+  { page: 112, code: 'CC', label: 'CC 1–14', type: 'cc', count: 14 },
 ]
 
 function App() {
@@ -187,8 +191,9 @@ function App() {
     return stickersData.filter(
       (s) =>
         s.code.includes(query) ||
-        s.name.toUpperCase().includes(query) ||
-        s.page.toString().includes(query)
+        (s.name && s.name.toUpperCase().includes(query)) ||
+        s.page.toString().includes(query) ||
+        (s.type && (s.code.includes(query) || (s.label && s.label.toUpperCase().includes(query))))
     )
   }, [search])
 
@@ -353,30 +358,47 @@ function App() {
             </p>
           </div>
         ) : (
-          filteredStickers.map((sticker) => (
-            <div
-              key={sticker.code}
-              className="sticker-card"
-              onClick={() => { setSelectedCode(sticker.code); setSearch(sticker.code); scrollToTop() }}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className="page-number">{sticker.page}</div>
-              <img src={flags[sticker.iso]} alt={sticker.name} className="country-flag" />
-              <div className="country-info">
-                <div className="country-code">{sticker.code}</div>
-                <div className="country-name">{sticker.name}</div>
+          filteredStickers.map((sticker) => {
+            const cardKey = sticker.type ? sticker.code : sticker.code
+            if (sticker.type) {
+              return (
+                <div
+                  key={cardKey}
+                  className={`sticker-card sticker-card--special sticker-card--${sticker.type}`}
+                  style={{ cursor: 'default' }}
+                >
+                  <div className="page-number">{sticker.page}</div>
+                  <div className="special-card-label">
+                    {sticker.code}
+                  </div>
+                </div>
+              )
+            }
+            return (
+              <div
+                key={cardKey}
+                className="sticker-card"
+                onClick={() => { setSelectedCode(sticker.code); setSearch(sticker.code); scrollToTop() }}
+                style={{ cursor: 'pointer' }}
+              >
+                <div className="page-number">{sticker.page}</div>
+                <img src={flags[sticker.iso]} alt={sticker.name} className="country-flag" />
+                <div className="country-info">
+                  <div className="country-code">{sticker.code}</div>
+                  <div className="country-name">{sticker.name}</div>
+                </div>
+                <div className={`group-badge group-${sticker.group.toLowerCase()}`}>
+                  {sticker.group}
+                </div>
               </div>
-              <div className={`group-badge group-${sticker.group.toLowerCase()}`}>
-                {sticker.group}
-              </div>
-            </div>
-          ))
+            )
+          })
         )}
       </div>
 
 
       {activeCountry && user && (
-        <StickerPanel countryCode={activeCountry.code} user={user} />
+        <StickerPanel countryCode={activeCountry.code} user={user} stickerCount={activeCountry.count ?? 20} />
       )}
 
       {activeCountry && !user && !authLoading && (

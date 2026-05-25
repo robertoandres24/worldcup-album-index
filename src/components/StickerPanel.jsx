@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
 
-const STICKER_COUNT = 20
 const LONG_PRESS_MS = 500
 
-function StickerPanel({ countryCode, user }) {
+function StickerPanel({ countryCode, user, stickerCount = 20 }) {
   const [collected, setCollected] = useState({})
   const [repeated, setRepeated] = useState({})
   const [loading, setLoading] = useState(true)
@@ -174,11 +173,11 @@ function StickerPanel({ countryCode, user }) {
           🗂️ Figuritas <strong>{countryCode}</strong>
         </span>
         <span className="sticker-panel-count">
-          {loading ? '...' : `${collectedCount} / ${STICKER_COUNT}${repeatedCount > 0 ? ` · 🔄 ${repeatedCount}` : ''}`}
+          {loading ? '...' : `${collectedCount} / ${stickerCount}${repeatedCount > 0 ? ` · 🔄 ${repeatedCount}` : ''}`}
         </span>
       </div>
       <div className="sticker-grid">
-        {Array.from({ length: STICKER_COUNT }, (_, i) => i + 1).map((num) => (
+        {Array.from({ length: stickerCount }, (_, i) => i + 1).map((num) => (
           <button
             key={num}
             className={`figurita-card ${collected[num] ? 'collected' : ''} ${repeated[num] > 0 ? 'repeated' : ''}`}
