@@ -252,6 +252,117 @@ header h1 span {
   text-decoration-color: #FF7A77;
 }
 
+/* ── What's New button & badge ─────────────────────────────── */
+.whats-new-btn {
+  position: relative;
+}
+
+.whats-new-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: block;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+/* ── What's New Modal ───────────────────────────────────────── */
+.whats-new-modal {
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+.whats-new-modal .whats-new-list {
+  overflow-y: auto;
+  padding-bottom: 1.5rem;
+  padding-right: 2px;
+}
+
+.whats-new-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.whats-new-title-icon {
+  font-size: 1.4rem;
+}
+
+.whats-new-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--light);
+  margin: 0;
+}
+
+.whats-new-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.whats-new-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.whats-new-item-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.whats-new-item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.whats-new-item-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.whats-new-item-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--light);
+}
+
+.whats-new-item-date {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.whats-new-item-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
 .lang-toggle {
   display: flex;
   gap: 0.5rem;
@@ -900,9 +1011,44 @@ footer {
 }
 
 .github-section {
-  margin-top: 2.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: none;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-link {
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0.25rem 0.4rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s ease;
+  font-family: inherit;
+}
+
+.footer-link:hover {
+  color: var(--light);
+}
+
+.footer-link-sep {
+  color: rgba(255,255,255,0.15);
+  font-size: 0.9rem;
+  line-height: 1;
 }
 
 .github-link {
@@ -1581,6 +1727,43 @@ footer {
 .user-avatar-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 4px 12px rgba(102, 45, 145, 0.5);
+}
+
+.user-avatar-btn--expanded {
+  width: auto;
+  border-radius: 20px;
+  padding: 0 0.75rem 0 0.4rem;
+  gap: 0.45rem;
+  height: 34px;
+}
+
+.user-avatar-initial {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.user-avatar-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-avatar-chevron {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  opacity: 0.7;
 }
 
 .user-dropdown {
