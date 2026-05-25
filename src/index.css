@@ -766,6 +766,33 @@ header h1 span {
   width: 100%;
   max-width: 500px;
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-back-btn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gray);
+  color: var(--light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.search-back-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.search-back-btn:hover {
+  background: var(--primary);
 }
 
 .search-input-wrapper {

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { useI18n } from './hooks/useI18n.js'
 import { useAuth } from './hooks/useAuth.js'
 import { useGlobalCollection } from './hooks/useGlobalCollection.js'
@@ -83,6 +83,7 @@ function App() {
   const { totals, loading: collectionLoading, updateEntry } = useGlobalCollection(user)
   const [search, setSearch] = useState('')
   const [selectedCode, setSelectedCode] = useState(null)
+  const searchInputRef = useRef(null)
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [isAtBottom, setIsAtBottom] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
@@ -369,8 +370,22 @@ function App() {
       )}
 
       <div className="search-container">
+        {search && (
+          <button
+            className="search-back-btn"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => { setSelectedCode(null); setSearch(''); searchInputRef.current?.blur() }}
+            aria-label={t('searchBackAriaLabel')}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 12H5" />
+              <path d="M12 19l-7-7 7-7" />
+            </svg>
+          </button>
+        )}
         <div className="search-input-wrapper">
           <input
+            ref={searchInputRef}
             type="text"
             className="search-input"
             placeholder={t('searchPlaceholder')}
@@ -382,7 +397,8 @@ function App() {
           {search && (
             <button
               className="search-clear-btn"
-              onClick={() => { setSelectedCode(null); setSearch('') }}
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => { setSelectedCode(null); setSearch(''); searchInputRef.current?.focus() }}
               aria-label="Limpiar búsqueda"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">

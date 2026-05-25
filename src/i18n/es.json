@@ -4,6 +4,7 @@
   "goodbyeIndex": "¡Adiós a revisar la página de índex como en los 90s!",
   "lessBrowsing": "Menos hojeadas = Más años de vida para tu álbum ",
   "searchPlaceholder": "Busca por código (MEX), país o página...",
+  "searchBackAriaLabel": "Volver al listado",
   "resultsCount": "resultado",
   "resultsCountPlural": "resultados",
   "noResults": "No se encontraron países con ese código",

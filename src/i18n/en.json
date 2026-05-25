@@ -3,6 +3,7 @@
   "description": "Find which page each sticker goes on, mark the ones you have and log your duplicates.",
   "goodbyeIndex": "Goodbye to flipping through the index like in the 90s!",
   "lessBrowsing": "Less browsing 📖 = More years of life for your album 😉",
+  "searchBackAriaLabel": "Back to list",
   "searchPlaceholder": "Search by code (MEX), country or page...",
   "resultsCount": "result",
   "resultsCountPlural": "results",
