@@ -5,8 +5,8 @@
 }
 
 :root {
-  --primary: #ff6b35;
-  --secondary: #f7931e;
+  --primary: #ff8c42;
+  --secondary: #ffa726;
   --accent: #c90076;
   --purple: #662d91;
   --dark: #1a1a2e;
@@ -19,14 +19,20 @@
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
   --bg-tertiary: #e9ecef;
-  --text-primary: #212529;
-  --text-secondary: #495057;
+  --text-primary: #495057;
+  --text-secondary: #6c757d;
   --text-muted: #6c757d;
   --border-color: #dee2e6;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --card-bg: #ffffff;
   --modal-bg: #ffffff;
   --overlay-bg: rgba(0, 0, 0, 0.5);
+  --fwc-gradient: linear-gradient(to right, #1e3a8a, #60a5fa);
+  --shimmer-start: rgba(0, 0, 0, 0.08);
+  --shimmer-middle: rgba(0, 0, 0, 0.16);
+  --shimmer-end: rgba(0, 0, 0, 0.08);
+  --x-color: #000000;
+  --country-name-color: #495057;
 }
 
 [data-theme="dark"] {
@@ -38,9 +44,15 @@
   --text-muted: #a0aab4;
   --border-color: rgba(255, 255, 255, 0.1);
   --shadow-color: rgba(0, 0, 0, 0.6);
-  --card-bg: rgba(20, 20, 40, 0.98);
+  --card-bg: rgba(255, 255, 255, 0.06);
   --modal-bg: rgba(20, 20, 40, 0.98);
   --overlay-bg: rgba(0, 0, 0, 0.7);
+  --fwc-gradient: linear-gradient(to right, #4d9fff, #87ceeb);
+  --shimmer-start: rgba(255, 255, 255, 0.06);
+  --shimmer-middle: rgba(255, 255, 255, 0.14);
+  --shimmer-end: rgba(255, 255, 255, 0.06);
+  --x-color: #ffffff;
+  --country-name-color: var(--text-primary);
 }
 
 body {
@@ -164,7 +176,7 @@ header h1 span {
 .welcome-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--overlay-bg);
   backdrop-filter: blur(4px);
   z-index: 2000;
   display: flex;
@@ -181,14 +193,14 @@ header h1 span {
 
 .welcome-modal {
   position: relative;
-  background: rgba(20, 20, 40, 0.98);
+  background: var(--modal-bg);
   border-radius: 20px;
   padding: 2rem 1.75rem 1.75rem;
   max-width: 420px;
   width: 100%;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-color) 0 24px 60px;
   animation: modalFadeIn 0.25s ease;
 }
 
@@ -196,20 +208,26 @@ header h1 span {
   position: absolute;
   top: 0.75rem;
   right: 0.9rem;
-  background: none;
-  border: none;
-  color: var(--gray);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   font-size: 1.3rem;
   cursor: pointer;
   line-height: 1;
   padding: 0.2rem 0.4rem;
   border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.15s, background 0.15s;
 }
 
 .welcome-modal-close:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.08);
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  transform: scale(1.1);
 }
 
 .welcome-modal-icon {
@@ -260,7 +278,7 @@ header h1 span {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--overlay-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -270,8 +288,8 @@ header h1 span {
 }
 
 .about-modal {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--modal-bg);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   max-width: 600px;
   width: 100%;
@@ -300,9 +318,9 @@ header h1 span {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: var(--gray);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   font-size: 1.5rem;
   cursor: pointer;
   display: flex;
@@ -312,19 +330,20 @@ header h1 span {
 }
 
 .about-close-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--white);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transform: scale(1.1);
 }
 
 .about-content h2 {
-  color: var(--white);
+  color: var(--text-primary);
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
 }
 
 .about-content p {
-  color: var(--light);
+  color: var(--text-primary);
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 1rem;
@@ -395,7 +414,7 @@ header h1 span {
 .whats-new-title {
   font-size: 1.4rem;
   font-weight: 800;
-  color: var(--light);
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -409,8 +428,8 @@ header h1 span {
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
 }
 
@@ -437,7 +456,7 @@ header h1 span {
 .whats-new-item-title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--light);
+  color: var(--text-primary);
 }
 
 .whats-new-item-date {
@@ -490,7 +509,7 @@ header h1 span {
 .promo-banner {
   position: relative;
   width: 100%;
-  background: rgba(20, 20, 40, 0.92);
+  background: var(--modal-bg);
   border-radius: 16px;
   padding: 1.5rem 1.25rem 1.25rem;
   margin-bottom: 1.5rem;
@@ -515,7 +534,7 @@ header h1 span {
   position: absolute;
   inset: 2px;
   border-radius: 14px;
-  background: rgba(20, 20, 40, 0.97);
+  background: var(--modal-bg);
   z-index: -1;
 }
 
@@ -558,7 +577,7 @@ header h1 span {
 .promo-title {
   font-size: 1rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin: 0 0 0.6rem;
   line-height: 1.3;
 }
@@ -736,13 +755,13 @@ header h1 span {
   bottom: calc(100% + 8px);
   top: auto;
   right: 0;
-  background: rgba(30, 30, 30, 0.95);
+  background: var(--modal-bg);
   backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 0.5rem;
   min-width: 180px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px var(--shadow-color);
+  border: 1px solid var(--border-color);
   z-index: 1001;
   animation: fadeInUp 0.2s ease;
 }
@@ -755,10 +774,10 @@ header h1 span {
   right: 14px;
   width: 12px;
   height: 12px;
-  background: rgba(30, 30, 30, 0.95);
+  background: var(--modal-bg);
   transform: rotate(45deg);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .share-option {
@@ -769,15 +788,22 @@ header h1 span {
   padding: 0.6rem 0.8rem;
   border: none;
   background: transparent;
-  color: var(--light);
+  color: var(--text-primary);
   font-size: 0.9rem;
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.2s ease;
 }
 
+.share-separator {
+  height: 1px;
+  background: var(--border-color);
+  margin: 0.25rem 0;
+  opacity: 0.3;
+}
+
 .share-option:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-tertiary);
 }
 
 .share-option svg {
@@ -803,7 +829,7 @@ header h1 span {
 }
 
 .share-option.x {
-  color: #d3bcbc;
+  color: var(--x-color);
 }
 
 .share-option.x:hover {
@@ -819,15 +845,15 @@ header h1 span {
 }
 
 .share-option.copy {
-  color: var(--gray);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
   margin-top: 0.25rem;
   padding-top: 0.75rem;
 }
 
 .share-option.copy:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--light);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 @media (max-width: 600px) {
@@ -971,14 +997,14 @@ header h1 span {
 }
 
 .sticker-card {
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
@@ -1042,7 +1068,7 @@ header h1 span {
 .country-name {
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--light);
+  color: var(--country-name-color);
 }
 
 .sticker-card--special {
@@ -1058,7 +1084,7 @@ header h1 span {
 }
 
 .sticker-card--fwc .special-card-label {
-  background: linear-gradient(to right, #ffffff, #4d9fff);
+  background: var(--fwc-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1548,9 +1574,9 @@ footer {
   max-width: 600px;
   margin: 1.5rem auto 0;
   padding: 1.25rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: var(--card-bg);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   backdrop-filter: blur(10px);
 }
 
@@ -1560,7 +1586,7 @@ footer {
   justify-content: space-between;
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .curiosity-icon {
@@ -1592,9 +1618,9 @@ footer {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--light);
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-muted);
   font-size: 1.5rem;
   cursor: pointer;
   display: flex;
@@ -1623,7 +1649,7 @@ footer {
 .curiosity-slide {
   animation: slideIn 0.3s ease-out;
   line-height: 1.6;
-  color: var(--light);
+  color: var(--text-primary);
   font-size: 1rem;
   text-align: center;
   padding: 0.5rem;
@@ -1658,17 +1684,17 @@ footer {
   height: 8px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--text-muted);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .curiosity-dot:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--text-secondary);
 }
 
 .curiosity-dot.active {
-  background: var(--secondary);
+  background: var(--primary);
   transform: scale(1.2);
 }
 
@@ -1699,6 +1725,19 @@ footer {
 }
 
 /* Suggestion Modal Styles */
+.suggestion-modal {
+  background: var(--modal-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 2rem;
+  animation: modalFadeIn 0.3s ease;
+}
+
 .top-bar-left {
   display: flex;
   gap: 0.5rem;
@@ -1710,7 +1749,7 @@ footer {
   margin-top: .5rem;
   background: none;
   border: none;
-  color: var(--gray);
+  color: var(--text-muted);
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
@@ -1718,12 +1757,12 @@ footer {
   transition: color 0.3s ease;
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-decoration-color: var(--border-color);
 }
 
 .suggestion-link:hover {
-  color: var(--light);
-  text-decoration-color: rgba(255, 255, 255, 0.6);
+  color: var(--text-primary);
+  text-decoration-color: var(--text-primary);
 }
 
 .suggestion-modal .about-content form {
@@ -1739,7 +1778,7 @@ footer {
 }
 
 .form-group label {
-  color: var(--light);
+  color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -1747,10 +1786,10 @@ footer {
 .form-group input,
 .form-group textarea {
   padding: 0.75rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--light);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-size: 1rem;
   transition: all 0.3s ease;
   font-family: inherit;
@@ -1760,7 +1799,7 @@ footer {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-secondary);
 }
 
 .form-group input::placeholder,
@@ -1780,7 +1819,7 @@ footer {
 }
 
 .char-count {
-  color: var(--gray);
+  color: var(--text-muted);
   font-size: 0.8rem;
   text-align: right;
 }
@@ -1875,9 +1914,9 @@ footer {
   border-radius: 20px;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.06) 25%,
-    rgba(255, 255, 255, 0.12) 50%,
-    rgba(255, 255, 255, 0.06) 75%
+    var(--shimmer-start) 25%,
+    var(--shimmer-middle) 50%,
+    var(--shimmer-end) 75%
   );
   background-size: 200% 100%;
   animation: skeletonShimmer 1.4s ease-in-out infinite;
@@ -1963,22 +2002,22 @@ footer {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background: rgba(26, 26, 46, 0.98);
+  background: var(--modal-bg);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 0.5rem;
   min-width: 200px;
   z-index: 1002;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px var(--shadow-color);
   animation: fadeInDown 0.15s ease;
 }
 
 .user-dropdown-email {
   font-size: 0.8rem;
-  color: var(--gray);
+  color: var(--text-muted);
   padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: 0.25rem;
   word-break: break-all;
 }
@@ -1988,7 +2027,7 @@ footer {
   text-align: left;
   background: none;
   border: none;
-  color: var(--light);
+  color: var(--text-primary);
   font-size: 0.85rem;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
@@ -2007,8 +2046,8 @@ footer {
 }
 
 .user-dropdown-import:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .user-dropdown-logout {
@@ -2016,7 +2055,7 @@ footer {
   text-align: left;
   background: none;
   border: none;
-  color: var(--light);
+  color: var(--text-primary);
   font-size: 0.85rem;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
@@ -2086,8 +2125,8 @@ footer {
   gap: 1rem;
   align-items: flex-start;
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 1.25rem;
   margin: 0.5rem 0 1.5rem;
@@ -2107,7 +2146,7 @@ footer {
 .inline-promo-title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--light);
+  color: var(--text-primary);
   margin: 0 0 0.4rem;
 }
 
@@ -2132,8 +2171,8 @@ footer {
 /* ── Global Stats Bar ──────────────────────────────────────── */
 .global-stats-bar {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 1.2rem 1.5rem;
   margin-bottom: 1.5rem;
@@ -2150,7 +2189,7 @@ footer {
 .global-stats-title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--light);
+  color: var(--text-primary);
   letter-spacing: 0.5px;
 }
 
@@ -2163,7 +2202,7 @@ footer {
 .global-stats-progress {
   width: 100%;
   height: 6px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--border-color);
   border-radius: 99px;
   overflow: hidden;
   margin-bottom: 1rem;
@@ -2189,9 +2228,9 @@ footer {
   border-radius: 99px;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.06) 25%,
-    rgba(255, 255, 255, 0.14) 50%,
-    rgba(255, 255, 255, 0.06) 75%
+    var(--shimmer-start) 25%,
+    var(--shimmer-middle) 50%,
+    var(--shimmer-end) 75%
   );
   background-size: 200% 100%;
   animation: skeletonShimmer 1.4s ease-in-out infinite;
@@ -2204,9 +2243,9 @@ footer {
   border-radius: 6px;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.06) 25%,
-    rgba(255, 255, 255, 0.14) 50%,
-    rgba(255, 255, 255, 0.06) 75%
+    var(--shimmer-start) 25%,
+    var(--shimmer-middle) 50%,
+    var(--shimmer-end) 75%
   );
   background-size: 200% 100%;
   animation: skeletonShimmer 1.4s ease-in-out infinite;
@@ -2247,7 +2286,7 @@ footer {
 }
 
 .global-stat-item--fwc .global-stat-value {
-  background: linear-gradient(to right, #ffffff, #4d9fff);
+  background: var(--fwc-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -2271,8 +2310,8 @@ footer {
 /* ── Sticker Panel ─────────────────────────────────────────── */
 .sticker-panel {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 1.25rem;
   margin: 2rem 0;
@@ -2288,7 +2327,7 @@ footer {
 
 .sticker-panel-title {
   font-size: 0.95rem;
-  color: var(--light);
+  color: var(--text-primary);
 }
 
 .sticker-panel-count {
@@ -2309,20 +2348,20 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 0.1rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
   border-radius: 10px;
   padding: 0.55rem 0.25rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: var(--gray);
+  color: var(--text-muted);
 }
 
 .figurita-card:focus {
   outline: none;
-  border-color: rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--gray);
+  border-color: var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-muted);
   box-shadow: none;
 }
 
@@ -2423,7 +2462,7 @@ footer {
 .sticker-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: var(--overlay-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2444,8 +2483,8 @@ footer {
 }
 
 .sticker-modal {
-  background: #1f2940;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--modal-bg);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 1.5rem;
   width: 100%;
@@ -2453,13 +2492,13 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-color) 0 20px 60px;
 }
 
 .sticker-modal-title {
   text-align: center;
   font-size: 1rem;
-  color: var(--light);
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -2617,7 +2656,7 @@ footer {
 .import-modal-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--light);
+  color: var(--text-primary);
   text-align: center;
   margin: 0;
 }

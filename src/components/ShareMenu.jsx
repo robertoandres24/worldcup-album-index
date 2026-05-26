@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useClickOutside } from '../hooks/useClickOutside.js'
 
 const ICONS = {
@@ -63,16 +63,18 @@ function ShareMenu({ t, share, shareOptions, className = '' }) {
       </button>
       {isOpen && (
         <div className="share-menu">
-          {shareOptions.map(({ id, label }) => (
-            <button
-              key={id}
-              className={`share-option ${id}`}
-              onClick={() => handleShare(id)}
-              aria-label={label}
-            >
-              {ICONS[id]}
-              <span>{label}</span>
-            </button>
+          {shareOptions.map(({ id, label }, index) => (
+            <React.Fragment key={id}>
+              <button
+                className={`share-option ${id}`}
+                onClick={() => handleShare(id)}
+                aria-label={label}
+              >
+                {ICONS[id]}
+                <span>{label}</span>
+              </button>
+              {index < shareOptions.length - 1 && <div className="share-separator"></div>}
+            </React.Fragment>
           ))}
         </div>
       )}
