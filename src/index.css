@@ -2550,7 +2550,7 @@ footer {
 .sticker-counter-value {
   font-size: 1.2rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
   min-width: 1.5rem;
   text-align: center;
 }
@@ -2618,7 +2618,7 @@ footer {
 }
 
 .sticker-modal-cancel:hover {
-  color: var(--light);
+  color: var(--text-primary);
 }
 
 @media (max-width: 600px) {
@@ -2790,7 +2790,7 @@ footer {
 }
 
 .import-btn-cancel:hover {
-  color: var(--light);
+  color: var(--text-primary);
 }
 
 .import-loading-spinner {
