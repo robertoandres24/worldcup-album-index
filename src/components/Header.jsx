@@ -14,13 +14,15 @@ function Header({
   return (
     <div className="top-bar">
       <div className="top-bar-left">
-        <button
-          className="about-link whats-new-btn"
-          onClick={onOpenWhatsNew}
-        >
-          {t('whatsNewButton')}
-          {whatsNewUnread && <span className="whats-new-badge" />}
-        </button>
+        {whatsNewUnread && (
+          <button
+            className="about-link whats-new-btn"
+            onClick={onOpenWhatsNew}
+          >
+            {t('whatsNewButton')}
+            <span className="whats-new-badge" />
+          </button>
+        )}
       </div>
       <div className="user-auth-area">
         {authLoading && (
