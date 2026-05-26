@@ -6,6 +6,7 @@ import { useScroll } from './hooks/useScroll.js'
 import { useShare } from './hooks/useShare.js'
 import { useStickerSearch } from './hooks/useStickerSearch.js'
 import { useBanners } from './hooks/useBanners.js'
+import { useTheme } from './hooks/useTheme.js'
 
 import SuggestionModal from './components/SuggestionModal.jsx'
 import StickerPanel from './components/StickerPanel.jsx'
@@ -27,6 +28,7 @@ import AboutModal from './components/AboutModal.jsx'
 function App() {
   const { locale, t, toggleLocale } = useI18n()
   const { user, loading: authLoading, signInWithGoogle, signOut } = useAuth()
+  useTheme()
   const { totals, loading: collectionLoading, updateEntry } = useGlobalCollection(user)
   const { showScrollTop, isAtBottom, scrollToTop } = useScroll()
   const { share, shareOptions } = useShare(t)

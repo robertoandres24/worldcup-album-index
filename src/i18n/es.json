@@ -128,5 +128,8 @@
   "welcomeBody3": "Aparecerán los 20 recuadros de figuritas de esa selección y podrás marcar las que ya tienes con un click. ¡A divertirse!",
   "welcomeCta": "¡Entendido, a jugar!",
   "newFeatureTitle": "Nueva funcionalidad: Mi Álbum Digital",
-  "newFeatureBody": "Inicia sesión con Google y accede a tu colección personal desde cualquier dispositivo. Marca las laminitas que ya tengas con un click y descubre cuáles te faltan al instante. Después de registrarte, selecciona un país y podrás comenzar a registrar tus figuritas."
+  "newFeatureBody": "Inicia sesión con Google y accede a tu colección personal desde cualquier dispositivo. Marca las laminitas que ya tengas con un click y descubre cuáles te faltan al instante. Después de registrarte, selecciona un país y podrás comenzar a registrar tus figuritas.",
+  "themeToggleLabel": "Cambiar tema",
+  "themeLight": "Claro",
+  "themeDark": "Oscuro"
 }

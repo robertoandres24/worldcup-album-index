@@ -128,5 +128,8 @@
   "welcomeBody3": "The 20 sticker slots for that team will appear, and you can mark the ones you already have with a click. Have fun!",
   "welcomeCta": "Got it, let's play!",
   "newFeatureTitle": "New feature: My Digital Album",
-  "newFeatureBody": "Sign in with Google and access your personal collection from any device. Mark the stickers you already have with a click and instantly see which ones you're missing. After signing in, select a country and you can start tracking your stickers."
+  "newFeatureBody": "Sign in with Google and access your personal collection from any device. Mark the stickers you already have with a click and instantly see which ones you're missing. After signing in, select a country and you can start tracking your stickers.",
+  "themeToggleLabel": "Toggle theme",
+  "themeLight": "Light",
+  "themeDark": "Dark"
 }
