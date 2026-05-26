@@ -250,7 +250,7 @@ header h1 span {
 }
 
 .welcome-modal-body strong {
-  color: var(--light);
+  color: var(--text-primary);
 }
 
 .welcome-modal-cta {
@@ -598,7 +598,7 @@ header h1 span {
   gap: 0.5rem;
   background: #fff;
   color: #1a1a2e;
-  border: none;
+  border: 1px solid #dadce0;
   border-radius: 10px;
   padding: 0.6rem 1.2rem;
   font-size: 0.85rem;
@@ -1793,6 +1793,7 @@ footer {
   font-size: 1rem;
   transition: all 0.3s ease;
   font-family: inherit;
+  caret-color: var(--text-primary);
 }
 
 .form-group input:focus,
@@ -2090,6 +2091,7 @@ footer {
 .auth-btn-login {
   background: #fff;
   color: #3c4043;
+  border: 1px solid #dadce0;
   box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
@@ -2679,13 +2681,14 @@ footer {
   width: 100%;
   padding: 0.7rem 1rem;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--light);
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s ease;
   box-sizing: border-box;
+  caret-color: var(--text-primary);
 }
 
 .import-input:focus {
@@ -2703,7 +2706,7 @@ footer {
   border-radius: 10px;
   padding: 0.9rem 1rem;
   font-size: 0.85rem;
-  color: #fca5a5;
+  color: #dc2626;
   line-height: 1.5;
 }
 
@@ -2718,13 +2721,13 @@ footer {
 
 .import-warning-source {
   margin-top: 0.6rem;
-  color: var(--light);
+  color: var(--text-primary);
   font-size: 0.85rem;
 }
 
 .import-confirm-instruction {
   font-size: 0.85rem;
-  color: var(--gray);
+  color: var(--text-primary);
   align-self: flex-start;
   margin: 0;
 }
@@ -2747,8 +2750,10 @@ footer {
 }
 
 .import-btn-primary:disabled {
-  opacity: 0.4;
+  opacity: 0.7;
   cursor: not-allowed;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--text-muted);
 }
 
 .import-btn-destructive {
@@ -2769,8 +2774,9 @@ footer {
 }
 
 .import-btn-destructive:disabled {
-  opacity: 0.35;
+  opacity: 0.7;
   cursor: not-allowed;
+  color: #fff;
 }
 
 .import-btn-cancel {
