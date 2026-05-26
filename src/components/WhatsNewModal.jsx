@@ -1,4 +1,5 @@
 const FEATURES = [
+  { id: 'theme-consistency', date: '2026-05-25', icon: '🎨' },
   { id: 'import-collection', date: '2026-05-25', icon: '📥' },
   { id: 'i18n-support',    date: '2026-05-25', icon: '🌐' },
   { id: 'ux-improvements', date: '2026-05-25', icon: '✨' },

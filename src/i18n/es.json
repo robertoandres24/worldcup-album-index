@@ -107,6 +107,8 @@
   "whatsNewCloseAriaLabel": "Cerrar",
   "closeAriaLabel": "Cerrar",
   "scrollToTopAriaLabel": "Volver arriba",
+  "feature.theme-consistency.title": "Mejora de consistencia visual en modo claro",
+  "feature.theme-consistency.description": "Nueva opción de tema claro/oscuro con mejor consistencia visual. Se corrigieron colores, bordes y visibilidad en todos los componentes",
   "feature.import-collection.title": "Importar colección desde otra cuenta",
   "feature.import-collection.description": "Ahora puedes copiar la colección completa de otra cuenta a la tuya con un solo clic. Disponible en el menú de tu usuario. Tus datos se respaldan automáticamente antes de importar, por si algo sale mal.",
   "feature.i18n-support.title": "Soporte completo en inglés y español",
