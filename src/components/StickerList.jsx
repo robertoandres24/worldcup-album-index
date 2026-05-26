@@ -1,6 +1,18 @@
+import { useMemo } from 'react'
 import StickerCard from './StickerCard.jsx'
 
-function StickerList({ stickers, onSelect, t, scrollToTop }) {
+function StickerList({ stickers, onSelect, collection, selectedCode, t }) {
+  const completedCodes = useMemo(() => {
+    const set = new Set()
+    stickers.forEach((sticker) => {
+      const total = sticker.count ?? 20
+      const codeMap = collection?.[sticker.code] ?? {}
+      const collectedCount = Object.values(codeMap).filter((e) => e.collected).length
+      if (collectedCount >= total) set.add(sticker.code)
+    })
+    return set
+  }, [stickers, collection])
+
   if (stickers.length === 0) {
     return (
       <div className="no-results">
@@ -19,7 +31,9 @@ function StickerList({ stickers, onSelect, t, scrollToTop }) {
         <StickerCard
           key={sticker.code}
           sticker={sticker}
-          onClick={() => { onSelect(sticker.code); scrollToTop() }}
+          isComplete={completedCodes.has(sticker.code)}
+          isActive={selectedCode === sticker.code}
+          onClick={() => onSelect(sticker.code)}
         />
       ))}
     </div>

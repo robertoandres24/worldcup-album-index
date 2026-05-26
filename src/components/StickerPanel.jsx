@@ -3,45 +3,55 @@ import { supabase } from '../lib/supabaseClient.js'
 
 const LONG_PRESS_MS = 500
 
-function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange, t }) {
-  const [collected, setCollected] = useState({})
-  const [repeated, setRepeated] = useState({})
-  const [loading, setLoading] = useState(true)
+const buildMaps = (data) => {
+  const cMap = {}
+  const rMap = {}
+  Object.entries(data).forEach(([num, entry]) => {
+    cMap[num] = entry.collected
+    rMap[num] = entry.repeated ?? 0
+  })
+  return { cMap, rMap }
+}
+
+function StickerPanel({ countryCode, user, stickerCount = 20, initialData = {}, onCollectionChange, onInteract, t }) {
+  const { cMap: initCollected, rMap: initRepeated } = buildMaps(initialData)
+  const [collected, setCollected] = useState(initCollected)
+  const [repeated, setRepeated] = useState(initRepeated)
+  const [loading, setLoading] = useState(false)
   const [modal, setModal] = useState(null)
   const [modalRepeated, setModalRepeated] = useState(0)
   const [lastTouched, setLastTouched] = useState(null)
   const longPressTimer = useRef(null)
+  const prevCompleteRef = useRef(false)
+  const [justCompleted, setJustCompleted] = useState(false)
 
   useEffect(() => {
-    if (!user || !countryCode) return
+    const { cMap, rMap } = buildMaps(initialData)
+    setCollected(cMap)
+    setRepeated(rMap)
+    const alreadyComplete = Object.values(initialData).filter((e) => e.collected).length >= stickerCount
+    prevCompleteRef.current = alreadyComplete
+    setJustCompleted(false)
+  }, [countryCode])
 
-    setLoading(true)
-    supabase
-      .from('sticker_collection')
-      .select('sticker_number, repeated')
-      .eq('user_id', user.id)
-      .eq('country_code', countryCode)
-      .then(({ data, error }) => {
-        if (error) {
-          console.error('Error loading stickers:', error)
-          setLoading(false)
-          return
-        }
-        const cMap = {}
-        const rMap = {}
-        if (data) {
-          data.forEach((row) => {
-            cMap[row.sticker_number] = true
-            rMap[row.sticker_number] = row.repeated ?? 0
-          })
-        }
-        setCollected(cMap)
-        setRepeated(rMap)
-        setLoading(false)
-      })
-  }, [user, countryCode])
+  const collectedCount = Object.values(collected).filter(Boolean).length
+  const isComplete = !loading && collectedCount >= stickerCount
+
+  useEffect(() => {
+    if (isComplete && !prevCompleteRef.current) {
+      setJustCompleted(true)
+      const timer = setTimeout(() => setJustCompleted(false), 3000)
+      prevCompleteRef.current = true
+      return () => clearTimeout(timer)
+    }
+    if (!isComplete) {
+      setJustCompleted(false)
+      prevCompleteRef.current = false
+    }
+  }, [isComplete])
 
   const toggleSticker = (number) => {
+    onInteract?.(countryCode)
     setLastTouched(number)
     if (repeated[number] > 0) {
       openModal(number)
@@ -181,11 +191,11 @@ function StickerPanel({ countryCode, user, stickerCount = 20, onCollectionChange
 
   if (!user) return null
 
-  const collectedCount = Object.values(collected).filter(Boolean).length
   const repeatedCount = Object.values(repeated).reduce((acc, v) => acc + (v || 0), 0)
+  const panelClass = `sticker-panel${isComplete ? ' sticker-panel--complete' : ''}${justCompleted ? ' sticker-panel--just-completed' : ''}`
 
   return (
-    <div className="sticker-panel">
+    <div className={panelClass}>
       <div className="sticker-panel-header">
         <span className="sticker-panel-title">
           {t('stickerPanelTitle')} <strong>{countryCode}</strong>

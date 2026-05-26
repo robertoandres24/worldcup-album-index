@@ -1,10 +1,12 @@
 import flags from '../data/flags.js'
 
-function StickerCard({ sticker, onClick }) {
+function StickerCard({ sticker, onClick, isComplete, isActive }) {
+  const stateClass = isActive ? 'sticker-card--active' : isComplete ? 'sticker-card--complete' : ''
+
   if (sticker.type) {
     return (
       <div
-        className={`sticker-card sticker-card--special sticker-card--${sticker.type}`}
+        className={`sticker-card sticker-card--special sticker-card--${sticker.type} ${stateClass}`.trim()}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
       >
@@ -16,7 +18,7 @@ function StickerCard({ sticker, onClick }) {
 
   return (
     <div
-      className="sticker-card"
+      className={`sticker-card ${stateClass}`.trim()}
       onClick={onClick}
       style={{ cursor: 'pointer' }}
     >

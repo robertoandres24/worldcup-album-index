@@ -29,7 +29,7 @@ function App() {
   const { locale, t, toggleLocale } = useI18n()
   const { user, loading: authLoading, signInWithGoogle, signOut } = useAuth()
   useTheme()
-  const { totals, loading: collectionLoading, updateEntry } = useGlobalCollection(user)
+  const { collection, totals, loading: collectionLoading, updateEntry } = useGlobalCollection(user)
   const { showScrollTop, isAtBottom, scrollToTop } = useScroll()
   const { share, shareOptions } = useShare(t)
   const {
@@ -176,8 +176,9 @@ function App() {
       <StickerList
         stickers={filteredStickers}
         onSelect={handleSelectCountry}
+        collection={collection}
+        selectedCode={selectedCode}
         t={t}
-        scrollToTop={scrollToTop}
       />
 
       {activeCountry && user && (
@@ -185,7 +186,9 @@ function App() {
           countryCode={activeCountry.code}
           user={user}
           stickerCount={activeCountry.count ?? 20}
+          initialData={collection[activeCountry.code] ?? {}}
           onCollectionChange={updateEntry}
+          onInteract={selectCountry}
           t={t}
         />
       )}
