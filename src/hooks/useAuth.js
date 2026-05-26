@@ -16,12 +16,6 @@ export function useAuth() {
       setUser(currentUser)
 
       if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && currentUser) {
-        setTimeout(() => {
-          if (window.location.href.endsWith('#')) {
-            window.history.replaceState(null, '', window.location.pathname + window.location.search)
-          }
-        }, 0)
-
         try {
           await invokeFunction('upsert-user', {
             email: currentUser.email,
