@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 const THEME_KEY = 'worldcup-album-theme'
-const DEFAULT_THEME = 'dark'
+const DEFAULT_THEME = 'light'
 
 export function useTheme() {
   const [theme, setTheme] = useState(() => {

@@ -112,6 +112,8 @@
   "whatsNewCloseAriaLabel": "Cerrar",
   "closeAriaLabel": "Cerrar",
   "scrollToTopAriaLabel": "Volver arriba",
+  "feature.site-redesign.title": "Nuevo diseño visual del sitio",
+  "feature.site-redesign.description": "Rediseño completo con nueva tipografía, colores más modernos y mejor organización visual. Ahora el tema claro es el predeterminado, pero puedes cambiar a oscuro cuando quieras desde el pie de página.",
   "feature.card-collection-stats.title": "Conteo de colección en cada carta",
   "feature.card-collection-stats.description": "Las cartas de países ahora muestran tu progreso: cuántas figuritas tienes del total, cuántas repetidas, y el grupo se ve más discreto al lado del código del país.",
   "feature.sticker-card-feedback.title": "Indicadores visuales por panel completado",

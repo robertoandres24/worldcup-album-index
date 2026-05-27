@@ -1,0 +1,202 @@
+/* ── Auth Skeleton ──────────────────────────────────────────── */
+.user-avatar-skeleton {
+  width: 110px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    var(--shimmer-start) 25%,
+    var(--shimmer-middle) 50%,
+    var(--shimmer-end) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.4s ease-in-out infinite;
+}
+
+/* ── Auth Area ──────────────────────────────────────────────── */
+.user-auth-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.user-avatar-container {
+  position: relative;
+}
+
+.user-avatar-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  border: none;
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-base);
+  flex-shrink: 0;
+}
+
+.user-avatar-btn:hover {
+  background: var(--accent-blue-hover);
+}
+
+.user-avatar-btn--expanded {
+  width: auto;
+  border-radius: var(--radius-full);
+  padding: 0 0.75rem 0 0.4rem;
+  gap: 0.45rem;
+  height: 34px;
+}
+
+.user-avatar-initial {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.user-avatar-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-avatar-chevron {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* ── User Dropdown ──────────────────────────────────────────── */
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--modal-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 0.375rem;
+  min-width: 196px;
+  z-index: 1002;
+  box-shadow: var(--shadow-lg);
+  animation: fadeInDown 0.15s ease;
+}
+
+.user-dropdown-email {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 0.25rem;
+  word-break: break-all;
+}
+
+.user-dropdown-import {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: inherit;
+}
+
+.user-dropdown-import svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.user-dropdown-import:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.user-dropdown-logout {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  font-family: inherit;
+}
+
+.user-dropdown-logout:hover {
+  background: rgba(239, 68, 68, 0.08);
+  color: #EF4444;
+}
+
+/* ── Auth Buttons ───────────────────────────────────────────── */
+.auth-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.4rem 0.75rem;
+  transition: background var(--transition-base), box-shadow var(--transition-base);
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.auth-btn-login {
+  background: #fff;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.auth-btn-login:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  background: #f8f8f8;
+}
+
+.auth-btn-logout {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+}
+
+.auth-btn-logout:hover {
+  background: var(--bg-quaternary);
+  color: var(--text-primary);
+}
+
+.google-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
