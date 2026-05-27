@@ -32,7 +32,7 @@ function Footer({ t, locale, toggleLocale, onShowAbout, onShowSuggestion, share,
         </button>
         <span className="footer-link-sep">·</span>
         <a
-          href="https://github.com/robertoandres24/worldcup-album-index"
+          href="https://github.com/studio84dev/worldcup-album-index"
           target="_blank"
           rel="noopener noreferrer"
           className="footer-link"
