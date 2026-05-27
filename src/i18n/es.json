@@ -112,6 +112,8 @@
   "whatsNewCloseAriaLabel": "Cerrar",
   "closeAriaLabel": "Cerrar",
   "scrollToTopAriaLabel": "Volver arriba",
+  "feature.card-collection-stats.title": "Conteo de colección en cada carta",
+  "feature.card-collection-stats.description": "Las cartas de países ahora muestran tu progreso: cuántas figuritas tienes del total, cuántas repetidas, y el grupo se ve más discreto al lado del código del país.",
   "feature.sticker-card-feedback.title": "Indicadores visuales por panel completado",
   "feature.sticker-card-feedback.description": "Cuando completas todas las figuritas de un país el panel celebra con una animación de destello.",
   "feature.theme-consistency.title": "Mejora de consistencia visual en modo claro",

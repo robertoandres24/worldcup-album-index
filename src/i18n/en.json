@@ -112,6 +112,8 @@
   "whatsNewCloseAriaLabel": "Close",
   "closeAriaLabel": "Close",
   "scrollToTopAriaLabel": "Scroll to top",
+  "feature.card-collection-stats.title": "Collection count on every card",
+  "feature.card-collection-stats.description": "Country cards now show your progress: how many stickers you have out of the total, how many duplicates, and the group appears more discreetly next to the country code.",
   "feature.sticker-card-feedback.title": "Visual indicator for completed panels",
   "feature.sticker-card-feedback.description": "When you complete all stickers for a country, the panel celebrates with a shimmer animation.",
   "feature.theme-consistency.title": "Light mode visual consistency improvements",
