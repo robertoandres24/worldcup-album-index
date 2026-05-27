@@ -65,6 +65,8 @@ function Footer({ t, locale, toggleLocale, onShowAbout, onShowSuggestion, share,
       </div>
 
       <ShareMenu t={t} share={share} shareOptions={shareOptions} className="footer-share" />
+
+      <p className="footer-disclaimer">{t('footerDisclaimer')}</p>
     </footer>
   )
 }

@@ -140,5 +140,6 @@
   "newFeatureBody": "Sign in with Google and access your personal collection from any device. Mark the stickers you already have with a click and instantly see which ones you're missing. After signing in, select a country and you can start tracking your stickers.",
   "themeToggleLabel": "Toggle theme",
   "themeLight": "Light",
-  "themeDark": "Dark"
+  "themeDark": "Dark",
+  "footerDisclaimer": "This project has no affiliation with Panini, FIFA, or Coca-Cola. It is an independent project for entertainment and collecting purposes."
 }
