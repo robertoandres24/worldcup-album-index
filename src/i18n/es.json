@@ -1,6 +1,8 @@
 {
-  "title": "Mi Album FIFA de la Copa Mundial 2026",
-  "description": "Encuentra en qué página va cada lámina, marca las que ya tienes y registra tus repetidas.",
+  "title": "Mi Álbum FIFA Digital, Copa del Mundo 2026",
+  "loginBarText": "Inicia sesión para comenzar a registrar tu colección",
+  "loginBarCta": "Iniciar sesión con Google",
+  "description": "Registra tu colección de figuritas del álbum Panini, marca las que tienes y controla tus repetidas.",
   "goodbyeIndex": "¡Adiós a revisar la página de índex como en los 90s!",
   "lessBrowsing": "Menos hojeadas = Más años de vida para tu álbum ",
   "searchPlaceholder": "Busca por código (MEX), país o página...",

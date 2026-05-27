@@ -1,6 +1,8 @@
 {
-  "title": "World Cup 2026 Album Index",
-  "description": "Find which page each sticker goes on, mark the ones you have and log your duplicates.",
+  "title": "My FIFA Digital Album, World Cup 2026",
+  "loginBarText": "Sign in to start tracking your collection",
+  "loginBarCta": "Sign in with Google",
+  "description": "Track your Panini sticker collection, mark the ones you have and manage your duplicates.",
   "goodbyeIndex": "Goodbye to flipping through the index like in the 90s!",
   "lessBrowsing": "Less browsing 📖 = More years of life for your album 😉",
   "searchBackAriaLabel": "Back to list",

@@ -76,6 +76,7 @@ body {
 
 header {
   text-align: center;
+  margin-top: 1.5rem;
   margin-bottom: 2rem;
   transition: margin 0.3s ease;
 }
@@ -504,6 +505,66 @@ header h1 span {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   border-color: transparent;
   color: white;
+}
+
+/* ── Login Bar ──────────────────────────────────────────────── */
+.login-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+}
+
+.login-bar-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.login-bar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.login-bar-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.login-bar-btn .google-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .login-bar {
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .login-bar-text {
+    font-size: 0.8rem;
+    text-align: center;
+  }
 }
 
 /* ── Promo Banner ───────────────────────────────────────────── */

@@ -22,6 +22,7 @@ import StickerList from './components/StickerList.jsx'
 import Footer from './components/Footer.jsx'
 import ScrollTopButton from './components/ScrollTopButton.jsx'
 import RedirectBanner from './components/RedirectBanner.jsx'
+import LoginBar from './components/LoginBar.jsx'
 import WelcomeModal from './components/WelcomeModal.jsx'
 import AboutModal from './components/AboutModal.jsx'
 
@@ -111,6 +112,10 @@ function App() {
 
       {showRedirectBanner && (
         <RedirectBanner onDismiss={dismissRedirectBanner} t={t} />
+      )}
+
+      {!user && !authLoading && (
+        <LoginBar onLogin={signInWithGoogle} t={t} />
       )}
 
       {showWelcomeModal && (
