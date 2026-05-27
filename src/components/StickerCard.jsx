@@ -17,11 +17,12 @@ const CC_ICON = (
   </svg>
 )
 
-function StickerCard({ sticker, onClick, isComplete, isActive }) {
+function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
   const stateClass = isActive ? 'sticker-card--active' : isComplete ? 'sticker-card--complete' : ''
 
   if (sticker.type) {
     const icon = sticker.type === 'fwc' ? FWC_ICON : CC_ICON
+    const total = sticker.type === 'fwc' ? 19 : 14
     return (
       <div
         className={`sticker-card sticker-card--special sticker-card--${sticker.type} ${stateClass}`.trim()}
@@ -34,6 +35,14 @@ function StickerCard({ sticker, onClick, isComplete, isActive }) {
           <div className="country-code">{sticker.code}</div>
           <div className="country-name">{sticker.label}</div>
         </div>
+        {stats ? (
+          <div className="sticker-stats">
+            <div className="sticker-stats-count">{stats.collected}/{total}</div>
+            {stats.repeated > 0 && (
+              <div className="sticker-stats-repeated">{stats.repeated} 🔄</div>
+            )}
+          </div>
+        ) : null}
       </div>
     )
   }
@@ -47,12 +56,26 @@ function StickerCard({ sticker, onClick, isComplete, isActive }) {
       <div className="page-number">{sticker.page}</div>
       <img src={flags[sticker.iso]} alt={sticker.name} className="country-flag" />
       <div className="country-info">
-        <div className="country-code">{sticker.code}</div>
+        <div className="country-code-row">
+          <span className="country-code">{sticker.code}</span>
+          <span className={`group-badge-small group-${sticker.group.toLowerCase()}`}>
+            {sticker.group}
+          </span>
+        </div>
         <div className="country-name">{sticker.name}</div>
       </div>
-      <div className={`group-badge group-${sticker.group.toLowerCase()}`}>
-        {sticker.group}
-      </div>
+      {stats ? (
+        <div className="sticker-stats">
+          <div className="sticker-stats-count">{stats.collected}/{stats.total}</div>
+          {stats.repeated > 0 && (
+            <div className="sticker-stats-repeated">{stats.repeated} 🔄</div>
+          )}
+        </div>
+      ) : (
+        <div className={`group-badge group-${sticker.group.toLowerCase()}`}>
+          {sticker.group}
+        </div>
+      )}
     </div>
   )
 }

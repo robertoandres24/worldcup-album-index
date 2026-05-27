@@ -2,15 +2,19 @@ import { useMemo } from 'react'
 import StickerCard from './StickerCard.jsx'
 
 function StickerList({ stickers, onSelect, collection, selectedCode, t }) {
-  const completedCodes = useMemo(() => {
-    const set = new Set()
+  const { completedCodes, statsMap } = useMemo(() => {
+    const completed = new Set()
+    const stats = {}
     stickers.forEach((sticker) => {
       const total = sticker.count ?? 20
       const codeMap = collection?.[sticker.code] ?? {}
-      const collectedCount = Object.values(codeMap).filter((e) => e.collected).length
-      if (collectedCount >= total) set.add(sticker.code)
+      const entries = Object.values(codeMap)
+      const collectedCount = entries.filter((e) => e.collected).length
+      const repeatedCount = entries.reduce((acc, e) => acc + (e.repeated ?? 0), 0)
+      if (collectedCount >= total) completed.add(sticker.code)
+      stats[sticker.code] = { collected: collectedCount, total, repeated: repeatedCount }
     })
-    return set
+    return { completedCodes: completed, statsMap: stats }
   }, [stickers, collection])
 
   if (stickers.length === 0) {
@@ -31,6 +35,7 @@ function StickerList({ stickers, onSelect, collection, selectedCode, t }) {
         <StickerCard
           key={sticker.code}
           sticker={sticker}
+          stats={statsMap[sticker.code]}
           isComplete={completedCodes.has(sticker.code)}
           isActive={selectedCode === sticker.code}
           onClick={() => onSelect(sticker.code)}
