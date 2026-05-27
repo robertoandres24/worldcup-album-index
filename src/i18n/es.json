@@ -109,6 +109,8 @@
   "whatsNewCloseAriaLabel": "Cerrar",
   "closeAriaLabel": "Cerrar",
   "scrollToTopAriaLabel": "Volver arriba",
+  "feature.sticker-card-feedback.title": "Indicadores visuales por panel completado",
+  "feature.sticker-card-feedback.description": "Cuando completas todas las figuritas de un país el panel celebra con una animación de destello.",
   "feature.theme-consistency.title": "Mejora de consistencia visual en modo claro",
   "feature.theme-consistency.description": "Nueva opción de tema claro/oscuro con mejor consistencia visual. Se corrigieron colores, bordes y visibilidad en todos los componentes",
   "feature.import-collection.title": "Importar colección desde otra cuenta",

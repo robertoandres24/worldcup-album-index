@@ -109,6 +109,8 @@
   "whatsNewCloseAriaLabel": "Close",
   "closeAriaLabel": "Close",
   "scrollToTopAriaLabel": "Scroll to top",
+  "feature.sticker-card-feedback.title": "Visual indicator for completed panels",
+  "feature.sticker-card-feedback.description": "When you complete all stickers for a country, the panel celebrates with a shimmer animation.",
   "feature.theme-consistency.title": "Light mode visual consistency improvements",
   "feature.theme-consistency.description": "New light/dark theme toggle with improved visual consistency. Fixed colors, borders, and visibility across all components",
   "feature.import-collection.title": "Import collection from another account",
