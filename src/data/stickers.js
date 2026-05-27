@@ -60,9 +60,9 @@ const stickersData = [
   { page: 102, code: 'GHA', name: 'Ghana', group: 'L', iso: 'gh' },
   { page: 104, code: 'PAN', name: 'Panama', group: 'L', iso: 'pa' },
   // FWC
-  { page: 1, code: 'FWC', label: 'FWC 1–19', type: 'fwc', count: 19 },
+  { page: 1, code: 'FWC', label: 'FWC', type: 'fwc', count: 19 },
   // CC
-  { page: 112, code: 'CC', label: 'CC 1–14', type: 'cc', count: 14 },
+  { page: 112, code: 'CC', label: 'CC', type: 'cc', count: 14 },
 ]
 
 export default stickersData

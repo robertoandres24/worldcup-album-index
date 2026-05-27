@@ -1,4 +1,5 @@
 const FEATURES = [
+  { id: 'sticker-card-feedback', date: '2026-05-26', icon: '✅' },
   { id: 'theme-consistency', date: '2026-05-25', icon: '🎨' },
   { id: 'import-collection', date: '2026-05-25', icon: '📥' },
   { id: 'i18n-support',    date: '2026-05-25', icon: '🌐' },

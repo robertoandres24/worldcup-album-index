@@ -13,6 +13,7 @@
   --light: #f8f9fa;
   --gray: #6c757d;
   --text-muted: #a0aab4;
+  --highlight: #38bdf8;
 }
 
 [data-theme="light"] {
@@ -75,6 +76,7 @@ body {
 
 header {
   text-align: center;
+  margin-top: 1.5rem;
   margin-bottom: 2rem;
   transition: margin 0.3s ease;
 }
@@ -505,6 +507,143 @@ header h1 span {
   color: white;
 }
 
+/* ── Share Prompt ───────────────────────────────────────────── */
+.share-prompt {
+  position: relative;
+  width: 100%;
+  background: var(--modal-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem 1.25rem 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.share-prompt-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem;
+}
+
+.share-prompt-close:hover {
+  color: var(--text-primary);
+}
+
+.share-prompt-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.share-prompt-body {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.share-prompt-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.share-prompt-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+  background: var(--card-bg);
+}
+
+.share-prompt-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.share-prompt-btn--whatsapp { border-color: #25d366; color: #25d366; }
+.share-prompt-btn--whatsapp:hover { background: #25d366; color: #fff; }
+
+.share-prompt-btn--facebook { border-color: #1877f2; color: #1877f2; }
+.share-prompt-btn--facebook:hover { background: #1877f2; color: #fff; }
+
+.share-prompt-btn--x { border-color: var(--text-secondary); }
+.share-prompt-btn--x:hover { background: var(--text-primary); color: var(--bg-primary); }
+
+/* ── Login Bar ──────────────────────────────────────────────── */
+.login-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+}
+
+.login-bar-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.login-bar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.login-bar-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.login-bar-btn .google-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .login-bar {
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .login-bar-text {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+}
+
 /* ── Promo Banner ───────────────────────────────────────────── */
 .promo-banner {
   position: relative;
@@ -735,6 +874,18 @@ header h1 span {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+}
+
+.footer-disclaimer {
+  margin-top: 1.5rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+  opacity: 0.7;
 }
 
 .footer-share .share-menu {
@@ -1014,6 +1165,24 @@ header h1 span {
   border-color: var(--primary);
 }
 
+.sticker-card--active,
+.sticker-card--active:hover {
+  border-color: var(--highlight);
+  transform: none;
+}
+
+.sticker-card--complete,
+.sticker-card--complete:hover {
+  border-color: var(--primary);
+  transform: none;
+}
+
+.sticker-card--active.sticker-card--complete,
+.sticker-card--active.sticker-card--complete:hover {
+  border-color: var(--highlight);
+  transform: none;
+}
+
 /* Center single card when only one result */
 .stickers-list:has(.sticker-card:only-child) {
   grid-template-columns: 1fr;
@@ -1075,22 +1244,21 @@ header h1 span {
   justify-content: flex-start;
 }
 
-.special-card-label {
-  flex: 1;
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: 800;
-  letter-spacing: 1px;
+.special-icon {
+  width: 1.8rem;
+  height: auto;
+  flex-shrink: 0;
+  display: block;
 }
 
-.sticker-card--fwc .special-card-label {
+.sticker-card--fwc .country-code {
   background: var(--fwc-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.sticker-card--cc .special-card-label {
+.sticker-card--cc .country-code {
   color: #F40000;
 }
 
@@ -2318,6 +2486,25 @@ footer {
   padding: 1.25rem;
   margin: 2rem 0;
   animation: modalFadeIn 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sticker-panel--complete {
+  border-color: var(--primary);
+  box-shadow: 0 0 12px 4px rgba(255, 140, 66, 0.4);
+}
+
+@keyframes panel-shimmer {
+  0%   { border-color: var(--primary); box-shadow: 0 0 8px 2px rgba(255,140,66,0.3); }
+  25%  { border-color: #ffb347; box-shadow: 0 0 28px 10px rgba(255,179,71,0.7); }
+  50%  { border-color: var(--primary); box-shadow: 0 0 12px 4px rgba(255,140,66,0.4); }
+  75%  { border-color: #ffb347; box-shadow: 0 0 32px 12px rgba(255,179,71,0.6); }
+  100% { border-color: var(--primary); box-shadow: 0 0 12px 4px rgba(255,140,66,0.4); }
+}
+
+.sticker-panel--just-completed {
+  animation: modalFadeIn 0.3s ease, panel-shimmer 3s ease forwards;
+  transition: none;
 }
 
 .sticker-panel-header {

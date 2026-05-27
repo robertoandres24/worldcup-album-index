@@ -1,6 +1,11 @@
 {
-  "title": "Mi Album FIFA de la Copa Mundial 2026",
-  "description": "Encuentra en qué página va cada lámina, marca las que ya tienes y registra tus repetidas.",
+  "title": "Mi Álbum FIFA Digital, Copa del Mundo 2026",
+  "loginBarText": "Inicia sesión para comenzar a registrar tu colección",
+  "loginBarCta": "Iniciar sesión con Google",
+  "sharePromptTitle": "¿Te gusta Mi Álbum FIFA 2026?",
+  "sharePromptBody": "Compártelo con otros coleccionistas en WhatsApp, Facebook o X. Cada persona que lo descubre ayuda a que la comunidad crezca y a que podamos seguir mejorando la herramienta.",
+  "sharePromptDismiss": "Cerrar",
+  "description": "Registra tu colección de figuritas del álbum Panini, marca las que tienes y controla tus repetidas.",
   "goodbyeIndex": "¡Adiós a revisar la página de índex como en los 90s!",
   "lessBrowsing": "Menos hojeadas = Más años de vida para tu álbum ",
   "searchPlaceholder": "Busca por código (MEX), país o página...",
@@ -16,8 +21,8 @@
   "starMessage": "Dale una estrella al repo si te sirvió",
   "suggestImprovement": "¿Sugerencias? Abre un issue",
   "share": "Compartir",
-  "shareTitle": "Indice del Album Mundial FIFA 2026",
-  "shareText": "Encuentra rápidamente en qué página va cada lámina de tu álbum",
+  "shareTitle": "Mi Álbum FIFA Digital 2026",
+  "shareText": "Tu álbum digital del Mundial de Fútbol 2026. Registra tus láminas o figuritas Panini, marca las que tienes, controla repetidas y descubre cuáles te faltan. Gratis, sin anuncios.",
   "linkCopied": "Enlace copiado al portapapeles",
   "copyLink": "Copiar enlace",
   "kofiMessage": "Si te gustó el sitio, invítame un cafecito para seguir agregando cosas geniales 😉",
@@ -107,6 +112,8 @@
   "whatsNewCloseAriaLabel": "Cerrar",
   "closeAriaLabel": "Cerrar",
   "scrollToTopAriaLabel": "Volver arriba",
+  "feature.sticker-card-feedback.title": "Indicadores visuales por panel completado",
+  "feature.sticker-card-feedback.description": "Cuando completas todas las figuritas de un país el panel celebra con una animación de destello.",
   "feature.theme-consistency.title": "Mejora de consistencia visual en modo claro",
   "feature.theme-consistency.description": "Nueva opción de tema claro/oscuro con mejor consistencia visual. Se corrigieron colores, bordes y visibilidad en todos los componentes",
   "feature.import-collection.title": "Importar colección desde otra cuenta",
@@ -133,5 +140,6 @@
   "newFeatureBody": "Inicia sesión con Google y accede a tu colección personal desde cualquier dispositivo. Marca las laminitas que ya tengas con un click y descubre cuáles te faltan al instante. Después de registrarte, selecciona un país y podrás comenzar a registrar tus figuritas.",
   "themeToggleLabel": "Cambiar tema",
   "themeLight": "Claro",
-  "themeDark": "Oscuro"
+  "themeDark": "Oscuro",
+  "footerDisclaimer": "Este proyecto no tiene relación alguna con Panini, FIFA ni Coca-Cola. Es un proyecto independiente con fines de entretenimiento y colección."
 }
