@@ -507,6 +507,83 @@ header h1 span {
   color: white;
 }
 
+/* ── Share Prompt ───────────────────────────────────────────── */
+.share-prompt {
+  position: relative;
+  width: 100%;
+  background: var(--modal-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem 1.25rem 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.share-prompt-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem;
+}
+
+.share-prompt-close:hover {
+  color: var(--text-primary);
+}
+
+.share-prompt-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.share-prompt-body {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.share-prompt-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.share-prompt-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+  background: var(--card-bg);
+}
+
+.share-prompt-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.share-prompt-btn--whatsapp { border-color: #25d366; color: #25d366; }
+.share-prompt-btn--whatsapp:hover { background: #25d366; color: #fff; }
+
+.share-prompt-btn--facebook { border-color: #1877f2; color: #1877f2; }
+.share-prompt-btn--facebook:hover { background: #1877f2; color: #fff; }
+
+.share-prompt-btn--x { border-color: var(--text-secondary); }
+.share-prompt-btn--x:hover { background: var(--text-primary); color: var(--bg-primary); }
+
 /* ── Login Bar ──────────────────────────────────────────────── */
 .login-bar {
   position: sticky;

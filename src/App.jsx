@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useI18n } from './hooks/useI18n.js'
 import { useAuth } from './hooks/useAuth.js'
 import { useGlobalCollection } from './hooks/useGlobalCollection.js'
@@ -23,6 +23,7 @@ import Footer from './components/Footer.jsx'
 import ScrollTopButton from './components/ScrollTopButton.jsx'
 import RedirectBanner from './components/RedirectBanner.jsx'
 import LoginBar from './components/LoginBar.jsx'
+import SharePrompt, { STORAGE_KEY as SHARE_PROMPT_KEY } from './components/SharePrompt.jsx'
 import WelcomeModal from './components/WelcomeModal.jsx'
 import AboutModal from './components/AboutModal.jsx'
 
@@ -82,6 +83,26 @@ function App() {
     if (ogLocale) ogLocale.setAttribute('content', locale === 'en' ? 'en_US' : 'es_ES')
   }, [locale, t])
 
+  const [showSharePrompt, setShowSharePrompt] = useState(false)
+  const prevSearchRef = useRef('')
+  const { teamCollected, fwcCollected, ccCollected } = totals
+  const totalCollected = teamCollected + fwcCollected + ccCollected
+
+  useEffect(() => {
+    if (localStorage.getItem(SHARE_PROMPT_KEY)) return
+    if (search.length > 0 && prevSearchRef.current.length === 0 && !user) {
+      const count = parseInt(localStorage.getItem('search-count') || '0') + 1
+      localStorage.setItem('search-count', String(count))
+      if (count >= 10) setShowSharePrompt(true)
+    }
+    prevSearchRef.current = search
+  }, [search, user])
+
+  useEffect(() => {
+    if (localStorage.getItem(SHARE_PROMPT_KEY)) return
+    if (user && totalCollected >= 20) setShowSharePrompt(true)
+  }, [user, totalCollected])
+
   const handleClearSearch = () => {
     clearSearch()
     searchInputRef.current?.focus()
@@ -140,6 +161,10 @@ function App() {
 
       {user && (
         <GlobalStatsBar totals={totals} loading={collectionLoading} t={t} />
+      )}
+
+      {showSharePrompt && (
+        <SharePrompt t={t} share={share} onDismiss={() => setShowSharePrompt(false)} />
       )}
 
       {showAbout && (
