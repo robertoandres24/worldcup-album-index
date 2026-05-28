@@ -1,14 +1,20 @@
+![Mi Álbum FIFA Banner](./public/og-image.png)
+
 # ⚽ Mi Álbum FIFA — World Cup 2026
 
 > **Find your sticker page in seconds. Track your collection. Never lose a swap again.**
 
-Live at → **[mialbumfifa.com](https://mialbumfifa.com)**
+Live at → **https://mialbumfifa.com**
 
 ---
 
 ## ✨ What is this?
 
-A fast, mobile-first web app for collectors of the **FIFA World Cup 2026 Panini sticker album**. Look up any country's page number by code, name or page, track which stickers you already have, and share the tool with your swapping friends.
+Mi Álbum FIFA is a fast, mobile-first web app for collectors of the **FIFA World Cup 2026 Panini sticker album**.
+
+Search any country instantly, track your collection digitally, manage repeated stickers and quickly check what you already own while swapping with friends or family.
+
+Originally built as a side project during the World Cup sticker season, the app has evolved into a full open-source collector companion focused on speed, simplicity and real-world usability.
 
 ---
 
@@ -16,67 +22,114 @@ A fast, mobile-first web app for collectors of the **FIFA World Cup 2026 Panini 
 
 ### 🔍 Smart Search
 
-- Search by **country code** (e.g. `GER`), **country name** (e.g. `Germany`) or **page number**
+- Search by:
+  - country code (`GER`)
+  - country name (`Germany`)
+  - album page number
+
 - Real-time filtering with instant results
-- Clicking a card sets it as the **active country** — even when multiple results match the same substring (e.g. `AUS` → Australia, not Austria)
+- Fast UX optimized for live trading sessions
 
-### 🗂️ Mi Álbum Digital _(requires login)_
+### 🗂️ Digital Album _(requires login)_
 
-- Log in with **Google** (one click, no password)
-- Select any country → see its **20 sticker slots**
-- Click a sticker to toggle it as **collected / missing**
-- Progress counter per country (`X / 20`)
-- Data synced to the cloud — access from **any device**
+- Google login via Supabase Auth
+- Track collected stickers
+- Mark repeated stickers
+- Per-country progress tracking
+- Cloud sync across devices
 
 ### 🌍 Country Cards
 
-- **48 countries** across 12 groups (A–L)
-- Country **flag**, **code**, **name**, **group badge** and **album page number**
-- Visual group color coding
+- 48 countries across groups A–L
+- Flags, codes, page numbers and progress indicators
+- Mobile-friendly layout
+- Group-based visual styling
 
-### 💡 Curiosities
+### 💡 Curiosity Carousel
 
-- After selecting a country, scroll down to see a **Curiosity Carousel** with fun facts about that nation
+- Fun facts and curiosities for each country
+- Localized content (`EN` / `ES`)
 
-### 📤 Share
+### 📱 Mobile-first Experience
 
-- Share the app via **WhatsApp**, **Facebook**, **X (Twitter)**, **LinkedIn** or **copy link**
+- Responsive UI
+- Theme support
+- Welcome onboarding modal
+- Persistent promo banners
+- Share menu
+- Scroll-to-top shortcuts
 
-### 📱 Mobile-first UX
+### 🌐 Internationalization
 
-- Fully responsive layout
-- Avatar dropdown menu for logged-in users (no crowded top bar)
-- Scroll-to-top button
-- Promo banners with dismiss (saved in `localStorage` — won't show again)
-- Post-login welcome modal with onboarding instructions
+- English and Spanish support
+- Lightweight custom i18n implementation
+
+---
+
+## ❤️ Open Source
+
+This project started as a small side project for football collectors and families during the FIFA World Cup 2026 sticker season.
+
+Contributions, ideas, bug reports and UX improvements are always welcome 🙌
+
+If you enjoy the project:
+
+- ⭐ Star the repository
+- 🐛 Open an issue
+- 💡 Suggest new ideas
+- 🚀 Share it with fellow collectors
+
+See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for contribution guidelines.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer         | Tech                                                                   |
-| ------------- | ---------------------------------------------------------------------- |
-| Frontend      | React 18 + Vite 5                                                      |
-| Styling       | Vanilla CSS (custom design system, CSS variables, keyframe animations) |
-| Auth          | Supabase Auth — Google OAuth 2.0                                       |
-| Database      | Supabase (PostgreSQL) with Row-Level Security                          |
-| Backend logic | Supabase Edge Functions (Deno / TypeScript)                            |
-| Flags         | [`flag-icons`](https://github.com/lipis/flag-icons) by @lipis          |
-| Hosting       | Vercel (production + staging preview deployments)                      |
+| Layer         | Tech                                                          |
+| ------------- | ------------------------------------------------------------- |
+| Frontend      | React 18 + Vite 5                                             |
+| Styling       | Vanilla CSS + CSS variables                                   |
+| Auth          | Supabase Auth (Google OAuth)                                  |
+| Database      | Supabase PostgreSQL + RLS                                     |
+| Backend Logic | Supabase Edge Functions (Deno / TypeScript)                   |
+| Hosting       | Vercel                                                        |
+| Icons / Flags | [`flag-icons`](https://github.com/lipis/flag-icons) by @lipis |
 
 ---
 
-## 🗄️ Database Schema
+## 🧱 Project Structure
 
-```sql
--- User profiles (upserted on every login via edge function)
-profiles (id, email, display_name, last_login)
-
--- Sticker collection (RLS: each user can only read/write their own rows)
-sticker_collection (user_id, country_code, sticker_number, collected, updated_at)
+```text
+src/
+├── components/   # Reusable UI components
+├── hooks/        # Custom React hooks
+├── data/         # Static album + curiosity data
+├── styles/       # Design system + modular CSS
+├── i18n/         # Translation files
+├── lib/          # External clients/config
+└── main.jsx
 ```
 
-Row-Level Security is enabled on both tables. The `upsert-user` Edge Function runs with the service role key to write profiles securely.
+Supabase Edge Functions live under:
+
+```text
+supabase/functions/
+```
+
+---
+
+## 🎨 Design Philosophy
+
+Mi Álbum FIFA is designed to feel:
+
+- fast
+- minimal
+- mobile-first
+- clean
+- accessible
+- easy to use during real sticker trading sessions
+
+The UI intentionally avoids excessive visual noise and prioritizes usability and clarity.
 
 ---
 
@@ -85,57 +138,71 @@ Row-Level Security is enabled on both tables. The `upsert-user` Edge Function ru
 ### Prerequisites
 
 - Node.js 18+
-- A [Supabase](https://supabase.com) project with Google OAuth enabled
+- A Supabase project with Google OAuth enabled
 
 ### Setup
 
 ```bash
-git clone https://github.com/robertoandres24/worldcup-album-index.git
-cd worldcup-album-index
+git clone https://github.com/studio84dev/mi-album-fifa.git
+
+cd mi-album-fifa
+
 npm install
 ```
 
-Create a `.env` file in the root:
+Create a `.env` file:
 
 ```env
-VITE_SUPABASE_URL=https://your-project-ref.supabase.co
+VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your-anon-key
 ```
+
+Run locally:
 
 ```bash
 npm run dev
 ```
 
-App runs at `http://localhost:5173` (or next available port).
+---
 
-### Deploy Edge Function
+## 📦 Available Scripts
 
 ```bash
-supabase link --project-ref your-project-ref
-supabase functions deploy upsert-user
+npm run dev
+npm run build
+npm run lint
+npm run format
 ```
 
 ---
 
 ## 🚢 Deployment
 
-The app is deployed on **Vercel**, connected to this GitHub repository. Every push triggers an automatic deployment:
+Hosted on Vercel.
 
-- `master` → [mialbumfifa.com](https://mialbumfifa.com) (production)
-- `staging` → Vercel preview URL (staging / QA)
+- `master` → production
+- `staging` → preview deployments
 
-No manual deploy steps needed — merge to `master` and Vercel takes care of the rest.
-
-Build command: `npm run build` — output: `dist/`
+Every push automatically triggers a deployment.
 
 ---
 
 ## 🔒 Security Notes
 
-- `VITE_SUPABASE_ANON_KEY` is intentionally public — it gives access only to data protected by RLS policies
-- `SUPABASE_SERVICE_ROLE_KEY` lives exclusively in the Edge Function environment, never exposed to the client
-- All sticker writes are validated server-side via JWT — users can only modify their own rows
+- Supabase Row-Level Security (RLS) enabled
+- Users can only access their own sticker data
+- Service role key never exposed to the client
+- Authenticated writes validated server-side
 
 ---
 
-Developed with ❤️ by [Studio84](https://ko-fi.com/studio84)
+## 🙌 Credits
+
+- [`flag-icons`](https://github.com/lipis/flag-icons) by @lipis
+- [SVG Repo](https://www.svgrepo.com/) — open-licensed SVG icons
+- FIFA World Cup sticker collecting community
+- Everyone sharing and contributing ideas
+
+---
+
+Developed with ❤️ by Studio84
