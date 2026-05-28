@@ -126,6 +126,8 @@
   "whatsNewCloseAriaLabel": "Close",
   "closeAriaLabel": "Close",
   "scrollToTopAriaLabel": "Scroll to top",
+  "feature.avatar-refresh.title": "New user avatar",
+  "feature.avatar-refresh.description": "The user button now shows your Google profile picture when signed in, or your initial as a fallback when no photo is available. Cleaner and more minimal.",
   "feature.design-refresh-may28.title": "New navigation bar and progress states",
   "feature.design-refresh-may28.description": "The top bar is now sticky, and your collection summary has been moved to the user menu. Community stats have been added, making the search bar much more accessible.",
   "feature.site-redesign.title": "New site visual design",

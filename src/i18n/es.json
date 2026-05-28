@@ -126,6 +126,8 @@
   "whatsNewCloseAriaLabel": "Cerrar",
   "closeAriaLabel": "Cerrar",
   "scrollToTopAriaLabel": "Volver arriba",
+  "feature.avatar-refresh.title": "Nuevo avatar de usuario",
+  "feature.avatar-refresh.description": "El botón de usuario ahora muestra tu foto de perfil de Google cuando inicias sesión, o tu inicial como respaldo si no hay foto disponible. Más limpio y minimalista.",
   "feature.design-refresh-may28.title": "Nueva barra de navegación y estados de progreso",
   "feature.design-refresh-may28.description": "La barra superior ahora es sticky y tu resumen de colección se movió al menú de usuario. Se agregaron estadísticas de la comunidad. El buscador quedó más accesible.",
   "feature.site-redesign.title": "Nuevo diseño visual del sitio",
