@@ -193,6 +193,10 @@
   border: 1px solid var(--border-color);
 }
 
+.promo-banner--home {
+  margin-top: 1rem;
+}
+
 .promo-banner--country {
   margin-top: 1.25rem;
 }

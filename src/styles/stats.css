@@ -125,6 +125,10 @@
   color: #E84040;
 }
 
+.global-stat-item--panini .global-stat-value {
+  color: #6366F1;
+}
+
 .global-stat-item--rep .global-stat-value {
   color: var(--accent-orange);
 }

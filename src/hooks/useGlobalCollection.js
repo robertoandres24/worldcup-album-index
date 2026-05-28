@@ -55,8 +55,9 @@ export function useGlobalCollection(user) {
   }, [])
 
   const totals = (() => {
+    const SPECIAL_CODES = new Set(['FWC', 'CC', '00'])
     const TEAM_CODES = new Set(
-      Object.keys(collection).filter((c) => c !== 'FWC' && c !== 'CC')
+      Object.keys(collection).filter((c) => !SPECIAL_CODES.has(c))
     )
     let teamCollected = 0
     TEAM_CODES.forEach((code) => {
@@ -65,6 +66,7 @@ export function useGlobalCollection(user) {
 
     const fwcCollected = Object.values(collection['FWC'] ?? {}).filter((e) => e.collected).length
     const ccCollected = Object.values(collection['CC'] ?? {}).filter((e) => e.collected).length
+    const paniniCollected = Object.values(collection['00'] ?? {}).filter((e) => e.collected).length
 
     let totalRepeated = 0
     Object.values(collection).forEach((codeMap) => {
@@ -73,7 +75,7 @@ export function useGlobalCollection(user) {
       })
     })
 
-    return { teamCollected, fwcCollected, ccCollected, totalRepeated }
+    return { teamCollected, fwcCollected, ccCollected, paniniCollected, totalRepeated }
   })()
 
   return { collection, loading, updateEntry, totals }

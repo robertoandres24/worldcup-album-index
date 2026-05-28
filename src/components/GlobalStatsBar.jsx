@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
 
 function GlobalStatsBar({ totals, loading, t }) {
-  const { teamCollected, fwcCollected, ccCollected, totalRepeated } = totals
+  const { teamCollected, fwcCollected, ccCollected, paniniCollected, totalRepeated } = totals
 
   const TEAM_TOTAL = 960  // 48 teams × 20 stickers
   const FWC_TOTAL = 19
   const CC_TOTAL = 14
+  const PANINI_TOTAL = 1
 
-  const overallCollected = teamCollected + fwcCollected + ccCollected
-  const overallTotal = TEAM_TOTAL + FWC_TOTAL + CC_TOTAL
+  const overallCollected = teamCollected + fwcCollected + ccCollected + paniniCollected
+  const overallTotal = TEAM_TOTAL + FWC_TOTAL + CC_TOTAL + PANINI_TOTAL
 
   const pct = Math.round((overallCollected / overallTotal) * 100)
 
@@ -50,6 +51,11 @@ function GlobalStatsBar({ totals, loading, t }) {
           {loading ? <span className="global-stat-skeleton" /> : <span className="global-stat-value">{ccCollected}</span>}
           <span className="global-stat-label">{t('statOf')} {CC_TOTAL}</span>
           <span className="global-stat-desc">CC</span>
+        </div>
+        <div className="global-stat-item global-stat-item--panini">
+          {loading ? <span className="global-stat-skeleton" /> : <span className="global-stat-value">{paniniCollected}</span>}
+          <span className="global-stat-label">{t('statOf')} {PANINI_TOTAL}</span>
+          <span className="global-stat-desc">00 PANINI</span>
         </div>
         <div className="global-stat-item global-stat-item--rep">
           {loading ? <span className="global-stat-skeleton" /> : <span className="global-stat-value">{totalRepeated}</span>}

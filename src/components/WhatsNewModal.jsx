@@ -1,4 +1,5 @@
 const FEATURES = [
+  { id: 'release-may27', date: '2026-05-27', icon: '📖' },
   { id: 'site-redesign', date: '2026-05-27', icon: '🎨' },
   { id: 'card-collection-stats', date: '2026-05-27', icon: '📈' },
   { id: 'sticker-card-feedback', date: '2026-05-26', icon: '✅' },

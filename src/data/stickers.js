@@ -63,6 +63,8 @@ const stickersData = [
   { page: 1, code: 'FWC', label: 'FWC', type: 'fwc', count: 19 },
   // CC
   { page: 112, code: 'CC', label: 'CC', type: 'cc', count: 14 },
+  // 00 PANINI
+  { page: 114, code: '00', label: '00 PANINI', type: 'panini', count: 1 },
 ]
 
 export default stickersData

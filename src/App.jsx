@@ -85,8 +85,8 @@ function App() {
 
   const [showSharePrompt, setShowSharePrompt] = useState(false)
   const prevSearchRef = useRef('')
-  const { teamCollected, fwcCollected, ccCollected } = totals
-  const totalCollected = teamCollected + fwcCollected + ccCollected
+  const { teamCollected, fwcCollected, ccCollected, paniniCollected } = totals
+  const totalCollected = teamCollected + fwcCollected + ccCollected + paniniCollected
 
   useEffect(() => {
     if (localStorage.getItem(SHARE_PROMPT_KEY)) return
@@ -151,6 +151,7 @@ function App() {
           onLogin={signInWithGoogle}
           onDismiss={dismissPromoBanner}
           storageKey="promo-banner-home"
+          className="promo-banner--home"
         />
       )}
 
@@ -227,7 +228,7 @@ function App() {
         <PromoBanner
           icon="🏆"
           title={t('promoBannerCountryTitle')}
-          body={t('promoBannerCountryBody').replace('{count}', activeCountry.count ?? 20).replace('{country}', activeCountry.name)}
+          body={t('promoBannerCountryBody').replace('{count}', activeCountry.count ?? 20).replace('{country}', activeCountry.name ?? activeCountry.label)}
           onLogin={signInWithGoogle}
           onDismiss={() => localStorage.setItem('promo-banner-country', '1')}
           storageKey="promo-banner-country"
