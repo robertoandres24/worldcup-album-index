@@ -2,7 +2,6 @@
 header {
   text-align: center;
   margin-top: 2rem;
-  margin-bottom: 2rem;
   transition:
     margin var(--transition-slow),
     opacity var(--transition-slow),
@@ -115,6 +114,10 @@ header h1 span {
   margin-bottom: 1rem;
   padding-top: 0.75rem;
   gap: 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
 }
 
 .top-bar-left {
@@ -290,7 +293,6 @@ header h1 span {
 /* ── Search ─────────────────────────────────────────────────── */
 .search-container {
   width: 100%;
-  max-width: 520px;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -497,9 +499,10 @@ header h1 span {
     margin-bottom: 0;
   }
 
-  /* Hide title and description when search is focused - mobile only */
+  /* Hide title, description and stats when search is focused - mobile only */
   header.search-focus-mode h1,
-  header.search-focus-mode p {
+  header.search-focus-mode p,
+  header.search-focus-mode .community-stats {
     max-height: 0;
     opacity: 0;
     margin: 0;

@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
 import { useClickOutside } from '../hooks/useClickOutside.js'
+import GlobalStatsBar from './GlobalStatsBar.jsx'
 
-function UserMenu({ user, onSignOut, onImport, t }) {
+function UserMenu({ user, onSignOut, onImport, t, totals, collectionLoading }) {
   const [showMenu, setShowMenu] = useState(false)
   const containerRef = useRef(null)
 
@@ -34,6 +35,10 @@ function UserMenu({ user, onSignOut, onImport, t }) {
       </button>
       {showMenu && (
         <div className="user-dropdown">
+          <div className="user-dropdown-stats">
+            <GlobalStatsBar totals={totals} loading={collectionLoading} t={t} />
+          </div>
+          <div className="user-dropdown-divider" />
           <div className="user-dropdown-email">{user.email}</div>
           <button
             className="user-dropdown-import"

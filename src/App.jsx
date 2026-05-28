@@ -10,7 +10,6 @@ import { useTheme } from './hooks/useTheme.js'
 
 import SuggestionModal from './components/SuggestionModal.jsx'
 import StickerPanel from './components/StickerPanel.jsx'
-import GlobalStatsBar from './components/GlobalStatsBar.jsx'
 import WhatsNewModal from './components/WhatsNewModal.jsx'
 import { PromoBanner } from './components/PromoBanner.jsx'
 import CuriosityCarousel from './components/CuriosityCarousel.jsx'
@@ -26,6 +25,7 @@ import LoginBar from './components/LoginBar.jsx'
 import SharePrompt, { STORAGE_KEY as SHARE_PROMPT_KEY } from './components/SharePrompt.jsx'
 import WelcomeModal from './components/WelcomeModal.jsx'
 import AboutModal from './components/AboutModal.jsx'
+import CommunityStats from './components/CommunityStats.jsx'
 
 function App() {
   const { locale, t, toggleLocale } = useI18n()
@@ -51,8 +51,6 @@ function App() {
     setShowWhatsNew,
     whatsNewUnread,
     openWhatsNew,
-    showPromoBanner,
-    dismissPromoBanner,
     showWelcomeModal,
     dismissWelcomeModal,
     showAbout,
@@ -129,6 +127,8 @@ function App() {
         onSignIn={signInWithGoogle}
         onSignOut={signOut}
         onImport={() => setShowImportModal(true)}
+        totals={totals}
+        collectionLoading={collectionLoading}
       />
 
       {showRedirectBanner && <RedirectBanner onDismiss={dismissRedirectBanner} t={t} />}
@@ -137,26 +137,13 @@ function App() {
 
       {showWelcomeModal && <WelcomeModal onClose={dismissWelcomeModal} t={t} />}
 
-      {showPromoBanner && !user && (
-        <PromoBanner
-          icon="✨"
-          title={t('newFeatureTitle')}
-          body={t('newFeatureBody')}
-          onLogin={signInWithGoogle}
-          onDismiss={dismissPromoBanner}
-          storageKey="promo-banner-home"
-          className="promo-banner--home"
-        />
-      )}
-
       <header className={searchFocused ? 'search-focus-mode' : ''}>
         <h1>
           <span>⚽</span> {t('title')}
         </h1>
         <p>{t('description')}</p>
+        <CommunityStats t={t} />
       </header>
-
-      {user && <GlobalStatsBar totals={totals} loading={collectionLoading} t={t} />}
 
       {showSharePrompt && (
         <SharePrompt t={t} share={share} onDismiss={() => setShowSharePrompt(false)} />
@@ -227,8 +214,6 @@ function App() {
             .replace('{count}', activeCountry.count ?? 20)
             .replace('{country}', activeCountry.name ?? activeCountry.label)}
           onLogin={signInWithGoogle}
-          onDismiss={() => localStorage.setItem('promo-banner-country', '1')}
-          storageKey="promo-banner-country"
           className="promo-banner--country"
         />
       )}

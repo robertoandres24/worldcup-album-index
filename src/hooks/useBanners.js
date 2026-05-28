@@ -7,9 +7,6 @@ export function useBanners(user) {
     const read = JSON.parse(localStorage.getItem(WHATS_NEW_KEY) || '[]')
     return FEATURES.some((f) => !read.includes(f.id))
   })
-  const [showPromoBanner, setShowPromoBanner] = useState(() => {
-    return !localStorage.getItem('promo-banner-home')
-  })
   const [showWelcomeModal, setShowWelcomeModal] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const [showSuggestionModal, setShowSuggestionModal] = useState(false)
@@ -22,19 +19,12 @@ export function useBanners(user) {
 
   useEffect(() => {
     if (user) {
-      localStorage.setItem('promo-banner-home', '1')
       localStorage.setItem('promo-banner-country', '1')
-      setShowPromoBanner(false)
       if (!localStorage.getItem('welcome-modal-dismissed')) {
         setShowWelcomeModal(true)
       }
     }
   }, [user])
-
-  const dismissPromoBanner = useCallback(() => {
-    localStorage.setItem('promo-banner-home', '1')
-    setShowPromoBanner(false)
-  }, [])
 
   const dismissWelcomeModal = useCallback(() => {
     localStorage.setItem('welcome-modal-dismissed', '1')
@@ -58,8 +48,6 @@ export function useBanners(user) {
     setShowWhatsNew,
     whatsNewUnread,
     openWhatsNew,
-    showPromoBanner,
-    dismissPromoBanner,
     showWelcomeModal,
     dismissWelcomeModal,
     showAbout,

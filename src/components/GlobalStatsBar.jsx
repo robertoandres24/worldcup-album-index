@@ -1,5 +1,24 @@
 import { useState, useEffect } from 'react'
 
+function StatValue({ collected, total, isRepeated, loading }) {
+  if (loading) return <span className="global-stat-skeleton" />
+  if (isRepeated) {
+    return (
+      <span className="global-stat-value">
+        <span className="global-stat-value-num">{collected}</span>
+      </span>
+    )
+  }
+  const complete = collected >= total
+  return (
+    <span className={`global-stat-value${complete ? ' is-complete' : ''}`}>
+      <span className="global-stat-value-num">{collected}</span>
+      <span className="global-stat-value-sep">/</span>
+      <span className="global-stat-value-total">{total}</span>
+    </span>
+  )
+}
+
 function GlobalStatsBar({ totals, loading, t }) {
   const { teamCollected, fwcCollected, ccCollected, paniniCollected, totalRepeated } = totals
 
@@ -40,57 +59,24 @@ function GlobalStatsBar({ totals, loading, t }) {
       </div>
       <div className="global-stats-grid">
         <div className="global-stat-item">
-          {loading ? (
-            <span className="global-stat-skeleton" />
-          ) : (
-            <span className="global-stat-value">{teamCollected}</span>
-          )}
-          <span className="global-stat-label">
-            {t('statOf')} {TEAM_TOTAL}
-          </span>
+          <StatValue collected={teamCollected} total={TEAM_TOTAL} loading={loading} />
           <span className="global-stat-desc">{t('statTeams')}</span>
         </div>
         <div className="global-stat-item global-stat-item--fwc">
-          {loading ? (
-            <span className="global-stat-skeleton" />
-          ) : (
-            <span className="global-stat-value">{fwcCollected}</span>
-          )}
-          <span className="global-stat-label">
-            {t('statOf')} {FWC_TOTAL}
-          </span>
+          <StatValue collected={fwcCollected} total={FWC_TOTAL} loading={loading} />
           <span className="global-stat-desc">FWC</span>
         </div>
         <div className="global-stat-item global-stat-item--cc">
-          {loading ? (
-            <span className="global-stat-skeleton" />
-          ) : (
-            <span className="global-stat-value">{ccCollected}</span>
-          )}
-          <span className="global-stat-label">
-            {t('statOf')} {CC_TOTAL}
-          </span>
+          <StatValue collected={ccCollected} total={CC_TOTAL} loading={loading} />
           <span className="global-stat-desc">CC</span>
         </div>
         <div className="global-stat-item global-stat-item--panini">
-          {loading ? (
-            <span className="global-stat-skeleton" />
-          ) : (
-            <span className="global-stat-value">{paniniCollected}</span>
-          )}
-          <span className="global-stat-label">
-            {t('statOf')} {PANINI_TOTAL}
-          </span>
+          <StatValue collected={paniniCollected} total={PANINI_TOTAL} loading={loading} />
           <span className="global-stat-desc">00 PANINI</span>
         </div>
         <div className="global-stat-item global-stat-item--rep">
-          {loading ? (
-            <span className="global-stat-skeleton" />
-          ) : (
-            <span className="global-stat-value">{totalRepeated}</span>
-          )}
-          <span className="global-stat-label">{t('statRepeated')}</span>
-          <span className="global-stat-desc">🔄</span>
+          <StatValue collected={totalRepeated} isRepeated loading={loading} />
+          <span className="global-stat-desc">{t('statRepeated')}</span>
         </div>
       </div>
     </div>
