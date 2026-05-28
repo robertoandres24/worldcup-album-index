@@ -3,8 +3,8 @@ import curiositiesEs from '../data/curiosities.es.json'
 import curiositiesEn from '../data/curiosities.en.json'
 
 const mapsCache = {
-  es: new Map(curiositiesEs.map(c => [c.code, c.datos_curiosos])),
-  en: new Map(curiositiesEn.map(c => [c.code, c.datos_curiosos])),
+  es: new Map(curiositiesEs.map((c) => [c.code, c.datos_curiosos])),
+  en: new Map(curiositiesEn.map((c) => [c.code, c.datos_curiosos])),
 }
 const SWIPE_THRESHOLD = 50
 
@@ -77,8 +77,12 @@ function CuriosityCarousel({ countryCode, locale = 'es' }) {
     <div className="curiosity-carousel">
       <div className="curiosity-header">
         <span className="curiosity-icon">💡</span>
-        <span className="curiosity-title">{locale === 'en' ? 'Did you know?' : '¿Sabías que...'}</span>
-        <span className="curiosity-counter">{currentIndex + 1} / {countryCuriosities.length}</span>
+        <span className="curiosity-title">
+          {locale === 'en' ? 'Did you know?' : '¿Sabías que...'}
+        </span>
+        <span className="curiosity-counter">
+          {currentIndex + 1} / {countryCuriosities.length}
+        </span>
       </div>
 
       <div className="curiosity-content-wrapper">
@@ -101,7 +105,7 @@ function CuriosityCarousel({ countryCode, locale = 'es' }) {
             key={currentIndex}
             style={{
               transform: `translateX(${dragOffset}px)`,
-              opacity: Math.max(0.3, 1 - Math.abs(dragOffset) / 300)
+              opacity: Math.max(0.3, 1 - Math.abs(dragOffset) / 300),
             }}
           >
             {countryCuriosities[currentIndex]}

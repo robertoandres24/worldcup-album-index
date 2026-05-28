@@ -56,9 +56,7 @@ export function useGlobalCollection(user) {
 
   const totals = (() => {
     const SPECIAL_CODES = new Set(['FWC', 'CC', '00'])
-    const TEAM_CODES = new Set(
-      Object.keys(collection).filter((c) => !SPECIAL_CODES.has(c))
-    )
+    const TEAM_CODES = new Set(Object.keys(collection).filter((c) => !SPECIAL_CODES.has(c)))
     let teamCollected = 0
     TEAM_CODES.forEach((code) => {
       teamCollected += Object.values(collection[code] ?? {}).filter((e) => e.collected).length

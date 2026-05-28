@@ -3,7 +3,10 @@ header {
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  transition: margin var(--transition-slow), opacity var(--transition-slow), max-height var(--transition-slow);
+  transition:
+    margin var(--transition-slow),
+    opacity var(--transition-slow),
+    max-height var(--transition-slow);
 }
 
 header h1 {
@@ -48,7 +51,9 @@ header h1 span {
   border-radius: var(--radius-full);
   padding: 0.2rem 0.5rem 0.2rem 0.3rem;
   cursor: pointer;
-  transition: background var(--transition-base), border-color var(--transition-base);
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base);
 }
 
 .theme-toggle:hover {
@@ -75,15 +80,17 @@ header h1 span {
   height: 14px;
   background: var(--text-muted);
   border-radius: 50%;
-  transition: transform var(--transition-base), background var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    background var(--transition-base);
 }
 
-[data-theme="light"] .theme-toggle-slider::before {
+[data-theme='light'] .theme-toggle-slider::before {
   transform: translateX(16px);
   background: var(--accent-blue);
 }
 
-[data-theme="dark"] .theme-toggle-slider::before {
+[data-theme='dark'] .theme-toggle-slider::before {
   background: var(--text-muted);
 }
 
@@ -147,7 +154,9 @@ header h1 span {
   border: 1px solid var(--border-color);
   border-radius: 50%;
   cursor: pointer;
-  transition: background var(--transition-base), border-color var(--transition-base);
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base);
 }
 
 .share-btn:hover {
@@ -211,7 +220,9 @@ header h1 span {
   font-size: var(--text-sm);
   cursor: pointer;
   border-radius: var(--radius-md);
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
   font-family: inherit;
 }
 
@@ -232,17 +243,36 @@ header h1 span {
   flex-shrink: 0;
 }
 
-.share-option.whatsapp { color: #25d366; }
-.share-option.whatsapp:hover { background: rgba(37, 211, 102, 0.1); color: #25d366; }
+.share-option.whatsapp {
+  color: #25d366;
+}
+.share-option.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.1);
+  color: #25d366;
+}
 
-.share-option.facebook { color: #1877f2; }
-.share-option.facebook:hover { background: rgba(24, 119, 242, 0.1); color: #1877f2; }
+.share-option.facebook {
+  color: #1877f2;
+}
+.share-option.facebook:hover {
+  background: rgba(24, 119, 242, 0.1);
+  color: #1877f2;
+}
 
-.share-option.x { color: var(--x-color); }
-.share-option.x:hover { background: var(--bg-tertiary); }
+.share-option.x {
+  color: var(--x-color);
+}
+.share-option.x:hover {
+  background: var(--bg-tertiary);
+}
 
-.share-option.linkedin { color: #0a66c2; }
-.share-option.linkedin:hover { background: rgba(10, 102, 194, 0.1); color: #0a66c2; }
+.share-option.linkedin {
+  color: #0a66c2;
+}
+.share-option.linkedin:hover {
+  background: rgba(10, 102, 194, 0.1);
+  color: #0a66c2;
+}
 
 .share-option.copy {
   color: var(--text-muted);
@@ -279,7 +309,10 @@ header h1 span {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
 }
 
 .search-back-btn svg {
@@ -307,7 +340,9 @@ header h1 span {
   background: var(--input-bg);
   color: var(--text-primary);
   outline: none;
-  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
   text-align: center;
   text-transform: uppercase;
   font-family: inherit;
@@ -348,7 +383,9 @@ header h1 span {
   align-items: center;
   justify-content: center;
   padding: 0;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .search-clear-btn svg {
@@ -390,7 +427,10 @@ header h1 span {
   align-items: center;
   justify-content: center;
   box-shadow: var(--shadow-md);
-  transition: background var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
   z-index: 1000;
   animation: fadeInUp 0.2s ease;
 }

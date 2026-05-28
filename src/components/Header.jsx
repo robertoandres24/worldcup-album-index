@@ -1,33 +1,18 @@
 import UserMenu from './UserMenu.jsx'
-import { FEATURES, STORAGE_KEY as WHATS_NEW_KEY } from './WhatsNewModal.jsx'
 
-function Header({
-  t,
-  user,
-  authLoading,
-  whatsNewUnread,
-  onOpenWhatsNew,
-  onSignIn,
-  onSignOut,
-  onImport,
-}) {
+function Header({ t, user, authLoading, whatsNewUnread, onOpenWhatsNew, onSignOut, onImport }) {
   return (
     <div className="top-bar">
       <div className="top-bar-left">
         {whatsNewUnread && (
-          <button
-            className="about-link whats-new-btn"
-            onClick={onOpenWhatsNew}
-          >
+          <button className="about-link whats-new-btn" onClick={onOpenWhatsNew}>
             {t('whatsNewButton')}
             <span className="whats-new-badge" />
           </button>
         )}
       </div>
       <div className="user-auth-area">
-        {authLoading && (
-          <div className="user-avatar-skeleton" aria-hidden="true" />
-        )}
+        {authLoading && <div className="user-avatar-skeleton" aria-hidden="true" />}
         {!authLoading && user && (
           <UserMenu user={user} onSignOut={onSignOut} onImport={onImport} t={t} />
         )}

@@ -12,14 +12,26 @@ function SharePrompt({ t, share, onDismiss }) {
 
   return (
     <div className="share-prompt">
-      <button className="share-prompt-close" onClick={handleDismiss} aria-label={t('sharePromptDismiss')}>×</button>
+      <button
+        className="share-prompt-close"
+        onClick={handleDismiss}
+        aria-label={t('sharePromptDismiss')}
+      >
+        ×
+      </button>
       <p className="share-prompt-title">{t('sharePromptTitle')}</p>
       <p className="share-prompt-body">{t('sharePromptBody')}</p>
       <div className="share-prompt-buttons">
-        <button className="share-prompt-btn share-prompt-btn--whatsapp" onClick={() => handleShare('whatsapp')}>
+        <button
+          className="share-prompt-btn share-prompt-btn--whatsapp"
+          onClick={() => handleShare('whatsapp')}
+        >
           WhatsApp
         </button>
-        <button className="share-prompt-btn share-prompt-btn--facebook" onClick={() => handleShare('facebook')}>
+        <button
+          className="share-prompt-btn share-prompt-btn--facebook"
+          onClick={() => handleShare('facebook')}
+        >
           Facebook
         </button>
         <button className="share-prompt-btn share-prompt-btn--x" onClick={() => handleShare('x')}>

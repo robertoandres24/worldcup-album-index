@@ -12,7 +12,7 @@ function SuggestionModal({ onClose }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = async (e) => {
@@ -35,7 +35,7 @@ function SuggestionModal({ onClose }) {
         setSuccess(true)
         setFormData({ name: '', email: '', message: '' })
       }
-    } catch (err) {
+    } catch (_err) {
       setError('unknown')
     } finally {
       setLoading(false)
@@ -125,9 +125,7 @@ function SuggestionModal({ onClose }) {
               )}
 
               {error && error !== 'rateLimit' && (
-                <div className="error-message">
-                  {t('suggestionError')}
-                </div>
+                <div className="error-message">{t('suggestionError')}</div>
               )}
 
               <button

@@ -22,9 +22,7 @@ function StickerList({ stickers, onSelect, collection, selectedCode, t }) {
       <div className="no-results">
         <div className="no-results-emoji">🤷‍♂️</div>
         <p>{t('noResults')}</p>
-        <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
-          {t('sureNotPasted')}
-        </p>
+        <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{t('sureNotPasted')}</p>
       </div>
     )
   }

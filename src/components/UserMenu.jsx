@@ -20,7 +20,15 @@ function UserMenu({ user, onSignOut, onImport, t }) {
       >
         <span className="user-avatar-initial">{initial}</span>
         <span className="user-avatar-name">{shortName}</span>
-        <svg className="user-avatar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          className="user-avatar-chevron"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M6 9l6 6 6-6" />
         </svg>
       </button>
@@ -29,18 +37,31 @@ function UserMenu({ user, onSignOut, onImport, t }) {
           <div className="user-dropdown-email">{user.email}</div>
           <button
             className="user-dropdown-import"
-            onClick={() => { onImport(); setShowMenu(false) }}
+            onClick={() => {
+              onImport()
+              setShowMenu(false)
+            }}
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
             {t('importMenuItem')}
           </button>
           <button
             className="user-dropdown-logout"
-            onClick={() => { onSignOut(); setShowMenu(false) }}
+            onClick={() => {
+              onSignOut()
+              setShowMenu(false)
+            }}
           >
             {t('signOut')}
           </button>

@@ -21,17 +21,20 @@ Deno.serve(async (req) => {
 
     const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
     const supabaseUser = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-      { global: { headers: { Authorization: authHeader } } },
+      { global: { headers: { Authorization: authHeader } } }
     )
 
     // Verify the requesting user
-    const { data: { user: targetUser }, error: userError } = await supabaseUser.auth.getUser()
+    const {
+      data: { user: targetUser },
+      error: userError,
+    } = await supabaseUser.auth.getUser()
     if (userError || !targetUser) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 401,
@@ -135,7 +138,9 @@ Deno.serve(async (req) => {
             repeated,
             updated_at: new Date().toISOString(),
           }))
-          const { error: restoreError } = await supabaseAdmin.from('sticker_collection').insert(restoreRows)
+          const { error: restoreError } = await supabaseAdmin
+            .from('sticker_collection')
+            .insert(restoreRows)
           restored = !restoreError
         }
         return new Response(
@@ -144,15 +149,15 @@ Deno.serve(async (req) => {
             restored,
             backupCount: backupStickers?.length ?? 0,
           }),
-          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         )
       }
     }
 
-    return new Response(
-      JSON.stringify({ success: true, imported: sourceStickers?.length ?? 0 }),
-      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
-    )
+    return new Response(JSON.stringify({ success: true, imported: sourceStickers?.length ?? 0 }), {
+      status: 200,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
   } catch (err) {
     return new Response(JSON.stringify({ error: String(err) }), {
       status: 500,

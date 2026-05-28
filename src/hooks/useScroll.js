@@ -9,7 +9,8 @@ export function useScroll(threshold = 300, bottomOffset = 100) {
       const scrolled = window.scrollY > threshold
       setShowScrollTop(scrolled)
 
-      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - bottomOffset
+      const nearBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - bottomOffset
       setIsAtBottom(scrolled && nearBottom)
     }
 

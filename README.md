@@ -15,11 +15,13 @@ A fast, mobile-first web app for collectors of the **FIFA World Cup 2026 Panini 
 ## 🚀 Features
 
 ### 🔍 Smart Search
+
 - Search by **country code** (e.g. `GER`), **country name** (e.g. `Germany`) or **page number**
 - Real-time filtering with instant results
 - Clicking a card sets it as the **active country** — even when multiple results match the same substring (e.g. `AUS` → Australia, not Austria)
 
-### 🗂️ Mi Álbum Digital *(requires login)*
+### 🗂️ Mi Álbum Digital _(requires login)_
+
 - Log in with **Google** (one click, no password)
 - Select any country → see its **20 sticker slots**
 - Click a sticker to toggle it as **collected / missing**
@@ -27,17 +29,21 @@ A fast, mobile-first web app for collectors of the **FIFA World Cup 2026 Panini 
 - Data synced to the cloud — access from **any device**
 
 ### 🌍 Country Cards
+
 - **48 countries** across 12 groups (A–L)
 - Country **flag**, **code**, **name**, **group badge** and **album page number**
 - Visual group color coding
 
 ### 💡 Curiosities
+
 - After selecting a country, scroll down to see a **Curiosity Carousel** with fun facts about that nation
 
 ### 📤 Share
+
 - Share the app via **WhatsApp**, **Facebook**, **X (Twitter)**, **LinkedIn** or **copy link**
 
 ### 📱 Mobile-first UX
+
 - Fully responsive layout
 - Avatar dropdown menu for logged-in users (no crowded top bar)
 - Scroll-to-top button
@@ -48,15 +54,15 @@ A fast, mobile-first web app for collectors of the **FIFA World Cup 2026 Panini 
 
 ## 🛠️ Tech Stack
 
-| Layer | Tech |
-|---|---|
-| Frontend | React 18 + Vite 5 |
-| Styling | Vanilla CSS (custom design system, CSS variables, keyframe animations) |
-| Auth | Supabase Auth — Google OAuth 2.0 |
-| Database | Supabase (PostgreSQL) with Row-Level Security |
-| Backend logic | Supabase Edge Functions (Deno / TypeScript) |
-| Flags | [`flag-icons`](https://github.com/lipis/flag-icons) by @lipis |
-| Hosting | Vercel (production + staging preview deployments) |
+| Layer         | Tech                                                                   |
+| ------------- | ---------------------------------------------------------------------- |
+| Frontend      | React 18 + Vite 5                                                      |
+| Styling       | Vanilla CSS (custom design system, CSS variables, keyframe animations) |
+| Auth          | Supabase Auth — Google OAuth 2.0                                       |
+| Database      | Supabase (PostgreSQL) with Row-Level Security                          |
+| Backend logic | Supabase Edge Functions (Deno / TypeScript)                            |
+| Flags         | [`flag-icons`](https://github.com/lipis/flag-icons) by @lipis          |
+| Hosting       | Vercel (production + staging preview deployments)                      |
 
 ---
 
@@ -77,6 +83,7 @@ Row-Level Security is enabled on both tables. The `upsert-user` Edge Function ru
 ## ⚙️ Local Development
 
 ### Prerequisites
+
 - Node.js 18+
 - A [Supabase](https://supabase.com) project with Google OAuth enabled
 

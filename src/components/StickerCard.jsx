@@ -1,8 +1,14 @@
 import flags from '../data/flags.js'
 
 const FWC_ICON = (
-  <svg className="special-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#FFD700">
-    <path d="M384,449.963v-12.629c0-17.643-14.357-32-32-32h-15.104c-19.989-34.176-27.52-93.973-27.563-127.659
+  <svg
+    className="special-icon"
+    viewBox="0 0 512 512"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="#FFD700"
+  >
+    <path
+      d="M384,449.963v-12.629c0-17.643-14.357-32-32-32h-15.104c-19.989-34.176-27.52-93.973-27.563-127.659
       c3.349-6.059,6.549-11.712,9.237-16.341c17.557-30.379,44.096-99.072,44.096-133.333v-4.821c0-5.845-0.043-10.368-0.192-14.336
       c0.085-0.619,0.192-1.707,0.192-2.176C362.667,47.851,314.816,0,256,0S149.333,47.851,149.333,106.667
       c0,13.141,2.645,25.835,7.211,37.717c0.043,0.213-0.021,0.427,0.021,0.64l46.763,185.728
@@ -21,20 +27,37 @@ const FWC_ICON = (
       s10.667-4.779,10.667-10.667c0-18.496,5.717-38.229,13.184-56.619c3.136,28.309,9.664,62.016,22.08,88.619H197.952
       C210.347,377.365,234.667,317.333,234.667,277.333z M149.333,437.333c0-5.888,4.8-10.667,10.667-10.667h192
       c5.867,0,10.667,4.779,10.667,10.667V448H149.333V437.333z M384,490.667H128V480c0-5.888,4.8-10.667,10.667-10.667h234.667
-      C379.2,469.333,384,474.112,384,480V490.667z"/>
+      C379.2,469.333,384,474.112,384,480V490.667z"
+    />
   </svg>
 )
 
 const CC_ICON = (
   <svg className="special-icon" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="14" cy="14" r="13" fill="#E8000E"/>
-    <text x="14" y="14" textAnchor="middle" dominantBaseline="central" fill="white" fontSize="11" fontWeight="800" fontFamily="system-ui,sans-serif">CC</text>
+    <circle cx="14" cy="14" r="13" fill="#E8000E" />
+    <text
+      x="14"
+      y="14"
+      textAnchor="middle"
+      dominantBaseline="central"
+      fill="white"
+      fontSize="11"
+      fontWeight="800"
+      fontFamily="system-ui,sans-serif"
+    >
+      CC
+    </text>
   </svg>
 )
 
 const PANINI_ICON = (
-  <svg className="special-icon" viewBox="-6.5 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#6366F1">
-    <path d="M2.531 4.781h13.563c1.406 0 2.531 1.156 2.531 2.531v14.844c0 1.344-1.094 2.469-2.438 2.531v-1.688c0.406-0.063 0.75-0.438 0.75-0.844v-14.844c0-0.438-0.406-0.813-0.844-0.813h-13.563c-0.438 0-0.844 0.375-0.844 0.813 0.156-0.031 0.375-0.063 0.563-0.063 0.156 0 0.281 0 0.438 0.031l10.156 1.531c1.375 0.25 2.375 1.5 2.375 2.875v13.219c0 1.313-0.938 2.281-2.219 2.281-0.125 0-0.313 0-0.469-0.031l-10.125-1.531c-1.344-0.25-2.406-1.5-2.406-2.844v-15.469c0-1.375 1.156-2.531 2.531-2.531zM3.031 12.75l8.906 1.313 0.219-1.531-8.906-1.313zM4.906 14.094l-0.125 0.938 4.938 0.75 0.125-0.938z"/>
+  <svg
+    className="special-icon"
+    viewBox="-6.5 0 32 32"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="#6366F1"
+  >
+    <path d="M2.531 4.781h13.563c1.406 0 2.531 1.156 2.531 2.531v14.844c0 1.344-1.094 2.469-2.438 2.531v-1.688c0.406-0.063 0.75-0.438 0.75-0.844v-14.844c0-0.438-0.406-0.813-0.844-0.813h-13.563c-0.438 0-0.844 0.375-0.844 0.813 0.156-0.031 0.375-0.063 0.563-0.063 0.156 0 0.281 0 0.438 0.031l10.156 1.531c1.375 0.25 2.375 1.5 2.375 2.875v13.219c0 1.313-0.938 2.281-2.219 2.281-0.125 0-0.313 0-0.469-0.031l-10.125-1.531c-1.344-0.25-2.406-1.5-2.406-2.844v-15.469c0-1.375 1.156-2.531 2.531-2.531zM3.031 12.75l8.906 1.313 0.219-1.531-8.906-1.313zM4.906 14.094l-0.125 0.938 4.938 0.75 0.125-0.938z" />
   </svg>
 )
 
@@ -58,7 +81,9 @@ function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
         </div>
         {stats ? (
           <div className="sticker-stats">
-            <div className="sticker-stats-count">{stats.collected}/{total}</div>
+            <div className="sticker-stats-count">
+              {stats.collected}/{total}
+            </div>
             {stats.repeated > 0 && (
               <div className="sticker-stats-repeated">{stats.repeated} 🔄</div>
             )}
@@ -87,15 +112,13 @@ function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
       </div>
       {stats ? (
         <div className="sticker-stats">
-          <div className="sticker-stats-count">{stats.collected}/{stats.total}</div>
-          {stats.repeated > 0 && (
-            <div className="sticker-stats-repeated">{stats.repeated} 🔄</div>
-          )}
+          <div className="sticker-stats-count">
+            {stats.collected}/{stats.total}
+          </div>
+          {stats.repeated > 0 && <div className="sticker-stats-repeated">{stats.repeated} 🔄</div>}
         </div>
       ) : (
-        <div className={`group-badge group-${sticker.group.toLowerCase()}`}>
-          {sticker.group}
-        </div>
+        <div className={`group-badge group-${sticker.group.toLowerCase()}`}>{sticker.group}</div>
       )}
     </div>
   )

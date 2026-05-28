@@ -27,7 +27,9 @@ function ImportCollectionModal({ onClose, onSuccess, t }) {
     setLoadingPhase('backup')
 
     try {
-      const { data: { session } } = await supabase.auth.getSession()
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
 
       // Small delay so user sees the "backing up" message
       await new Promise((r) => setTimeout(r, 600))
@@ -48,7 +50,7 @@ function ImportCollectionModal({ onClose, onSuccess, t }) {
 
       if (!res.ok) {
         setErrorState({
-          message: data.error === 'import_failed' ? null : (data.error || t('importError')),
+          message: data.error === 'import_failed' ? null : data.error || t('importError'),
           restored: data.restored ?? false,
           backupCount: data.backupCount ?? 0,
           isImportFail: data.error === 'import_failed',
@@ -59,7 +61,12 @@ function ImportCollectionModal({ onClose, onSuccess, t }) {
       setImportedCount(data.imported)
       setStep(3)
     } catch {
-      setErrorState({ message: t('importError'), restored: false, backupCount: 0, isImportFail: false })
+      setErrorState({
+        message: t('importError'),
+        restored: false,
+        backupCount: 0,
+        isImportFail: false,
+      })
     } finally {
       setLoadingPhase(null)
     }
@@ -73,7 +80,13 @@ function ImportCollectionModal({ onClose, onSuccess, t }) {
   return (
     <div className="about-modal-overlay" onClick={onClose}>
       <div className="about-modal import-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="about-close-btn" onClick={onClose} aria-label={t('importCloseAriaLabel')}>×</button>
+        <button
+          className="about-close-btn"
+          onClick={onClose}
+          aria-label={t('importCloseAriaLabel')}
+        >
+          ×
+        </button>
 
         {step === 1 && (
           <form className="import-modal-body" onSubmit={handleCheckEmail}>
@@ -94,11 +107,7 @@ function ImportCollectionModal({ onClose, onSuccess, t }) {
               autoFocus
             />
             {errorState?.message && <p className="import-error">{errorState.message}</p>}
-            <button
-              type="submit"
-              className="import-btn-primary"
-              disabled={!email.trim()}
-            >
+            <button type="submit" className="import-btn-primary" disabled={!email.trim()}>
               {t('importContinue')}
             </button>
             <button type="button" className="import-btn-cancel" onClick={onClose}>
@@ -139,7 +148,15 @@ function ImportCollectionModal({ onClose, onSuccess, t }) {
             >
               {t('importConfirmBtn')}
             </button>
-            <button type="button" className="import-btn-cancel" onClick={() => { setStep(1); setConfirmText(''); setErrorState(null) }}>
+            <button
+              type="button"
+              className="import-btn-cancel"
+              onClick={() => {
+                setStep(1)
+                setConfirmText('')
+                setErrorState(null)
+              }}
+            >
               {t('importBack')}
             </button>
           </form>
@@ -163,7 +180,9 @@ function ImportCollectionModal({ onClose, onSuccess, t }) {
               <>
                 <div className="import-modal-icon">{errorState.restored ? '🛡️' : '⚠️'}</div>
                 <h2 className="import-modal-title">
-                  {errorState.restored ? t('importErrorRestoredTitle') : t('importErrorNotRestoredTitle')}
+                  {errorState.restored
+                    ? t('importErrorRestoredTitle')
+                    : t('importErrorNotRestoredTitle')}
                 </h2>
                 <p className="import-modal-desc">
                   {errorState.restored
@@ -178,7 +197,13 @@ function ImportCollectionModal({ onClose, onSuccess, t }) {
                 <p className="import-modal-desc">{errorState.message}</p>
               </>
             )}
-            <button className="import-btn-primary" onClick={() => { setErrorState(null); setConfirmText('') }}>
+            <button
+              className="import-btn-primary"
+              onClick={() => {
+                setErrorState(null)
+                setConfirmText('')
+              }}
+            >
               {t('importTryAgain')}
             </button>
             <button type="button" className="import-btn-cancel" onClick={onClose}>

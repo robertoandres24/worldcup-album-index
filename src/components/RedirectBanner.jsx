@@ -4,7 +4,9 @@ function RedirectBanner({ onDismiss, t }) {
       <span>
         {t('redirectBanner')}{' '}
         <strong>
-          <a href="https://mialbumfifa.com" className="redirect-banner-link">mialbumfifa.com</a>
+          <a href="https://mialbumfifa.com" className="redirect-banner-link">
+            mialbumfifa.com
+          </a>
         </strong>
       </span>
       <button className="redirect-banner-dismiss" onClick={onDismiss}>

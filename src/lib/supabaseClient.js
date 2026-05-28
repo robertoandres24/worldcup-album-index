@@ -10,17 +10,14 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 })
 
 export const invokeFunction = async (functionName, body, accessToken) => {
-  const response = await fetch(
-    `${supabaseUrl}/functions/v1/${functionName}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken || supabaseAnonKey}`
-      },
-      body: JSON.stringify(body)
-    }
-  )
+  const response = await fetch(`${supabaseUrl}/functions/v1/${functionName}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken || supabaseAnonKey}`,
+    },
+    body: JSON.stringify(body),
+  })
 
   return response
 }

@@ -97,7 +97,9 @@ footer {
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: color var(--transition-base), border-color var(--transition-base);
+  transition:
+    color var(--transition-base),
+    border-color var(--transition-base);
   font-family: inherit;
   letter-spacing: 0.5px;
 }
@@ -212,7 +214,7 @@ footer {
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.375rem;
-  background: #FF5E5B;
+  background: #ff5e5b;
   color: #ffffff;
   font-weight: 600;
   font-size: var(--text-sm);

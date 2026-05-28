@@ -5,7 +5,7 @@ export function useClickOutside(refs, onClickOutside, enabled = true) {
     if (!enabled) return
 
     const handleClick = (e) => {
-      const isOutside = refs.every(ref => ref.current && !ref.current.contains(e.target))
+      const isOutside = refs.every((ref) => ref.current && !ref.current.contains(e.target))
       if (isOutside) {
         onClickOutside()
       }

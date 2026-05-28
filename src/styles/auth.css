@@ -58,7 +58,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,7 +118,9 @@
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -147,13 +149,15 @@
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
   font-family: inherit;
 }
 
 .user-dropdown-logout:hover {
   background: rgba(239, 68, 68, 0.08);
-  color: #EF4444;
+  color: #ef4444;
 }
 
 /* ── Auth Buttons ───────────────────────────────────────────── */
@@ -167,7 +171,9 @@
   font-weight: 600;
   cursor: pointer;
   padding: 0.4rem 0.75rem;
-  transition: background var(--transition-base), box-shadow var(--transition-base);
+  transition:
+    background var(--transition-base),
+    box-shadow var(--transition-base);
   white-space: nowrap;
   font-family: inherit;
 }
@@ -176,11 +182,11 @@
   background: #fff;
   color: #3c4043;
   border: 1px solid #dadce0;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .auth-btn-login:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   background: #f8f8f8;
 }
 

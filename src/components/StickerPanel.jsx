@@ -13,11 +13,19 @@ const buildMaps = (data) => {
   return { cMap, rMap }
 }
 
-function StickerPanel({ countryCode, user, stickerCount = 20, initialData = {}, onCollectionChange, onInteract, t }) {
+function StickerPanel({
+  countryCode,
+  user,
+  stickerCount = 20,
+  initialData = {},
+  onCollectionChange,
+  onInteract,
+  t,
+}) {
   const { cMap: initCollected, rMap: initRepeated } = buildMaps(initialData)
   const [collected, setCollected] = useState(initCollected)
   const [repeated, setRepeated] = useState(initRepeated)
-  const [loading, setLoading] = useState(false)
+  const [loading, _setLoading] = useState(false)
   const [modal, setModal] = useState(null)
   const [modalRepeated, setModalRepeated] = useState(0)
   const [lastTouched, setLastTouched] = useState(null)
@@ -29,10 +37,11 @@ function StickerPanel({ countryCode, user, stickerCount = 20, initialData = {}, 
     const { cMap, rMap } = buildMaps(initialData)
     setCollected(cMap)
     setRepeated(rMap)
-    const alreadyComplete = Object.values(initialData).filter((e) => e.collected).length >= stickerCount
+    const alreadyComplete =
+      Object.values(initialData).filter((e) => e.collected).length >= stickerCount
     prevCompleteRef.current = alreadyComplete
     setJustCompleted(false)
-  }, [countryCode])
+  }, [countryCode]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const collectedCount = Object.values(collected).filter(Boolean).length
   const isComplete = !loading && collectedCount >= stickerCount
@@ -88,9 +97,12 @@ function StickerPanel({ countryCode, user, stickerCount = 20, initialData = {}, 
     }
 
     if (error) {
-      console.error('Error saving sticker:', error)
+      console.error('Error saving sticker:', error) // eslint-disable-line no-console
       setCollected((prev) => ({ ...prev, [number]: current }))
-      onCollectionChange?.(countryCode, number, { collected: current, repeated: repeated[number] ?? 0 })
+      onCollectionChange?.(countryCode, number, {
+        collected: current,
+        repeated: repeated[number] ?? 0,
+      })
     }
   }
 
@@ -201,7 +213,9 @@ function StickerPanel({ countryCode, user, stickerCount = 20, initialData = {}, 
           {t('stickerPanelTitle')} <strong>{countryCode}</strong>
         </span>
         <span className="sticker-panel-count">
-          {loading ? '...' : `${collectedCount} / ${stickerCount}${repeatedCount > 0 ? ` · 🔄 ${repeatedCount}` : ''}`}
+          {loading
+            ? '...'
+            : `${collectedCount} / ${stickerCount}${repeatedCount > 0 ? ` · 🔄 ${repeatedCount}` : ''}`}
         </span>
       </div>
       <div className="sticker-grid">
@@ -219,9 +233,7 @@ function StickerPanel({ countryCode, user, stickerCount = 20, initialData = {}, 
           >
             <span className="figurita-number">{num}</span>
             <span className="figurita-code">{countryCode}</span>
-            {repeated[num] > 0 && (
-              <span className="figurita-repeated-badge">+{repeated[num]}</span>
-            )}
+            {repeated[num] > 0 && <span className="figurita-repeated-badge">+{repeated[num]}</span>}
           </button>
         ))}
       </div>
@@ -233,7 +245,10 @@ function StickerPanel({ countryCode, user, stickerCount = 20, initialData = {}, 
         <div className="sticker-modal-overlay" onClick={closeModal}>
           <div className="sticker-modal" onClick={(e) => e.stopPropagation()}>
             <p className="sticker-modal-title">
-              {t('modalTitle')} <strong>{countryCode} #{modal}</strong>
+              {t('modalTitle')}{' '}
+              <strong>
+                {countryCode} #{modal}
+              </strong>
             </p>
             <div className="sticker-modal-repeated-row">
               <span className="sticker-modal-repeated-label">{t('modalRepeatedLabel')}</span>
@@ -242,27 +257,39 @@ function StickerPanel({ countryCode, user, stickerCount = 20, initialData = {}, 
                   className="sticker-counter-btn"
                   onClick={() => setModalRepeated((v) => Math.max(0, v - 1))}
                   aria-label={t('ariaLess')}
-                >−</button>
+                >
+                  −
+                </button>
                 <span className="sticker-counter-value">{modalRepeated}</span>
                 <button
                   className="sticker-counter-btn"
                   onClick={() => setModalRepeated((v) => v + 1)}
                   aria-label={t('ariaMore')}
-                >+</button>
+                >
+                  +
+                </button>
               </div>
             </div>
-            {modalRepeated === 0 && (
-              <p className="sticker-modal-hint">{t('modalHintRemove')}</p>
-            )}
+            {modalRepeated === 0 && <p className="sticker-modal-hint">{t('modalHintRemove')}</p>}
             <div className="sticker-modal-actions">
-              <button className="sticker-modal-btn btn-collected" onClick={() => applyModalAction('collected')}>
-                {modalRepeated === 0 ? t('modalBtnCollectedZero') : t('modalBtnCollectedRep').replace('{count}', modalRepeated)}
+              <button
+                className="sticker-modal-btn btn-collected"
+                onClick={() => applyModalAction('collected')}
+              >
+                {modalRepeated === 0
+                  ? t('modalBtnCollectedZero')
+                  : t('modalBtnCollectedRep').replace('{count}', modalRepeated)}
               </button>
-              <button className="sticker-modal-btn btn-none" onClick={() => applyModalAction('none')}>
+              <button
+                className="sticker-modal-btn btn-none"
+                onClick={() => applyModalAction('none')}
+              >
                 {t('modalBtnNone')}
               </button>
             </div>
-            <button className="sticker-modal-cancel" onClick={closeModal}>{t('modalCancel')}</button>
+            <button className="sticker-modal-cancel" onClick={closeModal}>
+              {t('modalCancel')}
+            </button>
           </div>
         </div>
       )}

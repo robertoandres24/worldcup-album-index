@@ -1,43 +1,47 @@
 import { useCallback } from 'react'
 
 export function useShare(t) {
-  const share = useCallback((platform) => {
-    const url = window.location.href
-    const title = t('shareTitle')
-    const text = t('shareText')
+  const share = useCallback(
+    (platform) => {
+      const url = window.location.href
+      const title = t('shareTitle')
+      const text = t('shareText')
 
-    switch (platform) {
-      case 'whatsapp': {
-        const encoded = encodeURIComponent(`${title}\n${text}\n${url}`)
-        window.open(`https://wa.me/?text=${encoded}`, '_blank')
-        break
+      switch (platform) {
+        case 'whatsapp': {
+          const encoded = encodeURIComponent(`${title}\n${text}\n${url}`)
+          window.open(`https://wa.me/?text=${encoded}`, '_blank')
+          break
+        }
+        case 'facebook': {
+          const encoded = encodeURIComponent(url)
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${encoded}`, '_blank')
+          break
+        }
+        case 'x': {
+          const encodedText = encodeURIComponent(`${title} - ${text}`)
+          const encodedUrl = encodeURIComponent(url)
+          window.open(`https://x.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`, '_blank')
+          break
+        }
+        case 'linkedin': {
+          const encoded = encodeURIComponent(url)
+          window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`, '_blank')
+          break
+        }
+        case 'copyLink': {
+          navigator.clipboard
+            .writeText(`${title}\n${text}\n${url}`)
+            .then(() => alert(t('linkCopied')))
+            .catch((err) => console.error('Failed to copy:', err))
+          break
+        }
+        default:
+          break
       }
-      case 'facebook': {
-        const encoded = encodeURIComponent(url)
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encoded}`, '_blank')
-        break
-      }
-      case 'x': {
-        const encodedText = encodeURIComponent(`${title} - ${text}`)
-        const encodedUrl = encodeURIComponent(url)
-        window.open(`https://x.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`, '_blank')
-        break
-      }
-      case 'linkedin': {
-        const encoded = encodeURIComponent(url)
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`, '_blank')
-        break
-      }
-      case 'copyLink': {
-        navigator.clipboard.writeText(`${title}\n${text}\n${url}`)
-          .then(() => alert(t('linkCopied')))
-          .catch(err => console.error('Failed to copy:', err))
-        break
-      }
-      default:
-        break
-    }
-  }, [t])
+    },
+    [t]
+  )
 
   const shareOptions = [
     { id: 'whatsapp', label: 'WhatsApp', icon: 'whatsapp' },

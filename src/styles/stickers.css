@@ -17,7 +17,10 @@
   align-items: center;
   gap: 0.875rem;
   border: 1px solid var(--border-color);
-  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
   cursor: pointer;
 }
 
@@ -128,7 +131,7 @@
 }
 
 .sticker-card--cc .country-code {
-  color: #E84040;
+  color: #e84040;
 }
 
 .group-badge {
@@ -199,18 +202,42 @@
   opacity: 0.85;
 }
 
-.group-a { background: #2d7a35; }
-.group-b { background: #c53030; }
-.group-c { background: #b7791f; }
-.group-d { background: #2b6cb0; }
-.group-e { background: #c05621; }
-.group-f { background: #276749; }
-.group-g { background: #6b46c1; }
-.group-h { background: #086f83; }
-.group-i { background: #553c9a; }
-.group-j { background: #b7445a; }
-.group-k { background: #97266d; }
-.group-l { background: #744210; }
+.group-a {
+  background: #2d7a35;
+}
+.group-b {
+  background: #c53030;
+}
+.group-c {
+  background: #b7791f;
+}
+.group-d {
+  background: #2b6cb0;
+}
+.group-e {
+  background: #c05621;
+}
+.group-f {
+  background: #276749;
+}
+.group-g {
+  background: #6b46c1;
+}
+.group-h {
+  background: #086f83;
+}
+.group-i {
+  background: #553c9a;
+}
+.group-j {
+  background: #b7445a;
+}
+.group-k {
+  background: #97266d;
+}
+.group-l {
+  background: #744210;
+}
 
 .no-results {
   text-align: center;
@@ -241,13 +268,21 @@
 }
 
 @keyframes panel-shimmer {
-  0%   { border-color: var(--accent-orange-border); }
-  40%  { border-color: var(--accent-orange); }
-  100% { border-color: var(--accent-orange-border); }
+  0% {
+    border-color: var(--accent-orange-border);
+  }
+  40% {
+    border-color: var(--accent-orange);
+  }
+  100% {
+    border-color: var(--accent-orange-border);
+  }
 }
 
 .sticker-panel--just-completed {
-  animation: modalFadeIn 0.25s ease, panel-shimmer 2s ease forwards;
+  animation:
+    modalFadeIn 0.25s ease,
+    panel-shimmer 2s ease forwards;
   transition: none;
 }
 
@@ -289,7 +324,10 @@
   border-radius: var(--radius-md);
   padding: 0.5rem 0.25rem;
   cursor: pointer;
-  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
   color: var(--text-muted);
   position: relative;
   touch-action: pan-y;
@@ -536,7 +574,7 @@
 
 .btn-none {
   background: rgba(239, 68, 68, 0.1);
-  color: #EF4444;
+  color: #ef4444;
   border: 1px solid rgba(239, 68, 68, 0.25);
 }
 

@@ -7,7 +7,14 @@ function ScrollTopButton({ show, isRaised, onClick, t }) {
       onClick={onClick}
       aria-label={t('scrollToTopAriaLabel')}
     >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M18 15l-6-6-6 6" />
       </svg>
     </button>

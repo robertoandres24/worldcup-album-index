@@ -5,12 +5,12 @@ const FEATURES = [
   { id: 'sticker-card-feedback', date: '2026-05-26', icon: '✅' },
   { id: 'theme-consistency', date: '2026-05-25', icon: '🎨' },
   { id: 'import-collection', date: '2026-05-25', icon: '📥' },
-  { id: 'i18n-support',    date: '2026-05-25', icon: '🌐' },
+  { id: 'i18n-support', date: '2026-05-25', icon: '🌐' },
   { id: 'ux-improvements', date: '2026-05-25', icon: '✨' },
-  { id: 'last-touched',   date: '2026-05-25', icon: '🟡' },
-  { id: 'global-stats',   date: '2026-05-24', icon: '📊' },
-  { id: 'fwc-cc-cards',   date: '2026-05-24', icon: '🃏' },
-  { id: 'nav-redesign',   date: '2026-05-24', icon: '🎨' },
+  { id: 'last-touched', date: '2026-05-25', icon: '🟡' },
+  { id: 'global-stats', date: '2026-05-24', icon: '📊' },
+  { id: 'fwc-cc-cards', date: '2026-05-24', icon: '🃏' },
+  { id: 'nav-redesign', date: '2026-05-24', icon: '🎨' },
 ]
 
 function formatDate(isoDate, locale) {
@@ -25,7 +25,13 @@ function WhatsNewModal({ onClose, t, locale = 'es' }) {
   return (
     <div className="about-modal-overlay" onClick={onClose}>
       <div className="about-modal whats-new-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="about-close-btn" onClick={onClose} aria-label={t('whatsNewCloseAriaLabel')}>×</button>
+        <button
+          className="about-close-btn"
+          onClick={onClose}
+          aria-label={t('whatsNewCloseAriaLabel')}
+        >
+          ×
+        </button>
         <div className="whats-new-header">
           <span className="whats-new-title-icon">✨</span>
           <h2 className="whats-new-title">{t('whatsNewTitle')}</h2>

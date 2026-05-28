@@ -11,16 +11,22 @@ export function useAuth() {
       setLoading(false)
     })
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
       const currentUser = session?.user ?? null
       setUser(currentUser)
 
       if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && currentUser) {
         try {
-          await invokeFunction('upsert-user', {
-            email: currentUser.email,
-            display_name: currentUser.user_metadata?.full_name || currentUser.email,
-          }, session.access_token)
+          await invokeFunction(
+            'upsert-user',
+            {
+              email: currentUser.email,
+              display_name: currentUser.user_metadata?.full_name || currentUser.email,
+            },
+            session.access_token
+          )
         } catch (err) {
           console.error('upsert-user error:', err)
         }

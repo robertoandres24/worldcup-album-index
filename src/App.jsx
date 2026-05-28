@@ -131,17 +131,11 @@ function App() {
         onImport={() => setShowImportModal(true)}
       />
 
-      {showRedirectBanner && (
-        <RedirectBanner onDismiss={dismissRedirectBanner} t={t} />
-      )}
+      {showRedirectBanner && <RedirectBanner onDismiss={dismissRedirectBanner} t={t} />}
 
-      {!user && !authLoading && (
-        <LoginBar onLogin={signInWithGoogle} t={t} />
-      )}
+      {!user && !authLoading && <LoginBar onLogin={signInWithGoogle} t={t} />}
 
-      {showWelcomeModal && (
-        <WelcomeModal onClose={dismissWelcomeModal} t={t} />
-      )}
+      {showWelcomeModal && <WelcomeModal onClose={dismissWelcomeModal} t={t} />}
 
       {showPromoBanner && !user && (
         <PromoBanner
@@ -156,25 +150,21 @@ function App() {
       )}
 
       <header className={searchFocused ? 'search-focus-mode' : ''}>
-        <h1><span>⚽</span> {t('title')}</h1>
+        <h1>
+          <span>⚽</span> {t('title')}
+        </h1>
         <p>{t('description')}</p>
       </header>
 
-      {user && (
-        <GlobalStatsBar totals={totals} loading={collectionLoading} t={t} />
-      )}
+      {user && <GlobalStatsBar totals={totals} loading={collectionLoading} t={t} />}
 
       {showSharePrompt && (
         <SharePrompt t={t} share={share} onDismiss={() => setShowSharePrompt(false)} />
       )}
 
-      {showAbout && (
-        <AboutModal onClose={() => setShowAbout(false)} t={t} />
-      )}
+      {showAbout && <AboutModal onClose={() => setShowAbout(false)} t={t} />}
 
-      {showSuggestionModal && (
-        <SuggestionModal onClose={() => setShowSuggestionModal(false)} />
-      )}
+      {showSuggestionModal && <SuggestionModal onClose={() => setShowSuggestionModal(false)} />}
 
       {showWhatsNew && (
         <WhatsNewModal onClose={() => setShowWhatsNew(false)} t={t} locale={locale} />
@@ -200,9 +190,7 @@ function App() {
         t={t}
       />
 
-      {search && (
-        <ResultsCount count={filteredStickers.length} t={t} />
-      )}
+      {search && <ResultsCount count={filteredStickers.length} t={t} />}
 
       <StickerList
         stickers={filteredStickers}
@@ -228,7 +216,9 @@ function App() {
         <PromoBanner
           icon="🏆"
           title={t('promoBannerCountryTitle')}
-          body={t('promoBannerCountryBody').replace('{count}', activeCountry.count ?? 20).replace('{country}', activeCountry.name ?? activeCountry.label)}
+          body={t('promoBannerCountryBody')
+            .replace('{count}', activeCountry.count ?? 20)
+            .replace('{country}', activeCountry.name ?? activeCountry.label)}
           onLogin={signInWithGoogle}
           onDismiss={() => localStorage.setItem('promo-banner-country', '1')}
           storageKey="promo-banner-country"
@@ -236,9 +226,7 @@ function App() {
         />
       )}
 
-      {activeCountry && (
-        <CuriosityCarousel countryCode={activeCountry.code} locale={locale} />
-      )}
+      {activeCountry && <CuriosityCarousel countryCode={activeCountry.code} locale={locale} />}
 
       <Footer
         t={t}
@@ -250,12 +238,7 @@ function App() {
         shareOptions={shareOptions}
       />
 
-      <ScrollTopButton
-        show={showScrollTop}
-        isRaised={isAtBottom}
-        onClick={scrollToTop}
-        t={t}
-      />
+      <ScrollTopButton show={showScrollTop} isRaised={isAtBottom} onClick={scrollToTop} t={t} />
     </div>
   )
 }
