@@ -81,12 +81,12 @@ function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
         </div>
         {stats ? (
           <div className="sticker-stats">
-            <div className="sticker-stats-count">
-              {stats.collected}/{total}
+            <div className={`sticker-stats-count${stats.collected >= total ? ' is-complete' : ''}`}>
+              <span className="sticker-stats-num">{stats.collected}</span>
+              <span className="sticker-stats-sep">/</span>
+              <span className="sticker-stats-total">{total}</span>
             </div>
-            {stats.repeated > 0 && (
-              <div className="sticker-stats-repeated">{stats.repeated} 🔄</div>
-            )}
+            {stats.repeated > 0 && <div className="sticker-stats-repeated">{stats.repeated}</div>}
           </div>
         ) : null}
       </div>
@@ -112,10 +112,14 @@ function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
       </div>
       {stats ? (
         <div className="sticker-stats">
-          <div className="sticker-stats-count">
-            {stats.collected}/{stats.total}
+          <div
+            className={`sticker-stats-count${stats.collected >= stats.total ? ' is-complete' : ''}`}
+          >
+            <span className="sticker-stats-num">{stats.collected}</span>
+            <span className="sticker-stats-sep">/</span>
+            <span className="sticker-stats-total">{stats.total}</span>
           </div>
-          {stats.repeated > 0 && <div className="sticker-stats-repeated">{stats.repeated} 🔄</div>}
+          {stats.repeated > 0 && <div className="sticker-stats-repeated">{stats.repeated}</div>}
         </div>
       ) : (
         <div className={`group-badge group-${sticker.group.toLowerCase()}`}>{sticker.group}</div>

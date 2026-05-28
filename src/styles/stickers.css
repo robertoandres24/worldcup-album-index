@@ -161,9 +161,28 @@
 .sticker-stats-count {
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--accent-blue);
   line-height: 1.2;
   font-variant-numeric: tabular-nums;
+}
+
+.sticker-stats-num {
+  color: var(--accent-blue);
+}
+
+.sticker-stats-sep,
+.sticker-stats-total {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.sticker-stats-count.is-complete {
+  color: var(--accent-blue);
+}
+
+.sticker-stats-count.is-complete .sticker-stats-num,
+.sticker-stats-count.is-complete .sticker-stats-sep,
+.sticker-stats-count.is-complete .sticker-stats-total {
+  color: inherit;
 }
 
 .sticker-stats-repeated {
