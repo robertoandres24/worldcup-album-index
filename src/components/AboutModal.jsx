@@ -1,4 +1,6 @@
-function AboutModal({ onClose, t }) {
+import ShareMenu from './ShareMenu.jsx'
+
+function AboutModal({ onClose, t, share, shareOptions }) {
   return (
     <div className="about-modal-overlay" onClick={onClose}>
       <div className="about-modal" onClick={(e) => e.stopPropagation()}>
@@ -21,7 +23,7 @@ function AboutModal({ onClose, t }) {
             >
               {t('aboutParagraph4b')}
             </a>
-            {t('aboutParagraph4c') && ' ' + t('aboutParagraph4c')}
+            {'. '}
           </p>
           <p>{t('aboutParagraph4d')}</p>
 
@@ -31,6 +33,15 @@ function AboutModal({ onClose, t }) {
               <h3 className="about-opensource-title">{t('aboutOpenSourceTitle')}</h3>
             </div>
             <p className="about-opensource-desc">{t('aboutOpenSourceDesc')}</p>
+            <div className="about-share-row">
+              <span className="about-share-text">{t('aboutShareText')}</span>
+              <ShareMenu
+                t={t}
+                share={share}
+                shareOptions={shareOptions}
+                className="about-share-menu"
+              />
+            </div>
             <div className="about-stack">
               <span className="about-stack-label">{t('aboutBuiltWith')}</span>
               <div className="about-stack-pills">

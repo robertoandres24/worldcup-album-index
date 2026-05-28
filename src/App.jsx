@@ -162,7 +162,14 @@ function App() {
         <SharePrompt t={t} share={share} onDismiss={() => setShowSharePrompt(false)} />
       )}
 
-      {showAbout && <AboutModal onClose={() => setShowAbout(false)} t={t} />}
+      {showAbout && (
+        <AboutModal
+          onClose={() => setShowAbout(false)}
+          t={t}
+          share={share}
+          shareOptions={shareOptions}
+        />
+      )}
 
       {showSuggestionModal && <SuggestionModal onClose={() => setShowSuggestionModal(false)} />}
 

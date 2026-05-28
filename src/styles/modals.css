@@ -220,6 +220,31 @@
   margin-bottom: 0.875rem;
 }
 
+.about-share-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+  padding: 0.625rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.about-share-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.about-share-menu .share-btn {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
 .about-stack {
   display: flex;
   align-items: center;
