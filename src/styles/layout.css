@@ -414,7 +414,6 @@ header h1 span {
 @media (max-width: 600px) {
   .top-bar {
     max-width: 100%;
-    padding: 0 1rem;
   }
 
   .about-link {

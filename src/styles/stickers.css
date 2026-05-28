@@ -4,6 +4,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 0.625rem;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 /* ── Sticker Card ───────────────────────────────────────────── */
@@ -557,11 +559,17 @@
 /* ── Stickers media queries ─────────────────────────────────── */
 @media (max-width: 600px) {
   .stickers-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+    overflow-x: visible;
   }
 
   .sticker-card {
     padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
   }
 
   .page-number {
