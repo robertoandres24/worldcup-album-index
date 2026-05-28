@@ -12,11 +12,13 @@ function AboutModal({ onClose, t }) {
           <p>{t('aboutParagraph3')}</p>
           <p>
             {t('aboutParagraph4a')}{' '}
-            <a href="https://ko-fi.com/studio84" target="_blank" rel="noopener noreferrer" className="about-kofi-link">
+            <a href="https://link.mercadopago.cl/mialbumfifa" target="_blank" rel="noopener noreferrer" className="about-kofi-link">
               {t('aboutParagraph4b')}
-            </a>{' '}
-            {t('aboutParagraph4c')}
+            </a>
+            {t('aboutParagraph4c') && ' ' + t('aboutParagraph4c')}
           </p>
+          <p>{t('aboutParagraph4d')}</p>
+          <p>{t('aboutParagraph4e')}</p>
         </div>
       </div>
     </div>

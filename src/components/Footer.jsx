@@ -6,18 +6,17 @@ function Footer({ t, locale, toggleLocale, onShowAbout, onShowSuggestion, share,
     <footer>
       <div className="kofi-section">
         <p className="kofi-message">
-          ☕ {t('kofiMessage')}
+          {t('kofiMessage')}
         </p>
         <p className="kofi-sub-message">
           {t('kofiSubMessage')}
         </p>
         <a
-          href="https://ko-fi.com/studio84"
+          href="https://link.mercadopago.cl/mialbumfifa"
           target="_blank"
           rel="noopener noreferrer"
           className="kofi-btn"
         >
-          <img src="/kofi-icon.png" alt="Ko-fi" className="kofi-icon" />
           {t('kofiButton')}
         </a>
       </div>
