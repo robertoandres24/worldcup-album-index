@@ -4,23 +4,36 @@ import GlobalStatsBar from './GlobalStatsBar.jsx'
 
 function UserMenu({ user, onSignOut, onImport, t, totals, collectionLoading }) {
   const [showMenu, setShowMenu] = useState(false)
+  const [imgError, setImgError] = useState(false)
   const containerRef = useRef(null)
 
   useClickOutside([containerRef], () => setShowMenu(false), showMenu)
 
   const displayName = user.user_metadata?.full_name || user.email
-  const shortName = displayName.split('@')[0]
   const initial = displayName.charAt(0).toUpperCase()
+  const avatarUrl = user.user_metadata?.avatar_url
+
+  const showAvatar = avatarUrl && !imgError
 
   return (
     <div className="user-avatar-container" ref={containerRef}>
       <button
-        className="user-avatar-btn user-avatar-btn--expanded"
+        className="user-avatar-btn"
         onClick={() => setShowMenu(!showMenu)}
         aria-label={t('userMenuAriaLabel')}
       >
-        <span className="user-avatar-initial">{initial}</span>
-        <span className="user-avatar-name">{shortName}</span>
+        <span className="user-avatar-wrap">
+          <span className="user-avatar-initial">{initial}</span>
+          {showAvatar && (
+            <img
+              src={avatarUrl}
+              alt=""
+              className="user-avatar-img"
+              referrerPolicy="no-referrer"
+              onError={() => setImgError(true)}
+            />
+          )}
+        </span>
         <svg
           className="user-avatar-chevron"
           viewBox="0 0 24 24"
