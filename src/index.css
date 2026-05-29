@@ -1,3 +1,4 @@
+@import 'tailwindcss';
 @import './styles/tokens.css';
 @import './styles/base.css';
 @import './styles/layout.css';
@@ -7,3 +8,41 @@
 @import './styles/stickers.css';
 @import './styles/stats.css';
 @import './styles/footer.css';
+
+@theme {
+  --spacing: 0.25rem;
+
+  --color-card-bg: var(--card-bg);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-quaternary: var(--bg-quaternary);
+  --color-border-color: var(--border-color);
+  --color-border-strong: var(--border-strong);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-blue-subtle: var(--accent-blue-subtle);
+  --color-accent-blue-border: var(--accent-blue-border);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-orange-subtle: var(--accent-orange-subtle);
+  --color-accent-orange-border: var(--accent-orange-border);
+  --color-muted: var(--text-muted);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-country-name-color: var(--country-name-color);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+}

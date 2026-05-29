@@ -9,6 +9,8 @@
 }
 
 /* ── Sticker Card ───────────────────────────────────────────── */
+/* [Tailwind] .sticker-card styles migrated to StickerCard.jsx */
+/*
 .sticker-card {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
@@ -48,6 +50,7 @@
   border-color: var(--accent-blue-border);
   background: var(--accent-blue-subtle);
 }
+*/
 
 /* Center single card when only one result */
 .stickers-list:has(.sticker-card:only-child) {
@@ -71,6 +74,10 @@
   width: 100%;
 }
 
+/* [Tailwind] .page-number, .country-info, .country-flag, .country-code, .country-name,
+   .sticker-card--special, .special-icon, .group-badge, .sticker-stats, .country-code-row,
+   .group-badge-small, .group-* colors migrated to StickerCard.jsx */
+/*
 .page-number {
   font-size: 1.375rem;
   font-weight: 700;
@@ -149,7 +156,6 @@
   flex-shrink: 0;
 }
 
-/* Sticker stats on card (for logged-in users) */
 .sticker-stats {
   display: flex;
   flex-direction: column;
@@ -192,7 +198,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Country code row with small group badge */
 .country-code-row {
   display: flex;
   align-items: center;
@@ -221,42 +226,19 @@
   opacity: 0.85;
 }
 
-.group-a {
-  background: #2d7a35;
-}
-.group-b {
-  background: #c53030;
-}
-.group-c {
-  background: #b7791f;
-}
-.group-d {
-  background: #2b6cb0;
-}
-.group-e {
-  background: #c05621;
-}
-.group-f {
-  background: #276749;
-}
-.group-g {
-  background: #6b46c1;
-}
-.group-h {
-  background: #086f83;
-}
-.group-i {
-  background: #553c9a;
-}
-.group-j {
-  background: #b7445a;
-}
-.group-k {
-  background: #97266d;
-}
-.group-l {
-  background: #744210;
-}
+.group-a { background: #2d7a35; }
+.group-b { background: #c53030; }
+.group-c { background: #b7791f; }
+.group-d { background: #2b6cb0; }
+.group-e { background: #c05621; }
+.group-f { background: #276749; }
+.group-g { background: #6b46c1; }
+.group-h { background: #086f83; }
+.group-i { background: #553c9a; }
+.group-j { background: #b7445a; }
+.group-k { background: #97266d; }
+.group-l { background: #744210; }
+*/
 
 .no-results {
   text-align: center;
@@ -621,6 +603,8 @@
     overflow-x: visible;
   }
 
+  /* [Tailwind] mobile sticker-card, page-number, country-name migrated to StickerCard.jsx */
+  /*
   .sticker-card {
     padding: 1rem;
     width: 100%;
@@ -637,6 +621,7 @@
   .country-name {
     font-size: 1.1rem;
   }
+  */
 
   .sticker-grid {
     grid-template-columns: repeat(5, 1fr);

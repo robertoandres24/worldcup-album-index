@@ -2,7 +2,7 @@ import flags from '../data/flags.js'
 
 const FWC_ICON = (
   <svg
-    className="special-icon"
+    className="w-[1.625rem] h-auto shrink-0 block"
     viewBox="0 0 512 512"
     xmlns="http://www.w3.org/2000/svg"
     fill="#FFD700"
@@ -33,7 +33,11 @@ const FWC_ICON = (
 )
 
 const CC_ICON = (
-  <svg className="special-icon" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    className="w-[1.625rem] h-auto shrink-0 block"
+    viewBox="0 0 28 28"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <circle cx="14" cy="14" r="13" fill="#E8000E" />
     <text
       x="14"
@@ -52,7 +56,7 @@ const CC_ICON = (
 
 const PANINI_ICON = (
   <svg
-    className="special-icon"
+    className="w-[1.625rem] h-auto shrink-0 block"
     viewBox="-6.5 0 32 32"
     xmlns="http://www.w3.org/2000/svg"
     fill="#6366F1"
@@ -62,31 +66,94 @@ const PANINI_ICON = (
 )
 
 function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
-  const stateClass = isActive ? 'sticker-card--active' : isComplete ? 'sticker-card--complete' : ''
+  const stateClasses = isActive
+    ? 'border-accent-blue-border bg-accent-blue-subtle shadow-none'
+    : isComplete
+      ? 'border-accent-orange-border bg-accent-orange-subtle'
+      : 'bg-card-bg border-border-color hover:bg-bg-tertiary hover:border-border-strong hover:shadow-sm'
+
+  const baseCard =
+    'rounded-lg px-[1.125rem] py-[1rem] flex items-center gap-[0.875rem] border border-solid transition-[background,border-color,box-shadow] duration-200 cursor-pointer max-sm:px-[1rem] max-sm:w-full max-sm:min-w-0'
+
+  const pageNumberClasses =
+    'text-[1.375rem] font-bold text-muted min-w-[44px] text-center tracking-tight tabular-nums max-sm:text-2xl max-sm:min-w-[50px]'
+  const countryInfoClasses = 'flex-1 min-w-0'
+  const countryFlagClasses = 'w-[1.625rem] h-auto shrink-0 rounded-[3px] block'
+  const countryCodeClasses =
+    'text-xs text-muted font-semibold uppercase tracking-widest mb-[0.2rem]'
+  const codeRowCodeClasses =
+    'text-xs text-muted font-semibold uppercase tracking-widest leading-none'
+  const countryNameClasses =
+    'text-base font-semibold text-country-name-color whitespace-nowrap overflow-hidden text-ellipsis max-sm:text-[1.1rem]'
+  const statsClasses = 'flex flex-col items-end gap-[0.2rem] shrink-0'
+  const statsCountClasses = 'text-sm font-semibold leading-tight tabular-nums'
+  const statsNumClasses = 'text-accent-blue'
+  const statsSepClasses = 'text-muted font-medium'
+  const statsTotalClasses = 'text-muted font-medium'
+  const statsAllBlueClasses = 'text-accent-blue'
+  const statsRepeatedClasses = 'text-xs text-accent-orange leading-tight tabular-nums'
+  const codeRowClasses = 'flex items-center gap-2 mb-1'
+  const groupBadgeClasses =
+    'bg-bg-quaternary border border-border-color text-muted w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0'
+  const groupBadgeSmallClasses =
+    'w-4 h-4 rounded-full inline-flex items-center justify-center font-bold text-[0.6rem] text-white shrink-0 -mt-px opacity-85'
+
+  const groupColor = (group) => {
+    const colors = {
+      a: 'bg-[#2d7a35]',
+      b: 'bg-[#c53030]',
+      c: 'bg-[#b7791f]',
+      d: 'bg-[#2b6cb0]',
+      e: 'bg-[#c05621]',
+      f: 'bg-[#276749]',
+      g: 'bg-[#6b46c1]',
+      h: 'bg-[#086f83]',
+      i: 'bg-[#553c9a]',
+      j: 'bg-[#b7445a]',
+      k: 'bg-[#97266d]',
+      l: 'bg-[#744210]',
+    }
+    return colors[group.toLowerCase()] || ''
+  }
 
   if (sticker.type) {
     const icon = sticker.type === 'fwc' ? FWC_ICON : sticker.type === 'cc' ? CC_ICON : PANINI_ICON
     const total = sticker.count
+    const codeClasses =
+      sticker.type === 'fwc'
+        ? 'bg-[var(--fwc-gradient)] bg-clip-text text-transparent text-xs font-semibold uppercase tracking-widest mb-[0.2rem]'
+        : sticker.type === 'cc'
+          ? 'text-[#e84040] text-xs font-semibold uppercase tracking-widest mb-[0.2rem]'
+          : countryCodeClasses
+    const statsCompleteSpecial = stats && stats.collected >= total
     return (
       <div
-        className={`sticker-card sticker-card--special sticker-card--${sticker.type} ${stateClass}`.trim()}
+        className={`${baseCard} justify-start ${stateClasses}`.trim()}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
       >
-        <div className="page-number">{sticker.page}</div>
+        <div className={pageNumberClasses}>{sticker.page}</div>
         {icon}
-        <div className="country-info">
-          <div className="country-code">{sticker.code}</div>
-          <div className="country-name">{sticker.label}</div>
+        <div className={countryInfoClasses}>
+          <div className={codeClasses}>{sticker.code}</div>
+          <div className={countryNameClasses}>{sticker.label}</div>
         </div>
         {stats ? (
-          <div className="sticker-stats">
-            <div className={`sticker-stats-count${stats.collected >= total ? ' is-complete' : ''}`}>
-              <span className="sticker-stats-num">{stats.collected}</span>
-              <span className="sticker-stats-sep">/</span>
-              <span className="sticker-stats-total">{total}</span>
+          <div className={statsClasses}>
+            <div
+              className={`${statsCountClasses} ${statsCompleteSpecial ? 'text-accent-blue' : ''}`}
+            >
+              <span className={statsCompleteSpecial ? statsAllBlueClasses : statsNumClasses}>
+                {stats.collected}
+              </span>
+              <span className={statsCompleteSpecial ? statsAllBlueClasses : statsSepClasses}>
+                /
+              </span>
+              <span className={statsCompleteSpecial ? statsAllBlueClasses : statsTotalClasses}>
+                {total}
+              </span>
             </div>
-            {stats.repeated > 0 && <div className="sticker-stats-repeated">{stats.repeated}</div>}
+            {stats.repeated > 0 && <div className={statsRepeatedClasses}>{stats.repeated}</div>}
           </div>
         ) : null}
       </div>
@@ -95,34 +162,46 @@ function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
 
   return (
     <div
-      className={`sticker-card ${stateClass}`.trim()}
+      className={`${baseCard} ${stateClasses}`.trim()}
       onClick={onClick}
       style={{ cursor: 'pointer' }}
     >
-      <div className="page-number">{sticker.page}</div>
-      <img src={flags[sticker.iso]} alt={sticker.name} className="country-flag" />
-      <div className="country-info">
-        <div className="country-code-row">
-          <span className="country-code">{sticker.code}</span>
-          <span className={`group-badge-small group-${sticker.group.toLowerCase()}`}>
+      <div className={pageNumberClasses}>{sticker.page}</div>
+      <img src={flags[sticker.iso]} alt={sticker.name} className={countryFlagClasses} />
+      <div className={countryInfoClasses}>
+        <div className={codeRowClasses}>
+          <span className={codeRowCodeClasses}>{sticker.code}</span>
+          <span className={`${groupBadgeSmallClasses} ${groupColor(sticker.group)}`}>
             {sticker.group}
           </span>
         </div>
-        <div className="country-name">{sticker.name}</div>
+        <div className={countryNameClasses}>{sticker.name}</div>
       </div>
       {stats ? (
-        <div className="sticker-stats">
+        <div className={statsClasses}>
           <div
-            className={`sticker-stats-count${stats.collected >= stats.total ? ' is-complete' : ''}`}
+            className={`${statsCountClasses} ${stats.collected >= stats.total ? 'text-accent-blue' : ''}`}
           >
-            <span className="sticker-stats-num">{stats.collected}</span>
-            <span className="sticker-stats-sep">/</span>
-            <span className="sticker-stats-total">{stats.total}</span>
+            <span
+              className={stats.collected >= stats.total ? statsAllBlueClasses : statsNumClasses}
+            >
+              {stats.collected}
+            </span>
+            <span
+              className={stats.collected >= stats.total ? statsAllBlueClasses : statsSepClasses}
+            >
+              /
+            </span>
+            <span
+              className={stats.collected >= stats.total ? statsAllBlueClasses : statsTotalClasses}
+            >
+              {stats.total}
+            </span>
           </div>
-          {stats.repeated > 0 && <div className="sticker-stats-repeated">{stats.repeated}</div>}
+          {stats.repeated > 0 && <div className={statsRepeatedClasses}>{stats.repeated}</div>}
         </div>
       ) : (
-        <div className={`group-badge group-${sticker.group.toLowerCase()}`}>{sticker.group}</div>
+        <div className={`${groupBadgeClasses} ${groupColor(sticker.group)}`}>{sticker.group}</div>
       )}
     </div>
   )
