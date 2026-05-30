@@ -21,7 +21,7 @@ function StickerPanel({
   onCollectionChange,
   onInteract,
   highlightNumber = null,
-  matchedCard = null,
+  matchedSticker = null,
   t,
 }) {
   const { cMap: initCollected, rMap: initRepeated } = buildMaps(initialData)
@@ -230,9 +230,9 @@ function StickerPanel({
             : `${collectedCount} / ${stickerCount}${repeatedCount > 0 ? ` · 🔄 ${repeatedCount}` : ''}`}
         </span>
       </div>
-      {matchedCard && (
+      {matchedSticker && (
         <div className="search-match-badge">
-          {matchedCard.code} — {matchedCard.description}
+          {matchedSticker.code} — {matchedSticker.description}
         </div>
       )}
       <div className="sticker-grid">

@@ -4,7 +4,7 @@ import { useAuth } from './hooks/useAuth.js'
 import { useGlobalCollection } from './hooks/useGlobalCollection.js'
 import { useScroll } from './hooks/useScroll.js'
 import { useShare } from './hooks/useShare.js'
-import { useStickerSearch } from './hooks/useStickerSearch.js'
+import { useSearchResults } from './hooks/useSearchResults.js'
 import { useBanners } from './hooks/useBanners.js'
 import { useTheme } from './hooks/useTheme.js'
 
@@ -39,16 +39,16 @@ function App() {
     setSearch,
     selectedCode,
     selectCountry,
-    selectCard,
+    selectStickerCard,
     clearSearch,
     searchFocused,
     setSearchFocused,
     searchInputRef,
-    filteredStickers,
+    searchResults,
     activeCountry,
     matchedNumber,
-    matchedCard,
-  } = useStickerSearch()
+    matchedSticker,
+  } = useSearchResults()
   const {
     showWhatsNew,
     setShowWhatsNew,
@@ -115,10 +115,10 @@ function App() {
   }
 
   const handleSelectCountry = (sticker) => {
-    if (sticker.kind === 'card') {
-      selectCard(sticker)
-    } else if (sticker.matchedCard) {
-      selectCard(sticker.matchedCard)
+    if (sticker.kind === 'stickerCard') {
+      selectStickerCard(sticker)
+    } else if (sticker.matchedSticker) {
+      selectStickerCard(sticker.matchedSticker)
     } else {
       selectCountry(sticker.code)
     }
@@ -193,11 +193,11 @@ function App() {
         t={t}
       />
 
-      {!activeCountry && search && <ResultsCount count={filteredStickers.length} t={t} />}
+      {!activeCountry && search && <ResultsCount count={searchResults.length} t={t} />}
 
       {!activeCountry && (
         <StickerList
-          stickers={filteredStickers}
+          results={searchResults}
           onSelect={handleSelectCountry}
           collection={collection}
           selectedCode={selectedCode}
@@ -214,7 +214,7 @@ function App() {
           onCollectionChange={updateEntry}
           onInteract={selectCountry}
           highlightNumber={matchedNumber}
-          matchedCard={matchedCard}
+          matchedSticker={matchedSticker}
           t={t}
         />
       )}
