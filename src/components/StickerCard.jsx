@@ -61,8 +61,42 @@ const PANINI_ICON = (
   </svg>
 )
 
-function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
+function getCardStatus(collection, countryCode, number) {
+  const entry = collection?.[countryCode]?.[number]
+  if (!entry) return { collected: false, repeated: 0 }
+  return { collected: entry.collected, repeated: entry.repeated ?? 0 }
+}
+
+function StickerCard({ sticker, stats, collection, onClick, isComplete, isActive }) {
   const stateClass = isActive ? 'sticker-card--active' : isComplete ? 'sticker-card--complete' : ''
+
+  // Player card (individual card search result)
+  if (sticker.kind === 'card') {
+    const { collected, repeated } = getCardStatus(collection, sticker.country_code, sticker.number)
+    return (
+      <div
+        className={`sticker-card sticker-card--player ${stateClass}`.trim()}
+        style={{ cursor: 'pointer' }}
+        onClick={onClick}
+      >
+        <div className="player-card-main">
+          <span className="player-card-code">{sticker.code}</span>
+          <span className="player-card-name">{sticker.description}</span>
+        </div>
+        <div className="player-card-meta">
+          {collected ? (
+            repeated > 0 ? (
+              <span className="player-card-status repeated">+{repeated}</span>
+            ) : (
+              <span className="player-card-status collected">{/* check or dot */}</span>
+            )
+          ) : (
+            <span className="player-card-status missing" />
+          )}
+        </div>
+      </div>
+    )
+  }
 
   const isSpecial =
     sticker.card_type === 'panini_logo' ||
@@ -120,6 +154,11 @@ function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
           </span>
         </div>
         <div className="country-name">{sticker.team_name}</div>
+        {sticker.matchedCard && (
+          <div className="search-match-badge">
+            {sticker.matchedCard.code} — {sticker.matchedCard.description}
+          </div>
+        )}
       </div>
       {stats ? (
         <div className="sticker-stats">

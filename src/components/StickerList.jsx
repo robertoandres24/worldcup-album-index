@@ -34,9 +34,10 @@ function StickerList({ stickers, onSelect, collection, selectedCode, t }) {
           key={sticker.code}
           sticker={sticker}
           stats={statsMap[sticker.code]}
+          collection={collection}
           isComplete={completedCodes.has(sticker.code)}
           isActive={selectedCode === sticker.code}
-          onClick={() => onSelect(sticker.code)}
+          onClick={() => onSelect(sticker)}
         />
       ))}
     </div>

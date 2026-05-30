@@ -39,6 +39,7 @@ function App() {
     setSearch,
     selectedCode,
     selectCountry,
+    selectCard,
     clearSearch,
     searchFocused,
     setSearchFocused,
@@ -82,6 +83,7 @@ function App() {
   }, [locale, t])
 
   const [showSharePrompt, setShowSharePrompt] = useState(false)
+  const [highlightNumber, setHighlightNumber] = useState(null)
   const prevSearchRef = useRef('')
   const { teamCollected, fwcCollected, ccCollected, paniniCollected } = totals
   const totalCollected = teamCollected + fwcCollected + ccCollected + paniniCollected
@@ -111,8 +113,17 @@ function App() {
     searchInputRef.current?.blur()
   }
 
-  const handleSelectCountry = (code) => {
-    selectCountry(code)
+  const handleSelectCountry = (sticker) => {
+    if (sticker.kind === 'card') {
+      selectCard(sticker)
+      setHighlightNumber(sticker.number)
+    } else if (sticker.matchedCard) {
+      selectCard(sticker.matchedCard)
+      setHighlightNumber(sticker.matchedCard.number)
+    } else {
+      selectCountry(sticker.code)
+      setHighlightNumber(null)
+    }
     scrollToTop()
   }
 
@@ -202,6 +213,8 @@ function App() {
           initialData={collection[activeCountry.code] ?? {}}
           onCollectionChange={updateEntry}
           onInteract={selectCountry}
+          highlightNumber={highlightNumber}
+          onClearHighlight={() => setHighlightNumber(null)}
           t={t}
         />
       )}
