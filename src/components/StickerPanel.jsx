@@ -21,7 +21,6 @@ function StickerPanel({
   onCollectionChange,
   onInteract,
   highlightNumber = null,
-  onClearHighlight,
   t,
 }) {
   const { cMap: initCollected, rMap: initRepeated } = buildMaps(initialData)
@@ -72,7 +71,6 @@ function StickerPanel({
   }, [isComplete])
 
   const toggleSticker = (number) => {
-    onClearHighlight?.()
     onInteract?.(countryCode)
     setLastTouched(number)
     if (repeated[number] > 0) {
@@ -200,7 +198,6 @@ function StickerPanel({
   }
 
   const handleTouchStart = (e, number) => {
-    onClearHighlight?.()
     e.preventDefault()
     handleLongPressStart(e, number)
   }
@@ -211,7 +208,6 @@ function StickerPanel({
   }
 
   const handleContextMenu = (e, number) => {
-    onClearHighlight?.()
     e.preventDefault()
     openModal(number)
   }

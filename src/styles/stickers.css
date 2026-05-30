@@ -382,7 +382,6 @@
 .figurita-card.collected:focus,
 .figurita-card.collected:hover {
   background: var(--accent-blue);
-  border-color: var(--accent-blue);
   color: #fff;
   box-shadow: none;
 }
@@ -716,13 +715,13 @@
 @keyframes highlightGlow {
   0% {
     box-shadow:
-      0 0 0 2px var(--text-secondary),
+      0 0 0 1px var(--text-secondary),
       0 0 10px var(--text-secondary);
     transform: scale(1.04);
   }
   40% {
     box-shadow:
-      0 0 0 2px var(--text-secondary),
+      0 0 0 1px var(--text-secondary),
       0 0 6px var(--text-secondary);
     transform: scale(1.02);
   }

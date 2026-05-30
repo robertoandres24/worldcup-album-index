@@ -139,6 +139,22 @@ export function useStickerSearch() {
     return null
   }, [selectedCode, search, filteredStickers, stickersData])
 
+  const matchedNumber = useMemo(() => {
+    if (!activeCountry || !search.trim()) return null
+    const query = search.trim().toUpperCase()
+    const queryNoSpaces = query.replace(/\s+/g, '')
+    const codeMatch = queryNoSpaces.match(/^([A-Z0-9]+?)(\d+)$/)
+    if (codeMatch) {
+      const [, prefix, numStr] = codeMatch
+      const num = parseInt(numStr, 10)
+      if (prefix === activeCountry.code) {
+        const card = cardByCode.get(`${prefix}-${num}`)
+        if (card) return num
+      }
+    }
+    return null
+  }, [search, activeCountry, cardByCode])
+
   const clearSearch = useCallback(() => {
     setSelectedCode(null)
     setSearch('')
@@ -171,5 +187,6 @@ export function useStickerSearch() {
     searchInputRef,
     filteredStickers,
     activeCountry,
+    matchedNumber,
   }
 }
