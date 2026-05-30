@@ -47,6 +47,7 @@ function App() {
     filteredStickers,
     activeCountry,
     matchedNumber,
+    matchedCard,
   } = useStickerSearch()
   const {
     showWhatsNew,
@@ -192,15 +193,17 @@ function App() {
         t={t}
       />
 
-      {search && <ResultsCount count={filteredStickers.length} t={t} />}
+      {!activeCountry && search && <ResultsCount count={filteredStickers.length} t={t} />}
 
-      <StickerList
-        stickers={filteredStickers}
-        onSelect={handleSelectCountry}
-        collection={collection}
-        selectedCode={selectedCode}
-        t={t}
-      />
+      {!activeCountry && (
+        <StickerList
+          stickers={filteredStickers}
+          onSelect={handleSelectCountry}
+          collection={collection}
+          selectedCode={selectedCode}
+          t={t}
+        />
+      )}
 
       {activeCountry && user && (
         <StickerPanel
@@ -211,6 +214,7 @@ function App() {
           onCollectionChange={updateEntry}
           onInteract={selectCountry}
           highlightNumber={matchedNumber}
+          matchedCard={matchedCard}
           t={t}
         />
       )}

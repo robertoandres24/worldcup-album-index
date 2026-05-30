@@ -37,65 +37,9 @@ export function useStickerSearch() {
   }, [])
 
   const filteredStickers = useMemo(() => {
-    // When a country is explicitly selected, show only that team card
-    if (selectedCode) {
-      const team = stickersData.find((s) => s.code === selectedCode)
-      if (!team) return []
-      const query = search.trim().toUpperCase()
-      const queryNoSpaces = query.replace(/\s+/g, '')
-      const codeMatch = queryNoSpaces.match(/^([A-Z0-9]+?)(\d+)$/)
-      if (codeMatch) {
-        const [, prefix, numStr] = codeMatch
-        const num = parseInt(numStr, 10)
-        const card = cardByCode.get(`${prefix}-${num}`)
-        if (card && card.country_code === selectedCode) {
-          return [
-            {
-              ...team,
-              kind: 'team',
-              matchedCard: {
-                code: card.code,
-                number: card.number,
-                description: card.description,
-                country_code: card.country_code,
-              },
-            },
-          ]
-        }
-      }
-      return [{ ...team, kind: 'team' }]
-    }
-
     if (!search.trim()) return stickersData.map((s) => ({ ...s, kind: 'team' }))
     const query = search.trim().toUpperCase()
-    const queryNoSpaces = query.replace(/\s+/g, '')
 
-    // Exact card code match: "POR05", "POR 05", "POR 5"
-    const codeMatch = queryNoSpaces.match(/^([A-Z0-9]+?)(\d+)$/)
-    if (codeMatch) {
-      const [, prefix, numStr] = codeMatch
-      const num = parseInt(numStr, 10)
-      const card = cardByCode.get(`${prefix}-${num}`)
-      if (card) {
-        const team = stickersData.find((t) => t.code === card.country_code)
-        if (team) {
-          return [
-            {
-              ...team,
-              kind: 'team',
-              matchedCard: {
-                code: card.code,
-                number: card.number,
-                description: card.description,
-                country_code: card.country_code,
-              },
-            },
-          ]
-        }
-      }
-    }
-
-    // Normal filtering: teams by code/name/page + cards by description
     const matchedTeams = stickersData.filter(
       (s) =>
         s.code.includes(query) ||
@@ -122,22 +66,31 @@ export function useStickerSearch() {
       }))
 
     return [...matchedTeams.map((t) => ({ ...t, kind: 'team' })), ...matchedCards]
-  }, [search, stickersData, cardByCode, selectedCode])
+  }, [search, stickersData])
 
   const activeCountry = useMemo(() => {
+    // Auto-open panel on exact card code (e.g. "ARG 17")
+    if (search.trim()) {
+      const query = search.trim().toUpperCase()
+      const queryNoSpaces = query.replace(/\s+/g, '')
+      const codeMatch = queryNoSpaces.match(/^([A-Z0-9]+?)(\d+)$/)
+      if (codeMatch) {
+        const [, prefix, numStr] = codeMatch
+        const num = parseInt(numStr, 10)
+        const card = cardByCode.get(`${prefix}-${num}`)
+        if (card) {
+          const item = stickersData.find((s) => s.code === card.country_code)
+          return item ? { ...item, kind: 'team' } : null
+        }
+      }
+    }
+    // Persist panel from explicit click
     if (selectedCode) {
       const item = stickersData.find((s) => s.code === selectedCode)
       return item ? { ...item, kind: 'team' } : null
     }
-    if (!search.trim()) return null
-    const query = search.trim().toUpperCase()
-    const exact = stickersData.find((s) => s.code === query)
-    if (exact) return { ...exact, kind: 'team' }
-    if (filteredStickers.length === 1 && filteredStickers[0].kind === 'team') {
-      return filteredStickers[0]
-    }
     return null
-  }, [selectedCode, search, filteredStickers, stickersData])
+  }, [search, selectedCode, cardByCode, stickersData])
 
   const matchedNumber = useMemo(() => {
     if (!activeCountry || !search.trim()) return null
@@ -150,6 +103,21 @@ export function useStickerSearch() {
       if (prefix === activeCountry.code) {
         const card = cardByCode.get(`${prefix}-${num}`)
         if (card) return num
+      }
+    }
+    return null
+  }, [search, activeCountry, cardByCode])
+
+  const matchedCard = useMemo(() => {
+    if (!activeCountry || !search.trim()) return null
+    const query = search.trim().toUpperCase()
+    const queryNoSpaces = query.replace(/\s+/g, '')
+    const codeMatch = queryNoSpaces.match(/^([A-Z0-9]+?)(\d+)$/)
+    if (codeMatch) {
+      const [, prefix, numStr] = codeMatch
+      const num = parseInt(numStr, 10)
+      if (prefix === activeCountry.code) {
+        return cardByCode.get(`${prefix}-${num}`) ?? null
       }
     }
     return null
@@ -188,5 +156,6 @@ export function useStickerSearch() {
     filteredStickers,
     activeCountry,
     matchedNumber,
+    matchedCard,
   }
 }
