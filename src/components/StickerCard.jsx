@@ -64,12 +64,23 @@ const PANINI_ICON = (
 function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
   const stateClass = isActive ? 'sticker-card--active' : isComplete ? 'sticker-card--complete' : ''
 
-  if (sticker.type) {
-    const icon = sticker.type === 'fwc' ? FWC_ICON : sticker.type === 'cc' ? CC_ICON : PANINI_ICON
+  const isSpecial =
+    sticker.card_type === 'panini_logo' ||
+    sticker.card_type === 'fwc_special' ||
+    sticker.card_type === 'cc'
+  if (isSpecial) {
+    const icon =
+      sticker.card_type === 'fwc_special'
+        ? FWC_ICON
+        : sticker.card_type === 'cc'
+          ? CC_ICON
+          : PANINI_ICON
+    const label =
+      sticker.card_type === 'fwc_special' ? 'FWC' : sticker.card_type === 'cc' ? 'CC' : '00 PANINI'
     const total = sticker.count
     return (
       <div
-        className={`sticker-card sticker-card--special sticker-card--${sticker.type} ${stateClass}`.trim()}
+        className={`sticker-card sticker-card--special sticker-card--${label.toLowerCase()} ${stateClass}`.trim()}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
       >
@@ -77,7 +88,7 @@ function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
         {icon}
         <div className="country-info">
           <div className="country-code">{sticker.code}</div>
-          <div className="country-name">{sticker.label}</div>
+          <div className="country-name">{label}</div>
         </div>
         {stats ? (
           <div className="sticker-stats">
@@ -100,7 +111,7 @@ function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
       style={{ cursor: 'pointer' }}
     >
       <div className="page-number">{sticker.page}</div>
-      <img src={flags[sticker.iso]} alt={sticker.name} className="country-flag" />
+      <img src={flags[sticker.iso]} alt={sticker.team_name} className="country-flag" />
       <div className="country-info">
         <div className="country-code-row">
           <span className="country-code">{sticker.code}</span>
@@ -108,7 +119,7 @@ function StickerCard({ sticker, stats, onClick, isComplete, isActive }) {
             {sticker.group}
           </span>
         </div>
-        <div className="country-name">{sticker.name}</div>
+        <div className="country-name">{sticker.team_name}</div>
       </div>
       {stats ? (
         <div className="sticker-stats">

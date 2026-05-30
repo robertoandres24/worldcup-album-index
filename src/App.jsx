@@ -212,7 +212,7 @@ function App() {
           title={t('promoBannerCountryTitle')}
           body={t('promoBannerCountryBody')
             .replace('{count}', activeCountry.count ?? 20)
-            .replace('{country}', activeCountry.name ?? activeCountry.label)}
+            .replace('{country}', activeCountry.team_name ?? activeCountry.description)}
           onLogin={signInWithGoogle}
           className="promo-banner--country"
         />

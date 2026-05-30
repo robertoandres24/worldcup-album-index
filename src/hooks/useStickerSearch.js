@@ -7,66 +7,39 @@ export function useStickerSearch() {
   const [searchFocused, setSearchFocused] = useState(false)
   const searchInputRef = useRef(null)
 
-  const { stickersData, cardCodesByTeam } = useMemo(() => {
-    const map = new Map()
-    const codesMap = new Map()
-    for (const card of cards) {
+  const stickersData = useMemo(() => {
+    const teamsObj = cards.reduce((acc, card) => {
       const key = card.country_code ?? card.code
-      if (!map.has(key)) {
-        map.set(key, {
+      if (!acc[key]) {
+        acc[key] = {
           code: key,
-          name: card.team_name,
+          team_name: card.team_name,
           group: card.group,
           iso: card.iso,
           page: card.page,
           card_type: card.card_type,
+          description: card.description,
           count: 0,
-        })
-        codesMap.set(key, new Set())
-      }
-      map.get(key).count++
-      codesMap.get(key).add(card.code)
-    }
-
-    const teams = Array.from(map.values()).map((item) => {
-      if (item.card_type === 'panini_logo') {
-        return {
-          code: item.code,
-          label: '00 PANINI',
-          type: 'panini',
-          count: item.count,
-          page: item.page,
         }
       }
-      if (item.card_type === 'fwc_special') {
-        return { code: item.code, label: 'FWC', type: 'fwc', count: item.count, page: item.page }
-      }
-      if (item.card_type === 'cc') {
-        return { code: item.code, label: 'CC', type: 'cc', count: item.count, page: item.page }
-      }
-      return { code: item.code, name: item.name, group: item.group, iso: item.iso, page: item.page }
-    })
+      acc[key].count++
+      return acc
+    }, {})
 
-    return { stickersData: teams, cardCodesByTeam: codesMap }
+    return Object.values(teamsObj)
   }, [])
 
   const filteredStickers = useMemo(() => {
     if (!search.trim()) return stickersData
     const query = search.toUpperCase()
-    return stickersData.filter((s) => {
-      if (s.code.includes(query)) return true
-      if (s.name && s.name.toUpperCase().includes(query)) return true
-      if (s.label && s.label.toUpperCase().includes(query)) return true
-      if (s.page.toString().includes(query)) return true
-      const cardCodes = cardCodesByTeam.get(s.code)
-      if (cardCodes) {
-        for (const code of cardCodes) {
-          if (code.toUpperCase().includes(query)) return true
-        }
-      }
-      return false
-    })
-  }, [search, stickersData, cardCodesByTeam])
+    return stickersData.filter(
+      (s) =>
+        s.code.includes(query) ||
+        (s.team_name && s.team_name.toUpperCase().includes(query)) ||
+        (s.description && s.description.toUpperCase().includes(query)) ||
+        s.page.toString().includes(query)
+    )
+  }, [search, stickersData])
 
   const activeCountry = useMemo(() => {
     if (selectedCode) return stickersData.find((s) => s.code === selectedCode) ?? null
