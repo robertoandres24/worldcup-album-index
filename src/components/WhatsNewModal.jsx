@@ -1,4 +1,5 @@
 const FEATURES = [
+  { id: 'player-search', date: '2026-05-30', icon: '🔍' },
   { id: 'avatar-refresh', date: '2026-05-28', icon: '👤' },
   { id: 'design-refresh-may28', date: '2026-05-28', icon: '🎨' },
   { id: 'release-may27', date: '2026-05-27', icon: '📖' },

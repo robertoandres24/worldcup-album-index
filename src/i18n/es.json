@@ -127,6 +127,8 @@
   "whatsNewCloseAriaLabel": "Cerrar",
   "closeAriaLabel": "Cerrar",
   "scrollToTopAriaLabel": "Volver arriba",
+  "feature.player-search.title": "Búsqueda por jugador",
+  "feature.player-search.description": "Ahora puedes buscar figuritas individuales por nombre de jugador (ej: MESSI) o código exacto (ej: ARG 17). Los resultados se muestran como tarjetas independientes y el panel resalta automáticamente la figurita encontrada.",
   "feature.avatar-refresh.title": "Nuevo avatar de usuario",
   "feature.avatar-refresh.description": "El botón de usuario ahora muestra tu foto de perfil de Google cuando inicias sesión, o tu inicial como respaldo si no hay foto disponible. Más limpio y minimalista.",
   "feature.design-refresh-may28.title": "Nueva barra de navegación y estados de progreso",

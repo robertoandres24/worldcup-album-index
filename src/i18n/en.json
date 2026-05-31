@@ -127,6 +127,8 @@
   "whatsNewCloseAriaLabel": "Close",
   "closeAriaLabel": "Close",
   "scrollToTopAriaLabel": "Scroll to top",
+  "feature.player-search.title": "Player search",
+  "feature.player-search.description": "You can now search for individual stickers by player name (e.g. MESSI) or exact code (e.g. ARG 17). Results show as standalone cards and the panel automatically highlights the matched sticker.",
   "feature.avatar-refresh.title": "New user avatar",
   "feature.avatar-refresh.description": "The user button now shows your Google profile picture when signed in, or your initial as a fallback when no photo is available. Cleaner and more minimal.",
   "feature.design-refresh-may28.title": "New navigation bar and progress states",
