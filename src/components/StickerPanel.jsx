@@ -20,6 +20,8 @@ function StickerPanel({
   initialData = {},
   onCollectionChange,
   onInteract,
+  highlightNumber = null,
+  matchedSticker = null,
   t,
 }) {
   const { cMap: initCollected, rMap: initRepeated } = buildMaps(initialData)
@@ -32,6 +34,7 @@ function StickerPanel({
   const longPressTimer = useRef(null)
   const prevCompleteRef = useRef(false)
   const [justCompleted, setJustCompleted] = useState(false)
+  const [glowNumber, setGlowNumber] = useState(null)
 
   useEffect(() => {
     const { cMap, rMap } = buildMaps(initialData)
@@ -41,7 +44,16 @@ function StickerPanel({
       Object.values(initialData).filter((e) => e.collected).length >= stickerCount
     prevCompleteRef.current = alreadyComplete
     setJustCompleted(false)
+    setGlowNumber(null)
   }, [countryCode]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (highlightNumber != null) {
+      setGlowNumber(highlightNumber)
+      const timer = setTimeout(() => setGlowNumber(null), 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [highlightNumber])
 
   const collectedCount = Object.values(collected).filter(Boolean).length
   const isComplete = !loading && collectedCount >= stickerCount
@@ -218,11 +230,16 @@ function StickerPanel({
             : `${collectedCount} / ${stickerCount}${repeatedCount > 0 ? ` · 🔄 ${repeatedCount}` : ''}`}
         </span>
       </div>
+      {matchedSticker && (
+        <div className="search-match-badge">
+          {matchedSticker.code} — {matchedSticker.description}
+        </div>
+      )}
       <div className="sticker-grid">
         {Array.from({ length: stickerCount }, (_, i) => i + 1).map((num) => (
           <button
             key={num}
-            className={`figurita-card ${collected[num] ? 'collected' : ''} ${repeated[num] > 0 ? 'repeated' : ''} ${lastTouched === num ? 'last-touched' : ''}`}
+            className={`figurita-card ${collected[num] ? 'collected' : ''} ${repeated[num] > 0 ? 'repeated' : ''} ${lastTouched === num ? 'last-touched' : ''} ${glowNumber === num ? 'highlighted' : ''} ${highlightNumber === num ? 'search-matched' : ''}`}
             onClick={() => toggleSticker(num)}
             onContextMenu={(e) => handleContextMenu(e, num)}
             onTouchStart={(e) => handleTouchStart(e, num)}

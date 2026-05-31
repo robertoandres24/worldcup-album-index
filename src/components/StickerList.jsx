@@ -1,23 +1,24 @@
 import { useMemo } from 'react'
+import TeamCard from './TeamCard.jsx'
 import StickerCard from './StickerCard.jsx'
 
-function StickerList({ stickers, onSelect, collection, selectedCode, t }) {
+function StickerList({ results, onSelect, collection, selectedCode, t }) {
   const { completedCodes, statsMap } = useMemo(() => {
     const completed = new Set()
     const stats = {}
-    stickers.forEach((sticker) => {
-      const total = sticker.count ?? 20
-      const codeMap = collection?.[sticker.code] ?? {}
+    results.forEach((result) => {
+      const total = result.count ?? 20
+      const codeMap = collection?.[result.code] ?? {}
       const entries = Object.values(codeMap)
       const collectedCount = entries.filter((e) => e.collected).length
       const repeatedCount = entries.reduce((acc, e) => acc + (e.repeated ?? 0), 0)
-      if (collectedCount >= total) completed.add(sticker.code)
-      stats[sticker.code] = { collected: collectedCount, total, repeated: repeatedCount }
+      if (collectedCount >= total) completed.add(result.code)
+      stats[result.code] = { collected: collectedCount, total, repeated: repeatedCount }
     })
     return { completedCodes: completed, statsMap: stats }
-  }, [stickers, collection])
+  }, [results, collection])
 
-  if (stickers.length === 0) {
+  if (results.length === 0) {
     return (
       <div className="no-results">
         <div className="no-results-emoji">🤷‍♂️</div>
@@ -29,16 +30,25 @@ function StickerList({ stickers, onSelect, collection, selectedCode, t }) {
 
   return (
     <div className="stickers-list">
-      {stickers.map((sticker) => (
-        <StickerCard
-          key={sticker.code}
-          sticker={sticker}
-          stats={statsMap[sticker.code]}
-          isComplete={completedCodes.has(sticker.code)}
-          isActive={selectedCode === sticker.code}
-          onClick={() => onSelect(sticker.code)}
-        />
-      ))}
+      {results.map((result) =>
+        result.kind === 'teamCard' ? (
+          <TeamCard
+            key={result.code}
+            team={result}
+            stats={statsMap[result.code]}
+            isComplete={completedCodes.has(result.code)}
+            isActive={selectedCode === result.code}
+            onClick={() => onSelect(result)}
+          />
+        ) : (
+          <StickerCard
+            key={result.code}
+            sticker={result}
+            collection={collection}
+            onClick={() => onSelect(result)}
+          />
+        )
+      )}
     </div>
   )
 }

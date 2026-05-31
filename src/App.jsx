@@ -4,7 +4,7 @@ import { useAuth } from './hooks/useAuth.js'
 import { useGlobalCollection } from './hooks/useGlobalCollection.js'
 import { useScroll } from './hooks/useScroll.js'
 import { useShare } from './hooks/useShare.js'
-import { useStickerSearch } from './hooks/useStickerSearch.js'
+import { useSearchResults } from './hooks/useSearchResults.js'
 import { useBanners } from './hooks/useBanners.js'
 import { useTheme } from './hooks/useTheme.js'
 
@@ -39,13 +39,16 @@ function App() {
     setSearch,
     selectedCode,
     selectCountry,
+    selectStickerCard,
     clearSearch,
     searchFocused,
     setSearchFocused,
     searchInputRef,
-    filteredStickers,
+    searchResults,
     activeCountry,
-  } = useStickerSearch()
+    matchedNumber,
+    matchedSticker,
+  } = useSearchResults()
   const {
     showWhatsNew,
     setShowWhatsNew,
@@ -111,8 +114,14 @@ function App() {
     searchInputRef.current?.blur()
   }
 
-  const handleSelectCountry = (code) => {
-    selectCountry(code)
+  const handleSelectCountry = (sticker) => {
+    if (sticker.kind === 'stickerCard') {
+      selectStickerCard(sticker)
+    } else if (sticker.matchedSticker) {
+      selectStickerCard(sticker.matchedSticker)
+    } else {
+      selectCountry(sticker.code)
+    }
     scrollToTop()
   }
 
@@ -184,15 +193,17 @@ function App() {
         t={t}
       />
 
-      {search && <ResultsCount count={filteredStickers.length} t={t} />}
+      {!activeCountry && search && <ResultsCount count={searchResults.length} t={t} />}
 
-      <StickerList
-        stickers={filteredStickers}
-        onSelect={handleSelectCountry}
-        collection={collection}
-        selectedCode={selectedCode}
-        t={t}
-      />
+      {!activeCountry && (
+        <StickerList
+          results={searchResults}
+          onSelect={handleSelectCountry}
+          collection={collection}
+          selectedCode={selectedCode}
+          t={t}
+        />
+      )}
 
       {activeCountry && user && (
         <StickerPanel
@@ -202,6 +213,8 @@ function App() {
           initialData={collection[activeCountry.code] ?? {}}
           onCollectionChange={updateEntry}
           onInteract={selectCountry}
+          highlightNumber={matchedNumber}
+          matchedSticker={matchedSticker}
           t={t}
         />
       )}
@@ -212,7 +225,7 @@ function App() {
           title={t('promoBannerCountryTitle')}
           body={t('promoBannerCountryBody')
             .replace('{count}', activeCountry.count ?? 20)
-            .replace('{country}', activeCountry.name ?? activeCountry.label)}
+            .replace('{country}', activeCountry.team_name ?? activeCountry.description)}
           onLogin={signInWithGoogle}
           className="promo-banner--country"
         />
