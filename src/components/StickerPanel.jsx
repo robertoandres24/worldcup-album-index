@@ -229,9 +229,8 @@ function StickerPanel({
           )}
         </span>
         <span className="sticker-panel-count">
-          {loading
-            ? '...'
-            : `${collectedCount} / ${stickerCount}${repeatedCount > 0 ? ` · 🔄 ${repeatedCount}` : ''}`}
+          {loading ? '...' : `${collectedCount} / ${stickerCount}${repeatedCount > 0 ? ` · ` : ''}`}
+          {repeatedCount > 0 && <span className="sticker-panel-repeated">{repeatedCount}</span>}
         </span>
       </div>
       {matchedSticker && (

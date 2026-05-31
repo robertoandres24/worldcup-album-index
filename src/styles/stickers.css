@@ -330,6 +330,10 @@
   color: var(--text-muted);
 }
 
+.sticker-panel-repeated {
+  color: var(--accent-orange);
+}
+
 /* ── Figuritas Grid ─────────────────────────────────────────── */
 .sticker-grid {
   display: grid;
