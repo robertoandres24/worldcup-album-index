@@ -70,7 +70,8 @@ export function useSearchResults() {
       .filter((sticker) => {
         const descMatch = sticker.description.toUpperCase().includes(query)
         const notInTeamResults = !matchedTeams.some((t) => t.code === sticker.country_code)
-        return descMatch && notInTeamResults
+        const isHiddenType = sticker.card_type === 'team_logo' || sticker.card_type === 'team_photo'
+        return descMatch && notInTeamResults && !isHiddenType
       })
       .map((sticker) => ({
         kind: 'stickerCard',
