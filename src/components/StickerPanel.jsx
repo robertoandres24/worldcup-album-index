@@ -22,6 +22,7 @@ function StickerPanel({
   onInteract,
   highlightNumber = null,
   matchedSticker = null,
+  page = null,
   t,
 }) {
   const { cMap: initCollected, rMap: initRepeated } = buildMaps(initialData)
@@ -223,6 +224,9 @@ function StickerPanel({
       <div className="sticker-panel-header">
         <span className="sticker-panel-title">
           {t('stickerPanelTitle')} <strong>{countryCode}</strong>
+          {page != null && (
+            <span className="sticker-panel-page">{` · ${t('stickerPanelPageLabel')} ${page}`}</span>
+          )}
         </span>
         <span className="sticker-panel-count">
           {loading

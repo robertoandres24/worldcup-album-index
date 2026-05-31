@@ -210,6 +210,7 @@ function App() {
           countryCode={activeCountry.code}
           user={user}
           stickerCount={activeCountry.count ?? 20}
+          page={activeCountry.page ?? null}
           initialData={collection[activeCountry.code] ?? {}}
           onCollectionChange={updateEntry}
           onInteract={selectCountry}
